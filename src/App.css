@@ -1,20 +1,44 @@
 .app {
-  border-style: dashed;
+    display: grid;
+    width: 1000px;
+    height: 500px;
+
+    grid-template-areas:
+            "h h"
+            "n c";
+    grid-template-rows: 60px 1fr;
+    grid-template-columns: 2fr 10fr;
 }
 
-.headers {
-  background-color: darkgray;
+.header {
+    grid-area: h;
+    background-color: silver;
 }
 
-.headers-text {
-  font-weight: bold;
-  color: antiquewhite;
+.header img {
+    height: 3em;
 }
 
-.technologies {
-  line-height: 2em;
+.nav {
+    grid-area: n;
+    background-color: cornflowerblue;
 }
 
-.technologies-link {
-  list-style-type: decimal;
+.nav-links {
+    font-weight: bold;
 }
+
+.nav-item {
+    border: 5px groove silver;
+}
+
+.profile {
+    grid-area: c;
+    background-color: aqua;
+}
+
+.profile img {
+    height: 15em;
+}
+
+

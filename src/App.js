@@ -1,16 +1,17 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import Headers from "./Headers";
-import Technologies from "./Technologies";
+import Headers from './components/Headers';
+import Navigation from './components/Navigation';
+import Profile from "./components/Profile";
 
 function App() {
-  return (
-    <div className="app">
-      <Headers/>
-      <Technologies/>
-    </div>
-  );
+    return (
+        <div className="app">
+            <Headers/>
+            <Navigation/>
+            <Profile/>
+        </div>
+    );
 }
 
 export default App;
