@@ -1,0 +1,17 @@
+.nav {
+    grid-area: n;
+    background-color: cornflowerblue;
+}
+
+.item {
+    border: 5px groove silver;
+    font-weight: bold;
+}
+
+.item a{
+    color: white;
+}
+
+.item.active a{
+    color: gold;
+}

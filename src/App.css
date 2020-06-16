@@ -10,35 +10,10 @@
     grid-template-columns: 2fr 10fr;
 }
 
-.header {
-    grid-area: h;
-    background-color: silver;
-}
 
-.header img {
-    height: 3em;
-}
 
-.nav {
-    grid-area: n;
-    background-color: cornflowerblue;
-}
 
-.nav-links {
-    font-weight: bold;
-}
 
-.nav-item {
-    border: 5px groove silver;
-}
 
-.profile {
-    grid-area: c;
-    background-color: aqua;
-}
-
-.profile img {
-    height: 15em;
-}
 
 
