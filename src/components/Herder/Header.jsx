@@ -5,7 +5,7 @@ import h from './Headers.module.css';
 
 const Header = () => {
   return (
-    <header className={h.header}>
+    <header className={h.main}>
         <img src={logotype} alt="image of header"/>
     </header>
   );

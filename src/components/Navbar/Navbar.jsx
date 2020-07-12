@@ -3,12 +3,12 @@ import n from './Navbar.module.css';
 
 const Navbar = () => {
     return (
-        <nav className={n.nav}>
-            <div className={n.item}>
-                <a href="#">Profile</a>
-            </div>
+        <nav className={n.main}>
             <div className={`${n.item} ${n.active}`}>
-                <a href="#">Friends</a>
+                <a href="">Profile</a>
+            </div>
+            <div className={n.item}>
+                <a href="">Friends</a>
             </div>
             <div className={n.item}>
                 <a href="#">Messages</a>

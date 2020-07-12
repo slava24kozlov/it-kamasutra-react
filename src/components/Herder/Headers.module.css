@@ -1,8 +1,8 @@
-.header {
+.main {
     grid-area: h;
     background-color: silver;
 }
 
-.header img {
+.main img {
     height: 3em;
 }

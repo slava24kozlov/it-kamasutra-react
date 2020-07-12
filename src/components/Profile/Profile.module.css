@@ -1,8 +1,3 @@
-.profile {
-    grid-area: c;
-    background-color: aqua;
-}
-
-.profile img {
-    height: 15em;
-}
+.main img {
+     height: 15em;
+ }
