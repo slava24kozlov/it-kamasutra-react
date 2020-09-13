@@ -1,4 +1,22 @@
 .main {
+    display: grid;
+    grid-template-columns: 2fr 10fr;
     font-weight: bold;
     color: darkolivegreen;
+}
+
+.dialogs {
+    padding: 10px;
+}
+
+.dialog .active {
+    color: gold;
+}
+
+.messages {
+    padding: 10px;
+}
+
+.messages .message {
+
 }

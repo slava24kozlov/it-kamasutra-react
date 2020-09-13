@@ -1,8 +1,15 @@
 .main {
     grid-area: h;
     background-color: silver;
+    display: grid;
+    grid-template-columns: 2fr 10fr;
 }
 
 .main img {
     height: 3em;
+}
+
+.textHead {
+    color: black;
+    font-weight: bold;
 }

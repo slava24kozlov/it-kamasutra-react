@@ -1,0 +1,9 @@
+.main img {
+    height: 15em;
+}
+
+.description {
+    font-weight: bold;
+    font-style: italic;
+    border: 2px groove black;
+}
