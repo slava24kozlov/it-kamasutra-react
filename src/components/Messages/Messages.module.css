@@ -9,7 +9,7 @@
     padding: 10px;
 }
 
-.dialog .active {
+.dialog.a.active{
     color: gold;
 }
 
@@ -17,6 +17,3 @@
     padding: 10px;
 }
 
-.messages .message {
-
-}
