@@ -17,3 +17,7 @@
 .item a.active{
     color: gold;
 }
+
+.itemFriends {
+    margin-top: 5em;
+}

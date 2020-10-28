@@ -9,16 +9,16 @@ import Communities from "./components/Communities/Communities";
 import Music from "./components/Music/Music";
 import {BrowserRouter, Route} from "react-router-dom";
 
-function App() {
+function App(props) {
     return (
         <BrowserRouter>
         <div className="app-main">
             <Header/>
-            <Navbar/>
+            <Navbar state={props.state.sidebar}/>
             <div className="app-profile">
-                <Route path='/profile' component={Profile}/>
-                <Route path='/friends' component={Friends}/>
-                <Route path='/messages' component={Messages}/>
+                <Route path='/profile' render={() => <Profile state={props.state.ProfilePage}/>}/>
+                <Route path='/friends' render={() => <Friends state={props.state.sidebar}/>}/>
+                <Route path='/messages' render={() => <Messages state={props.state.MessagesPage}/>}/>
                 <Route path='/communities' component={Communities}/>
                 <Route path='/music' component={Music}/>
             </div>

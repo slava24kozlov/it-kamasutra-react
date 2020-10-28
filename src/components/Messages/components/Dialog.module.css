@@ -1,0 +1,16 @@
+.main {
+
+}
+
+.main a {
+    color: black;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.image {
+    height: 1em;
+    border-radius: 10px;
+}
+
+

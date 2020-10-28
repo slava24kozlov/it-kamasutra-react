@@ -1,11 +1,13 @@
 .main {
     display: grid;
     grid-template-columns: 2fr 10fr;
+    border: 2px solid black;
+    background-color: aquamarine;
     font-weight: bold;
-    color: darkolivegreen;
 }
 
 .dialogs {
+    border: 1px solid black;
     padding: 10px;
 }
 
@@ -14,6 +16,8 @@
 }
 
 .messages {
+    border: 1px solid black;
+    color: darkolivegreen;
     padding: 10px;
 }
 
