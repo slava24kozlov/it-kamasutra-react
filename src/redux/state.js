@@ -1,9 +1,11 @@
+import {renderEntireTree} from '../render';
+
 let state = {
     ProfilePage: {
         postData: [
-            {message: "This is my first post", author: "Slava Nelson", like: "23"},
-            {message: "My favorite actor is Will Smith", author: "Vlad Lenon", like: "5"},
-            {message: "It's page of animals", author: "Len Name", like: "10"}
+            {message: "This is my first post", author: "Slava Nelson", like: 23},
+            {message: "My favorite actor is Will Smith", author: "Vlad Lenon", like: 5},
+            {message: "It's page of animals", author: "Len Name", like: 10}
         ]
     },
     MessagesPage: {
@@ -31,5 +33,31 @@ let state = {
     }
 }
 
+export let addPost = (postMessage) => {
+    let newPost = {
+        message: postMessage,
+        author: "Sam Nem",
+        like: 0
+    }
+    state.ProfilePage.postData.push(newPost);
+    renderEntireTree(state, addPost, addMessages);
+}
+
+export let addMessages = (message) => {
+    let newDialog = {
+        id: 6,
+        name: "Viktor",
+        image: "https://html5css.ru/w3images/avatar2.png"
+    }
+    let newMessage = {
+        id: 6,
+        message: message
+    }
+    state.MessagesPage.dialogData.push(newDialog);
+    state.MessagesPage.messagesData.push(newMessage);
+    renderEntireTree(state, addPost, addMessages);
+}
+
 export default state;
+
 
