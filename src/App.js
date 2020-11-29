@@ -14,13 +14,18 @@ function App(props) {
         <BrowserRouter>
         <div className="app-main">
             <Header/>
-            <Navbar state={props.state.sidebar}/>
+            <Navbar friendsNav={props.state.sidebar.FriendsBar}/>
             <div className="app-profile">
                 <Route path='/profile' render={() =>
-                    <Profile state={props.state.ProfilePage} addPost={props.addPost}/>}/>
-                <Route path='/friends' render={() => <Friends state={props.state.sidebar}/>}/>
+                    <Profile profilePage={props.state.ProfilePage}
+                             setPost={props.setPost}
+                             updatePostText={props.updatePostText}/>}/>
+                <Route path='/friends' render={() =>
+                    <Friends friends={props.state.sidebar.FriendsBar}/>}/>
                 <Route path='/messages' render={() =>
-                    <Messages state={props.state.MessagesPage} addMessage={props.addMessage}/>}/>
+                    <Messages messagesPage={props.state.MessagesPage}
+                              setMessage={props.setMessage}
+                              updateMessageText={props.updateMessageText}/>}/>
                 <Route path='/communities' component={Communities}/>
                 <Route path='/music' component={Music}/>
             </div>

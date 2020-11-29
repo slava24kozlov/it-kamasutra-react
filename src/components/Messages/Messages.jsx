@@ -4,13 +4,16 @@ import Dialog from "./components/Dialog";
 import Message from "./components/Message";
 
 const Messages = (props) => {
-    let dialogElement = props.state.dialogData.map(d => <Dialog id={d.id} name={d.name} image={d.image}/>);
-    let messageElement = props.state.messagesData.map(e =><Message id={e.id} message={e.message}/>);
+    let dialogElement = props.messagesPage.dialogData.map(d => <Dialog id={d.id} name={d.name} image={d.image}/>);
+    let messageElement = props.messagesPage.messagesData.map(e =><Message id={e.id} message={e.message}/>);
     let textarea = React.createRef();
+
     let addMessage = () => {
-        let newMessage = textarea.current.value;
-        {props.addMessage(newMessage)}
-        textarea.current.value = '';
+        props.setMessage(textarea.current.value)
+    }
+
+    let updateMessage = () => {
+        props.updateMessageText(textarea.current.value);
     }
 
     return (
@@ -21,7 +24,7 @@ const Messages = (props) => {
             <div className={m.messages}>
                 {messageElement}
             </div>
-            <textarea ref={textarea}>Enter words</textarea>
+            <textarea ref={textarea} onClick={updateMessage} value={props.newMessageText}/>
             <button onClick={addMessage}>Click</button>
         </div>
     );

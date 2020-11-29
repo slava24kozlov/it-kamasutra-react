@@ -3,7 +3,7 @@ import f from './Friends.module.css';
 import FriendElement from "./FriendElement";
 
 const Friends = (props) => {
-    let friendsElement = props.state.FriendsBar.map(f => <FriendElement name={f.name} image={f.image}/>);
+    let friendsElement = props.friends.map(f => <FriendElement name={f.name} image={f.image}/>);
     return (
         <div className={f.main}>
             {friendsElement}
