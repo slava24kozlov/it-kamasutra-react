@@ -1,3 +1,8 @@
+const SET_POST = 'SET-POST';
+const UPDATE_POST_TEXT = 'UPDATE-POST-TEXT';
+const SET_MESSAGE = 'SET-MESSAGE';
+const UPDATE_MESSAGE_TEXT = 'UPDATE-MESSAGE-TEXT';
+
 let store = {
     _state: {
         ProfilePage: {
@@ -50,51 +55,71 @@ let store = {
             ]
         }
     },
-    getState() {
-        return this._state;
-    },
     _callSubscriber() {
         console.log('no subscribers(observers)');
+    },
+
+    getState() {
+        return this._state;
     },
     subscriber(observer) {
        this._callSubscriber = observer;
     },
-    setPost(newPost) {
-        let post = {
-            message: newPost,
-            author: "Sam Nem",
-            like: 0
+
+    dispatch(action){
+        if (action.type === 'SET-POST'){
+            let post = {
+                message: this._state.ProfilePage.newPostText,
+                author: "Sam Nem",
+                like: 0
+            }
+            this._state.ProfilePage.postData.push(post);
+            this._state.ProfilePage.newPostText = '';
+            this._callSubscriber(this._state);
+
+        } else if (action.type === 'UPDATE-POST-TEXT'){
+            this._state.ProfilePage.newPostText = action.newPost;
+            this._callSubscriber(this._state);
+
+        } else if (action.type === 'SET-MESSAGE'){
+            let dialog = {
+                id: 6,
+                name: "Viktor",
+                image: "https://html5css.ru/w3images/avatar2.png"
+            }
+            let message = {
+                id: 6,
+                message: this._state.MessagesPage.newMessageText
+            }
+            this._state.MessagesPage.dialogData.push(dialog);
+            this._state.MessagesPage.messagesData.push(message);
+            this._state.MessagesPage.newMessageText = '';
+            this._callSubscriber(this._state);
+
+        } else if (action.type === 'UPDATE-MESSAGE-TEXT'){
+            this._state.MessagesPage.newMessageText = action.newMessage;
+            this._callSubscriber(this._state)
         }
-        this._state.ProfilePage.postData.push(post);
-        this._state.ProfilePage.newPostText = '';
-        this._callSubscriber(this._state);
-    },
-    updatePostText(newText) {
-        this._state.ProfilePage.newPostText = newText;
-        this._callSubscriber(this._state);
-    },
-    setMessage(newMessage) {
-        let dialog = {
-            id: 6,
-            name: "Viktor",
-            image: "https://html5css.ru/w3images/avatar2.png"
-        }
-        let message = {
-            id: 6,
-            message: newMessage
-        }
-        this._state.MessagesPage.dialogData.push(dialog);
-        this._state.MessagesPage.messagesData.push(message);
-        this._state.MessagesPage.newMessageText = '';
-        this._callSubscriber(this._state);
-    },
-    updateMessageText(newText) {
-        this._state.MessagesPage.newMessageText = newText;
-        this._callSubscriber(this._state)
     }
 }
 
+export const actionCreatorSetPost = () => ({
+    type: SET_POST
+})
+
+export const actionCreatorUpdatePostText = (action) => ({
+    type: UPDATE_POST_TEXT,
+    newPost: action
+})
+
+export const actionCreatorSetMessage = () => ({
+    type: SET_MESSAGE
+})
+
+export const actionCreatorUpdateMessageText = (action) => ({
+    type: UPDATE_MESSAGE_TEXT,
+    newMessage: action
+})
+
 export default store;
-
-
 

@@ -18,14 +18,12 @@ function App(props) {
             <div className="app-profile">
                 <Route path='/profile' render={() =>
                     <Profile profilePage={props.state.ProfilePage}
-                             setPost={props.setPost}
-                             updatePostText={props.updatePostText}/>}/>
+                             dispatch={props.dispatch}/>}/>
                 <Route path='/friends' render={() =>
                     <Friends friends={props.state.sidebar.FriendsBar}/>}/>
                 <Route path='/messages' render={() =>
                     <Messages messagesPage={props.state.MessagesPage}
-                              setMessage={props.setMessage}
-                              updateMessageText={props.updateMessageText}/>}/>
+                              dispatch={props.dispatch}/>}/>
                 <Route path='/communities' component={Communities}/>
                 <Route path='/music' component={Music}/>
             </div>
