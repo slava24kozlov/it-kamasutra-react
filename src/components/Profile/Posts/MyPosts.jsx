@@ -22,15 +22,14 @@ const MyPosts = (props) => {
 
     return (
         <div className={p.main}>
-            <h3>My posts</h3>
             <div>
-                <h1>Enter new post</h1>
-                <textarea className={p.updatePost} ref={linkPosts} onChange={updatePostText}
+                <p className={p.text}>Enter new post</p>
+                <textarea className={p.textareaPost} ref={linkPosts} onChange={updatePostText}
                           value={props.profilePage.newPostText}/>
             </div>
             <div>
-                <h1>Enter count likes</h1>
-                <textarea className={p.updateLikes} ref={linkLikes} onChange={updateLikeText}
+                <p className={p.text}>Enter count likes</p>
+                <textarea className={p.textareaLikes} ref={linkLikes} onChange={updateLikeText}
                           value={props.profilePage.newCountLike}/>
             </div>
             <div>

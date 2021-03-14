@@ -1,5 +1,5 @@
 import React from 'react';
-import store from './redux/store';
+import store from './redux/store-redux';
 import ReactDOM from "react-dom";
 import App from "./App";
 
@@ -13,6 +13,9 @@ export let renderEntireTree = (state) => {
 }
 
 renderEntireTree(store.getState());
-store.subscriber(renderEntireTree);
+
+store.subscribe(() => {
+    renderEntireTree(store.getState())
+});
 
 

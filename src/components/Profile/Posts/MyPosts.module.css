@@ -2,7 +2,19 @@
     padding: 10px;
 }
 
+.text {
+    font-style: italic;
+    font-weight: bold;
+}
+
 .post {
     border: 2px groove burlywood;
 }
 
+.textareaPost {
+    margin-top: -1em;
+}
+
+.textareaLikes {
+    margin-top: -1em;
+}

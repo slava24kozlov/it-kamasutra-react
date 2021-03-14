@@ -2,7 +2,17 @@ const SET_POST = 'SET-POST';
 const UPDATE_POST_TEXT = 'UPDATE-POST-TEXT';
 const UPDATE_COUNT_LIKE = 'UPDATE_COUNT_LIKE';
 
-export const profileReducer = (state, action) => {
+let initialState = {
+    postData: [
+        {message: "This is my first post", author: "Slava Nelson", like: 23},
+        {message: "My favorite actor is Will Smith", author: "Vlad Lenon", like: 5},
+        {message: "It's page of animals", author: "Len Name", like: 10}
+        ],
+    newPostText: 'Enter new post',
+    newCountLike: 0
+}
+
+export const profileReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_POST:
             let post = {
