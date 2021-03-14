@@ -1,7 +1,6 @@
-const SET_POST = 'SET-POST';
-const UPDATE_POST_TEXT = 'UPDATE-POST-TEXT';
-const SET_MESSAGE = 'SET-MESSAGE';
-const UPDATE_MESSAGE_TEXT = 'UPDATE-MESSAGE-TEXT';
+import ProfileReducer from './reducer/ProfileReducer';
+import MessagesReducer from './reducer/MessagesReducer';
+import SidebarReducer from './reducer/SidebarReducer';
 
 let store = {
     _state: {
@@ -11,7 +10,8 @@ let store = {
                 {message: "My favorite actor is Will Smith", author: "Vlad Lenon", like: 5},
                 {message: "It's page of animals", author: "Len Name", like: 10}
             ],
-            newPostText: 'Enter new post'
+            newPostText: 'Enter new post',
+            newCountLike: 0
         },
         MessagesPage: {
             dialogData: [
@@ -63,63 +63,17 @@ let store = {
         return this._state;
     },
     subscriber(observer) {
-       this._callSubscriber = observer;
+        this._callSubscriber = observer;
     },
 
-    dispatch(action){
-        if (action.type === 'SET-POST'){
-            let post = {
-                message: this._state.ProfilePage.newPostText,
-                author: "Sam Nem",
-                like: 0
-            }
-            this._state.ProfilePage.postData.push(post);
-            this._state.ProfilePage.newPostText = '';
-            this._callSubscriber(this._state);
+    dispatch(action) {
+        this._state.ProfilePage = ProfileReducer(this._state.ProfilePage, action);
+        this._state.MessagesPage = MessagesReducer(this._state.MessagesPage, action);
+        this._state.sidebar = SidebarReducer(this._state.sidebar, action);
 
-        } else if (action.type === 'UPDATE-POST-TEXT'){
-            this._state.ProfilePage.newPostText = action.newPost;
-            this._callSubscriber(this._state);
-
-        } else if (action.type === 'SET-MESSAGE'){
-            let dialog = {
-                id: 6,
-                name: "Viktor",
-                image: "https://html5css.ru/w3images/avatar2.png"
-            }
-            let message = {
-                id: 6,
-                message: this._state.MessagesPage.newMessageText
-            }
-            this._state.MessagesPage.dialogData.push(dialog);
-            this._state.MessagesPage.messagesData.push(message);
-            this._state.MessagesPage.newMessageText = '';
-            this._callSubscriber(this._state);
-
-        } else if (action.type === 'UPDATE-MESSAGE-TEXT'){
-            this._state.MessagesPage.newMessageText = action.newMessage;
-            this._callSubscriber(this._state)
-        }
+        this._callSubscriber(this._state);
     }
 }
-
-export const actionCreatorSetPost = () => ({
-    type: SET_POST
-})
-
-export const actionCreatorUpdatePostText = (action) => ({
-    type: UPDATE_POST_TEXT,
-    newPost: action
-})
-
-export const actionCreatorSetMessage = () => ({
-    type: SET_MESSAGE
-})
-
-export const actionCreatorUpdateMessageText = (action) => ({
-    type: UPDATE_MESSAGE_TEXT,
-    newMessage: action
-})
 
 export default store;
 
