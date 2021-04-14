@@ -22,6 +22,7 @@ const MyPosts = (props) => {
 
     return (
         <div className={p.main}>
+            <div className={p.menu}>
             <div>
                 <p className={p.text}>Enter new post</p>
                 <textarea className={p.textareaPost} ref={linkPosts} onChange={updatePostText}
@@ -35,7 +36,8 @@ const MyPosts = (props) => {
             <div>
                 <button onClick={addPost}>Add post</button>
             </div>
-            <div className={p.post}>
+            </div>
+            <div className={p.posts}>
                 {postElement}
             </div>
         </div>

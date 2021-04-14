@@ -4,9 +4,9 @@ const UPDATE_COUNT_LIKE = 'UPDATE_COUNT_LIKE';
 
 let initialState = {
     postData: [
-        {message: "This is my first post", author: "Slava Nelson", like: 23},
-        {message: "My favorite actor is Will Smith", author: "Vlad Lenon", like: 5},
-        {message: "It's page of animals", author: "Len Name", like: 10}
+        {message: "This is my first post", author: "Benedict Cumberbatch", like: 23},
+        {message: "My favorite actor is Will Smith", author: "James McAvoy", like: 5},
+        {message: "This is a test web page", author: "Daniel Radcliffe", like: 10}
         ],
     newPostText: 'Enter new post',
     newCountLike: 0

@@ -1,9 +1,9 @@
 .main img {
-    height: 5em;
+    height: 8em;
 }
 
-.description {
+.description p{
+    margin: 5px;
     font-weight: bold;
     font-style: italic;
-    border: 2px groove black;
 }
