@@ -6,7 +6,8 @@ let initialState = {
         {
             id: 1,
             name: "Slava",
-            image: "https://html5css.ru/w3images/avatar2.png"},
+            image: "https://html5css.ru/w3images/avatar2.png"
+        },
         {
             id: 2,
             name: "Lesha",
@@ -20,11 +21,13 @@ let initialState = {
         {
             id: 4,
             name: "Vika",
-            image: "https://html5css.ru/w3images/avatar2.png"},
+            image: "https://html5css.ru/w3images/avatar2.png"
+        },
         {
             id: 5,
             name: "Tonya",
-            image: "https://html5css.ru/howto/img_avatar2.png"}
+            image: "https://html5css.ru/howto/img_avatar2.png"
+        }
         ],
     messagesData: [
         {id: 1, message: "Hello. How are you?"},
@@ -33,30 +36,36 @@ let initialState = {
         {id: 4, message: "What do you do?"},
         {id: 5, message: "Hello"}
         ],
-    newMessageText: 'Enter message'
+    newMessageText: 'Enter message',
+    counterList: 6
 }
 
 export const messagesReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_MESSAGE:
             let dialog = {
-                id: 6,
+                id: state.counterList,
                 name: "Indefinite Name",
                 image: "https://html5css.ru/w3images/avatar2.png"
             }
             let message = {
-                id: 6,
+                id: state.counterList,
                 message: state.newMessageText
             }
-            state.dialogData.push(dialog);
-            state.messagesData.push(message);
-            state.newMessageText = '';
-            return state;
+            state.counterList++
+            return {
+                ...state,
+                dialogData: [...state.dialogData, dialog],
+                messagesData: [...state.messagesData, message],
+                newMessageText: '',
+            }
         case UPDATE_MESSAGE_TEXT:
-            state.newMessageText = action.newMessage;
-            return state;
+            return {
+                ...state,
+                newMessageText: action.newMessage
+            }
         default:
-            return state;
+            return {...state}
     }
 }
 
@@ -70,3 +79,18 @@ export const actionCreatorUpdateMessageText = (action) => ({
 })
 
 export default messagesReducer;
+
+/*stateCopy.dialogData = [...state.dialogData]
+            stateCopy.messagesData = [...state.messagesData]
+            stateCopy.dialogData.push(dialog)
+            stateCopy.messagesData.push(message)
+            stateCopy.newMessageText = ''
+            stateCopy.counterList++*/
+/*state.dialogData.push(dialog)
+state.messagesData.push(message)
+state.newMessageText = ''
+return stateCopy*/
+
+/*stateCopy.newMessageText = action.newMessage
+            state.newMessageText = action.newMessage
+            return stateCopy*/

@@ -20,18 +20,24 @@ export const profileReducer = (state = initialState, action) => {
                 author: "Sam Nem",
                 like: state.newCountLike
             }
-            state.postData.push(post);
-            state.newPostText = '';
-            state.newCountLike = 0;
-            return state;
+            return {
+                ...state,
+                postData: [...state.postData, post],
+                newPostText: '',
+                newCountLike: 0
+            }
         case UPDATE_POST_TEXT:
-            state.newPostText = action.newPost;
-            return state;
+            return {
+                ...state,
+                newPostText: action.newPost
+            }
         case UPDATE_COUNT_LIKE:
-            state.newCountLike = action.newCountLike;
-            return state;
+            return {
+                ...state,
+                newCountLike: action.newCountLike
+            }
         default:
-            return state;
+            return {...state}
     }
 }
 
@@ -49,3 +55,15 @@ export const actionCreatorUpdateCountLike = (action) => ({
 })
 
 export default profileReducer;
+
+
+
+/*state.postData.push(post);
+        state.newPostText = '';
+        state.newCountLike = 0;*/
+
+/*stateCopy.newPostText = action.newPost*/
+/*state.newPostText = action.newPost;*/
+
+/*stateCopy.newCountLike = action.newCountLike*/
+/*state.newCountLike = action.newCountLike;*/

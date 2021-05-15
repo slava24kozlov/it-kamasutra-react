@@ -3,27 +3,25 @@ import './App.css';
 import Header from './components/Herder/Header';
 import Navbar from './components/Navbar/Navbar';
 import Profile from './components/Profile/Profile';
-import Messages from './components/Messages/Messages';
 import Friends from "./components/Friends/Friends";
 import Communities from "./components/Communities/Communities";
 import Music from "./components/Music/Music";
 import {BrowserRouter, Route} from "react-router-dom";
+import MessagesContainer from "./components/Messages/MessagesContainer";
 
-function App(props) {
+function App() {
     return (
         <BrowserRouter>
         <div className="app-main">
             <Header/>
-            <Navbar friendsNav={props.state.sidebar.FriendsBar}/>
+            <Navbar/>
             <div className="app-profile">
                 <Route path='/profile' render={() =>
-                    <Profile profilePage={props.state.ProfilePage}
-                             dispatch={props.dispatch}/>}/>
+                    <Profile/>}/>
                 <Route path='/friends' render={() =>
-                    <Friends friends={props.state.sidebar.FriendsBar}/>}/>
+                    <Friends/>}/>
                 <Route path='/messages' render={() =>
-                    <Messages messagesPage={props.state.MessagesPage}
-                              dispatch={props.dispatch}/>}/>
+                    <MessagesContainer/>}/>
                 <Route path='/communities' component={Communities}/>
                 <Route path='/music' component={Music}/>
             </div>

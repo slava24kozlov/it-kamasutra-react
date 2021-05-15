@@ -11,6 +11,10 @@
     padding: 10px;
 }
 
+.messages {
+    line-height: 1.3em;
+}
+
 .dialog.a.active{
     color: gold;
 }

@@ -2,8 +2,10 @@ import React from 'react';
 import n from './Navbar.module.css';
 import NavbarFriends from "./NavbarFriends";
 import {NavLink} from "react-router-dom";
+import store from '../../redux/store-redux';
 
-const Navbar = (props) => {
+const Navbar = () => {
+    let state = store.getState().sidebar;
     return (
         <nav className={n.main}>
             <div className={n.item}>
@@ -20,7 +22,7 @@ const Navbar = (props) => {
             </div>
             <div className={`${n.item} ${n.itemFriends}`}>
                 <NavLink to='/friends' activeClassName={n.active}>Friends
-                    <NavbarFriends friends={props.friendsNav}/></NavLink>
+                    <NavbarFriends friends={state.FriendsBar}/></NavLink>
             </div>
         </nav>
     );
