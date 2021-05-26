@@ -6,9 +6,9 @@ import Messages from "./Messages";
 
 let mapStateToProps = (state) => (
     {
-        dialogData: state.MessagesPage.dialogData,
-        messagesData: state.MessagesPage.messagesData,
-        newMessageText: state.MessagesPage.newMessageText
+        dialogData: state.messagesPage.dialogData,
+        messagesData: state.messagesPage.messagesData,
+        newMessageText: state.messagesPage.newMessageText
     }
 )
 
@@ -25,6 +25,6 @@ let mapDispatchToProps = (dispatch) => (
 
 let MessagesContainer = connect(mapStateToProps, mapDispatchToProps)(Messages);
 
-export default MessagesContainer;
+export default MessagesContainer
 
 

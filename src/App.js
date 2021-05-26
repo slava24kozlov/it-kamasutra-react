@@ -6,8 +6,9 @@ import Profile from './components/Profile/Profile';
 import Friends from "./components/Friends/Friends";
 import Communities from "./components/Communities/Communities";
 import Music from "./components/Music/Music";
-import {BrowserRouter, Route} from "react-router-dom";
 import MessagesContainer from "./components/Messages/MessagesContainer";
+import UsersContainer from "./components/Users/UsersContainer";
+import {BrowserRouter, Route} from "react-router-dom";
 
 function App() {
     return (
@@ -22,6 +23,8 @@ function App() {
                     <Friends/>}/>
                 <Route path='/messages' render={() =>
                     <MessagesContainer/>}/>
+                <Route path='/users' render={() =>
+                    <UsersContainer/>}/>
                 <Route path='/communities' component={Communities}/>
                 <Route path='/music' component={Music}/>
             </div>

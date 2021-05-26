@@ -10,9 +10,9 @@ import {connect} from "react-redux";
 
 let mapStateToProps = (state) => (
     {
-        postData: state.ProfilePage.postData,
-        newPostText: state.ProfilePage.newPostText,
-        newCountLike: state.ProfilePage.newCountLike
+        postData: state.profilePage.postData,
+        newPostText: state.profilePage.newPostText,
+        newCountLike: state.profilePage.newCountLike
     }
 )
 

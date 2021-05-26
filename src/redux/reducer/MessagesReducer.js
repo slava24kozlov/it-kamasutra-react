@@ -57,7 +57,7 @@ export const messagesReducer = (state = initialState, action) => {
                 ...state,
                 dialogData: [...state.dialogData, dialog],
                 messagesData: [...state.messagesData, message],
-                newMessageText: '',
+                newMessageText: ''
             }
         case UPDATE_MESSAGE_TEXT:
             return {

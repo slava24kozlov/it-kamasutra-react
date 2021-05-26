@@ -1,0 +1,42 @@
+.main {
+    display: flex;
+    width: 80%;
+    margin: 15px 35px;
+    padding: 15px;
+    background-color: white;
+    opacity: 0.9;
+    border-radius: 30px;
+}
+
+.userHead{
+    /*border: 1px black solid;*/
+    width: 13%;
+}
+
+.userHead img{
+    height: 60px;
+    width: 60px;
+    border-radius: 100%;
+}
+
+.userHead button{
+    margin-top: 15px;
+    background-color: green;
+    color: white;
+    font-weight: bold;
+}
+
+.userInformation {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    margin-left: 20px;
+    padding: 5px;
+    border: 1px black solid;
+    border-radius: 15px;
+}
+
+/*.button_show_more{
+    text-align: center;
+}*/

@@ -17,7 +17,7 @@ export const profileReducer = (state = initialState, action) => {
         case SET_POST:
             let post = {
                 message: state.newPostText,
-                author: "Sam Nem",
+                author: "Indefinite author",
                 like: state.newCountLike
             }
             return {
