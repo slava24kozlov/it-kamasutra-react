@@ -16,6 +16,7 @@
 .app-profile {
     grid-area: c;
     background-color: aqua;
+    overflow-y: auto;
 }
 
 
