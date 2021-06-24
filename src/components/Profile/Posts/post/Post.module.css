@@ -5,6 +5,7 @@
 .item img {
     height: 30px;
     border-radius: 30px;
+    margin-right: 5px;
 }
 
 .like {
