@@ -77,20 +77,3 @@ export const actionCreatorUpdateMessageText = (action) => ({
     type: UPDATE_MESSAGE_TEXT,
     newMessage: action
 })
-
-export default messagesReducer;
-
-/*stateCopy.dialogData = [...state.dialogData]
-            stateCopy.messagesData = [...state.messagesData]
-            stateCopy.dialogData.push(dialog)
-            stateCopy.messagesData.push(message)
-            stateCopy.newMessageText = ''
-            stateCopy.counterList++*/
-/*state.dialogData.push(dialog)
-state.messagesData.push(message)
-state.newMessageText = ''
-return stateCopy*/
-
-/*stateCopy.newMessageText = action.newMessage
-            state.newMessageText = action.newMessage
-            return stateCopy*/

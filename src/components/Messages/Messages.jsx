@@ -4,8 +4,8 @@ import Dialog from "./components/Dialog";
 import Message from "./components/Message";
 
 const Messages = (props) => {
-    let dialogElement = props.dialogData.map(d => <Dialog id={d.id} name={d.name} image={d.image}/>);
-    let messageElement = props.messagesData.map(e => <Message id={e.id} message={e.message}/>);
+    let dialogElement = props.dialogData.map(d => <Dialog key={d.id} id={d.id} name={d.name} image={d.image}/>);
+    let messageElement = props.messagesData.map(e => <Message key={e.id} id={e.id} message={e.message}/>);
     let linkMessage = React.createRef();
 
     return (

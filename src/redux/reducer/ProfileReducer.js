@@ -4,9 +4,9 @@ const UPDATE_COUNT_LIKE = 'UPDATE_COUNT_LIKE';
 
 let initialState = {
     postData: [
-        {message: "This is my first post", author: "Benedict Cumberbatch", like: 23},
-        {message: "My favorite actor is Will Smith", author: "James McAvoy", like: 5},
-        {message: "This is a test web page", author: "Daniel Radcliffe", like: 10}
+        {id: 1, message: "This is my first post", author: "Benedict Cumberbatch", like: 23},
+        {id: 2, message: "My favorite actor is Will Smith", author: "James McAvoy", like: 5},
+        {id: 3, message: "This is a test web page", author: "Daniel Radcliffe", like: 10}
         ],
     newPostText: 'Enter new post',
     newCountLike: 0
@@ -53,8 +53,6 @@ export const actionCreatorUpdateCountLike = (action) => ({
     type: UPDATE_COUNT_LIKE,
     newCountLike: action
 })
-
-export default profileReducer;
 
 
 

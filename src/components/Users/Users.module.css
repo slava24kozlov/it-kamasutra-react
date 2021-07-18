@@ -1,4 +1,12 @@
-.main {
+.pagesList span {
+   cursor: pointer;
+}
+
+.currentPage{
+    font-weight: bold;
+}
+
+.userMain {
     display: flex;
     width: 50%;
     margin: 15px 35px;

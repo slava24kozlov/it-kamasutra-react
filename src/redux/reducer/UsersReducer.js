@@ -1,9 +1,14 @@
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET-USERS';
+const SET_CURRENT_PAGE = 'SET-CURRENT-PAGE';
+const SET_TOTAL_USERS_COUNT = 'SET-TOTAL_USERS_COUNT';
 
 let initialState = {
-    users: []
+    users: [],
+    currentPage: 1,
+    pageSize: 100,
+    totalUsersCount: 0
 }
 
 export const usersReducer = (state = initialState, action) => {
@@ -31,7 +36,17 @@ export const usersReducer = (state = initialState, action) => {
         case SET_USERS:
             return {
                 ...state,
-                users: [...state.users, ...action.users]
+                users: [...action.users]
+            }
+        case SET_CURRENT_PAGE:
+            return {
+                ...state,
+                currentPage: action.currentPage
+            }
+        case SET_TOTAL_USERS_COUNT:
+            return {
+                ...state,
+                totalUsersCount: action.totalUsersCount
             }
         default:
             return {...state}
@@ -51,16 +66,11 @@ export const setUsersAC = (action) => ({
     type: SET_USERS,
     users: action
 })
-
-export default usersReducer;
-
-
-/*state.postData.push(post);
-        state.newPostText = '';
-        state.newCountLike = 0;*/
-
-/*stateCopy.newPostText = action.newPost*/
-/*state.newPostText = action.newPost;*/
-
-/*stateCopy.newCountLike = action.newCountLike*/
-/*state.newCountLike = action.newCountLike;*/
+export const setCurrentPageAC = (action) => ({
+    type: SET_CURRENT_PAGE,
+    currentPage: action
+})
+export const setTotalUsersCountAC = (action) => ({
+    type: SET_TOTAL_USERS_COUNT,
+    totalUsersCount: action
+})

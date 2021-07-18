@@ -6,17 +6,41 @@ import photoUser from '../../image/photoUser.png'
 class Users extends React.Component {
     componentDidMount() {
         if (this.props.users.length === 0) {
-            axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => this.props.setUsers(response.data.items))
+            axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+                .then(response => {
+                    this.props.setUsers(response.data.items)
+                    this.props.setTotalUsersCount(response.data.totalCount)
+                })
         }
     }
 
+    onChangeCurrentPage = (currentPage) => {
+        this.props.setCurrentPage(currentPage)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${this.props.pageSize}`)
+            .then(response => {
+                this.props.setUsers(response.data.items)
+            })
+        debugger
+    }
+
     render() {
+        let pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize)
+        let pages = []
+        for (let i = 1; i <= pagesCount; i++) {
+            pages.push(i)
+        }
+
         return <div>
+            <div className={style.pagesList}>
+                {pages.map((page) =>
+                    <span key={page} className={this.props.currentPage === page ? style.currentPage : undefined}
+                          onClick={() => this.onChangeCurrentPage(page)}>{page} </span>)}
+            </div>
             {this.props.users.map(el =>
-                <div key={el.id} className={style.main}>
+                <div key={el.id} className={style.userMain}>
                     <section className={style.userHead}>
                         <div>
-                            <img src={el.photos.small != null ? el.photos.small : photoUser} alt='image avatar'/>
+                            <img src={el.photos.small != null ? el.photos.small : photoUser} alt='user avatar'/>
                         </div>
                         <div>
                             {el.followed
@@ -36,32 +60,3 @@ class Users extends React.Component {
 }
 
 export default Users;
-
-
-/*if (props.users.length === 0) {
-   props.setUsers([
-       {
-           id: 1,
-           followed: true,
-           imageUser: 'http://mhs.edu.af/en/wp-content/uploads/2015/05/unknown-user.png',
-           name: 'Dwayne J',
-           status: 'Our life is what our thoughts make it',
-           location: {country: 'Hayward', city: 'United States'}
-       },
-       {
-           id: 2,
-           followed: false,
-           imageUser: 'http://mhs.edu.af/en/wp-content/uploads/2015/05/unknown-user.png',
-           name: 'Tom H',
-           status: 'In the middle of difficulty lies opportunity',
-           location: {country: 'Kingston upon Thames', city: 'United Kingdom'}
-       },
-       {
-           id: 3,
-           followed: true,
-           imageUser: 'http://mhs.edu.af/en/wp-content/uploads/2015/05/unknown-user.png',
-           name: 'Jim C',
-           status: 'Life is a series of choices',
-           location: {country: 'Newmarket', city: 'Canada'}
-       }])
-}*/

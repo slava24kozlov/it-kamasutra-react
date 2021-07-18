@@ -7,7 +7,7 @@ import {NavLink} from "react-router-dom";
 const Header = () => {
   return (
     <header className={h.main}>
-        <NavLink to=''><img src={logotype} alt="image of header"/></NavLink>
+        <NavLink to=''><img src={logotype} alt="header"/></NavLink>
         <p className={h.textHead}>THE PAGE IS TEST LESSON OF IT</p>
     </header>
   );
