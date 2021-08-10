@@ -1,6 +1,8 @@
 import React from 'react'
+import Preloader from "../common/Preloader/Preloader";
 import photoUser from '../../image/photoUser.png'
 import style from './Users.module.css'
+import {NavLink} from "react-router-dom";
 
 const Users = (props) => {
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
@@ -12,30 +14,32 @@ const Users = (props) => {
     return (
         <div>
             <div className={style.pagesList}>
-                {pages.map((page) =>
+                {pages.map(page =>
                     <span key={page} className={props.currentPage === page ? style.currentPage : undefined}
                           onClick={() => props.onChangeCurrentPage(page)}>{page} </span>)}
             </div>
-
-            {props.users.map(el =>
-                <div key={el.id} className={style.userMain}>
-                    <section className={style.userHead}>
-                        <div>
-                            <img src={el.photos.small != null ? el.photos.small : photoUser} alt='user avatar'/>
-                        </div>
-                        <div>
-                            {el.followed
-                                ? <button onClick={() => props.unfollow(el.id)}>UNFOLLOW</button>
-                                : <button onClick={() => props.follow(el.id)}>FOLLOW</button>}
-                        </div>
-                    </section>
-                    <section className={style.userInformation}>
-                    <span>
-                        <div><b>{el.name}</b></div>
-                        <div>{el.status ?? <i>No status</i>}</div>
-                    </span>
-                    </section>
-                </div>)}
+            {props.isFetching && <Preloader/>}
+            <div className={style.usersMain}>
+                {props.users.map(el =>
+                    <div key={el.id} className={style.userItem}>
+                        <section className={style.userHead}>
+                            <NavLink to={`/profile/${el.id}`} style={{textDecoration: 'none', color: 'black'}}>
+                                <img src={el.photos.small != null ? el.photos.small : photoUser} alt='user avatar'/>
+                            </NavLink>
+                            <div>
+                                {el.followed
+                                    ? <button onClick={() => props.unfollow(el.id)}>UNFOLLOW</button>
+                                    : <button onClick={() => props.follow(el.id)}>FOLLOW</button>}
+                            </div>
+                        </section>
+                        <NavLink className={style.userInformation} to={`/profile/${el.id}`}
+                                 style={{textDecoration: 'none', color: 'black'}}>
+                            <p><b>Name: </b>{el.name}</p>
+                            <p><b>Status: </b>{el.status}</p>
+                        </NavLink>
+                    </div>
+                )}
+            </div>
         </div>);
 }
 

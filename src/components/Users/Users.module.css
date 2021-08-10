@@ -1,38 +1,47 @@
-.pagesList span {
-   cursor: pointer;
+.pagesList{
+    position: relative;
+    width: 1020px;
 }
 
-.currentPage{
+.pagesList span {
+    cursor: pointer;
+}
+
+.currentPage {
     font-weight: bold;
 }
 
-.userMain {
-    display: flex;
-    width: 50%;
-    margin: 15px 35px;
+.usersMain {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+    width: 85%;
     padding: 10px;
+}
+
+.userItem {
+    border: 1px solid black;
+    display: grid;
+    grid-template-columns: 1fr 3.6fr;
+    padding: 10px 5px;
     background-color: white;
     opacity: 0.9;
     border-radius: 30px;
 }
 
-.userHead{
-    width: 22%;
+.userHead {
+    padding-left: 5px;
 }
 
-.userHead img{
-    display: block;
-    margin: auto;
+.userHead img {
     height: 60px;
     width: 60px;
     border-radius: 100%;
 }
 
-.userHead button{
-    display: block;
-    margin-right: auto;
-    margin-left: auto;
-    margin-top: 15px;
+.userHead button {
+    margin-top: 5px;
     background-color: green;
     color: white;
     font-weight: bold;
@@ -40,12 +49,12 @@
 
 .userInformation {
     border: 1px black solid;
+    max-width: 334px;
     border-radius: 15px;
-    width: 100%;
-    margin-left: 10px;
     padding: 5px;
 }
 
-/*.button_show_more{
-    text-align: center;
-}*/
+.userInformation p {
+    margin: 3px;
+    overflow: hidden;
+}

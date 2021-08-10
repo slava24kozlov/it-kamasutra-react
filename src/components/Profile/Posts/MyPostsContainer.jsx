@@ -1,8 +1,8 @@
 import MyPosts from "./MyPosts";
 import {
-    actionCreatorSetPost,
-    actionCreatorUpdatePostText,
-    actionCreatorUpdateCountLike
+    setPostAC,
+    updatePostTextAC,
+    updateCountLikeAC
 } from '../../../redux/reducer/ProfileReducer';
 import {connect} from "react-redux";
 
@@ -18,13 +18,13 @@ let mapStateToProps = (state) => (
 let mapDispatchToProps = (dispatch) => (
     {
         addPost: () => {
-            dispatch(actionCreatorSetPost())
+            dispatch(setPostAC())
         },
         updatePostText: (value) => {
-            dispatch(actionCreatorUpdatePostText(value))
+            dispatch(updatePostTextAC(value))
         },
         updateLikeText: (value) => {
-            dispatch(actionCreatorUpdateCountLike(value))
+            dispatch(updateCountLikeAC(value))
         }
     }
 )

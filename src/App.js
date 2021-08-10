@@ -1,14 +1,15 @@
 import React from 'react';
 import './App.css';
+import {BrowserRouter, Redirect, Route} from "react-router-dom";
 import Header from './components/Herder/Header';
 import Navbar from './components/Navbar/Navbar';
-import Profile from './components/Profile/Profile';
+import ProfileContainer from "./components/Profile/ProfileContainer";
 import Friends from "./components/Friends/Friends";
 import Communities from "./components/Communities/Communities";
 import Music from "./components/Music/Music";
 import MessagesContainer from "./components/Messages/MessagesContainer";
 import UsersContainer from "./components/Users/UsersContainer";
-import {BrowserRouter, Route} from "react-router-dom";
+
 
 function App() {
     return (
@@ -17,8 +18,8 @@ function App() {
             <Header/>
             <Navbar/>
             <div className="app-profile">
-                <Route path='/profile' render={() =>
-                    <Profile/>}/>
+                <Route path='/profile/:userId?' render={() =>
+                    <ProfileContainer/>}/>
                 <Route path='/friends' render={() =>
                     <Friends/>}/>
                 <Route path='/messages' render={() =>
@@ -27,6 +28,7 @@ function App() {
                     <UsersContainer/>}/>
                 <Route path='/communities' component={Communities}/>
                 <Route path='/music' component={Music}/>
+                <Redirect from='/' to='/profile'/>
             </div>
         </div>
         </BrowserRouter>

@@ -1,6 +1,7 @@
 const SET_POST = 'SET-POST';
 const UPDATE_POST_TEXT = 'UPDATE-POST-TEXT';
-const UPDATE_COUNT_LIKE = 'UPDATE_COUNT_LIKE';
+const UPDATE_COUNT_LIKE = 'UPDATE-COUNT-LIKE';
+const SET_PROFILE = 'SET-PROFILE';
 
 let initialState = {
     postData: [
@@ -8,6 +9,7 @@ let initialState = {
         {id: 2, message: "My favorite actor is Will Smith", author: "James McAvoy", like: 5},
         {id: 3, message: "This is a test web page", author: "Daniel Radcliffe", like: 10}
         ],
+    profile: null,
     newPostText: 'Enter new post',
     newCountLike: 0
 }
@@ -26,6 +28,11 @@ export const profileReducer = (state = initialState, action) => {
                 newPostText: '',
                 newCountLike: 0
             }
+        case SET_PROFILE:
+            return {
+                ...state,
+                profile: {...action.profile}
+            }
         case UPDATE_POST_TEXT:
             return {
                 ...state,
@@ -41,17 +48,20 @@ export const profileReducer = (state = initialState, action) => {
     }
 }
 
-export const actionCreatorSetPost = () => ({
+export const setPostAC = () => ({
     type: SET_POST
 })
-
-export const actionCreatorUpdatePostText = (action) => ({
-    type: UPDATE_POST_TEXT,
-    newPost: action
+export const setProfileAC = (profile) => ({
+    type: SET_PROFILE,
+    profile
 })
-export const actionCreatorUpdateCountLike = (action) => ({
+export const updatePostTextAC = (newPost) => ({
+    type: UPDATE_POST_TEXT,
+    newPost
+})
+export const updateCountLikeAC = (newCountLike) => ({
     type: UPDATE_COUNT_LIKE,
-    newCountLike: action
+    newCountLike
 })
 
 

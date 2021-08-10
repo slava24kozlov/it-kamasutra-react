@@ -1,0 +1,35 @@
+.main {
+  .head {
+    background-color: cornsilk;
+    text-align: center;
+
+    & > span {
+      font-size: 30px;
+      font-weight: bold;
+    }
+  }
+
+  .profile {
+    display: flex;
+    margin: 10px;
+
+    & > img {
+      border-radius: 100%;
+      width: 120px;
+      height: 120px;
+    }
+
+    .profileDescription{
+      margin-left: 15px
+    }
+}
+
+
+
+
+
+
+
+}
+
+
