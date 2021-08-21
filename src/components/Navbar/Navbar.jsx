@@ -5,7 +5,7 @@ import {NavLink} from "react-router-dom";
 import store from '../../redux/store-redux';
 
 const Navbar = () => {
-    let state = store.getState().sidebar;
+    let sidebar = store.getState().sidebar.FriendsBar;
     return (
         <nav className={n.main}>
             <div className={n.item}>
@@ -22,7 +22,7 @@ const Navbar = () => {
             </div>
             <div className={`${n.item} ${n.itemFriends}`}>
                 <NavLink to='/friends' activeClassName={n.active}>Friends
-                    <NavbarFriends friends={state.FriendsBar}/></NavLink>
+                    <NavbarFriends friends={sidebar}/></NavLink>
             </div>
             <div className={n.item}>
                 <NavLink to='/users' activeClassName={n.active}>Find Users</NavLink>

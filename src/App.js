@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
 import {BrowserRouter, Redirect, Route} from "react-router-dom";
-import Header from './components/Herder/Header';
 import Navbar from './components/Navbar/Navbar';
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import Friends from "./components/Friends/Friends";
@@ -9,13 +8,14 @@ import Communities from "./components/Communities/Communities";
 import Music from "./components/Music/Music";
 import MessagesContainer from "./components/Messages/MessagesContainer";
 import UsersContainer from "./components/Users/UsersContainer";
+import HeaderContainer from "./components/Herder/HeaderContainer";
 
 
 function App() {
     return (
         <BrowserRouter>
         <div className="app-main">
-            <Header/>
+            <HeaderContainer/>
             <Navbar/>
             <div className="app-profile">
                 <Route path='/profile/:userId?' render={() =>
