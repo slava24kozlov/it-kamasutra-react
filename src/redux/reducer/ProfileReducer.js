@@ -63,15 +63,3 @@ export const updateCountLikeAC = (newCountLike) => ({
     type: UPDATE_COUNT_LIKE,
     newCountLike
 })
-
-
-
-/*state.postData.push(post);
-        state.newPostText = '';
-        state.newCountLike = 0;*/
-
-/*stateCopy.newPostText = action.newPost*/
-/*state.newPostText = action.newPost;*/
-
-/*stateCopy.newCountLike = action.newCountLike*/
-/*state.newCountLike = action.newCountLike;*/

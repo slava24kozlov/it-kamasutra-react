@@ -1,8 +1,9 @@
 import React from 'react'
 import Preloader from "../common/Preloader/Preloader";
 import photoUser from '../../image/photoUser.png'
-import style from './Users.module.css'
+import style from './Users.module.scss'
 import {NavLink} from "react-router-dom";
+
 
 const Users = (props) => {
   let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
@@ -11,6 +12,7 @@ const Users = (props) => {
     pages.push(i)
   }
 
+  console.log(`isFollowing: ${props.isFollowing}`)
   return (
     <div>
       <div className={style.pagesList}>
@@ -28,8 +30,18 @@ const Users = (props) => {
               </NavLink>
               <div>
                 {el.followed
-                  ? <button onClick={() => props.unfollow(el.id)}>UNFOLLOW</button>
-                  : <button onClick={() => props.follow(el.id)}>FOLLOW</button>}
+                  ? <button
+                    disabled={props.isFollowing.some(user => user === el.id)}
+                    onClick={() => props.unfollow(el.id)}
+                  >
+                    UNFOLLOW
+                  </button>
+                  : <button
+                    disabled={props.isFollowing.some(user => user === el.id)}
+                    onClick={() => props.follow(el.id)}
+                  >
+                    FOLLOW
+                  </button>}
               </div>
             </section>
             <NavLink className={style.userInformation} to={`/profile/${el.id}`}
