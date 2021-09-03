@@ -1,7 +1,7 @@
 import React from 'react';
 import f from './Friends.module.css';
 import FriendElement from "./FriendElement";
-import store from '../../redux/store-redux';
+import store from '../../redux/store';
 
 const Friends = () => {
     let state = store.getState().sidebar;

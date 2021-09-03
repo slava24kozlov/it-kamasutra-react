@@ -2,10 +2,10 @@ import React from 'react';
 import n from './Navbar.module.css';
 import NavbarFriends from "./NavbarFriends";
 import {NavLink} from "react-router-dom";
-import store from '../../redux/store-redux';
+import {useSelector} from "react-redux";
 
 const Navbar = () => {
-    let sidebar = store.getState().sidebar.FriendsBar;
+    let sidebar = useSelector(state => state.sidebar.FriendsBar)
     return (
         <nav className={n.main}>
             <div className={n.item}>

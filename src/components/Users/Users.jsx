@@ -3,6 +3,7 @@ import Preloader from "../common/Preloader/Preloader";
 import photoUser from '../../image/photoUser.png'
 import style from './Users.module.scss'
 import {NavLink} from "react-router-dom";
+import {useSelector} from "react-redux";
 
 
 const Users = (props) => {
@@ -12,7 +13,9 @@ const Users = (props) => {
     pages.push(i)
   }
 
-  console.log(`isFollowing: ${props.isFollowing}`)
+  let state = useSelector((state) => state.usersPage)
+  console.log(state)
+
   return (
     <div>
       <div className={style.pagesList}>

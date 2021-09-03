@@ -1,5 +1,4 @@
-const SET_MESSAGE = 'SET-MESSAGE';
-const UPDATE_MESSAGE_TEXT = 'UPDATE-MESSAGE-TEXT';
+import {SET_MESSAGE, UPDATE_MESSAGE_TEXT} from "../action-type";
 
 let initialState = {
     dialogData: [
@@ -73,7 +72,7 @@ export const actionCreatorSetMessage = () => ({
     type: SET_MESSAGE
 })
 
-export const actionCreatorUpdateMessageText = (action) => ({
+export const actionCreatorUpdateMessageText = (newMessage) => ({
     type: UPDATE_MESSAGE_TEXT,
-    newMessage: action
+    newMessage
 })
