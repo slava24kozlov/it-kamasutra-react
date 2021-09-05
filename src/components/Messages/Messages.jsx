@@ -17,9 +17,9 @@ const Messages = (props) => {
                 {messageElement}
             </div>
             <textarea ref={linkMessage}
-                      onChange={() => props.updateMessageText(linkMessage.current.value)}
+                      onChange={() => props.updateMessageAC(linkMessage.current.value)}
                       value={props.newMessageText}/>
-            <button onClick={props.addMessage}>Click</button>
+            <button onClick={props.setMessageAC}>Click</button>
         </div>
     );
 }

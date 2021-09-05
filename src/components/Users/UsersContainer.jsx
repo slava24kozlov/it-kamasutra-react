@@ -6,10 +6,12 @@ import {
 import React from "react";
 import Users from "./Users";
 import {FOLLOW, UNFOLLOW} from "../../redux/action-type";
+import {withAuthRedirect} from "../../hoc/AuthRedirect";
 
 
 class UsersContainer extends React.Component {
   componentDidMount() {
+    console.log(this.props.isAuthUser)
     if (this.props.users.length === 0) {
       this.props.getUsersTC(this.props.currentPage, this.props.pageSize)
     }
@@ -50,12 +52,15 @@ let mapStateToProps = (state) => ({
   totalUsersCount: state.usersPage.totalUsersCount,
   pageSize: state.usersPage.pageSize,
   isFetching: state.usersPage.isFetching,
-  isFollowing: state.usersPage.isFollowing
+  isFollowing: state.usersPage.isFollowing,
+  isAuthUser: state.authUser.isAuth
 })
+
+const UsersWithRedirect = withAuthRedirect(UsersContainer)
 
 export default connect(mapStateToProps,
   {
     getUsersTC,
     followingTC,
   })
-(UsersContainer)
+(UsersWithRedirect)

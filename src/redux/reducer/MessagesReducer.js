@@ -68,11 +68,11 @@ export const messagesReducer = (state = initialState, action) => {
     }
 }
 
-export const actionCreatorSetMessage = () => ({
+export const setMessageAC = () => ({
     type: SET_MESSAGE
 })
 
-export const actionCreatorUpdateMessageText = (newMessage) => ({
+export const updateMessageAC = (newMessage) => ({
     type: UPDATE_MESSAGE_TEXT,
     newMessage
 })

@@ -2,7 +2,7 @@ import {SET_AUTH_USERS} from "../action-type";
 import {authAPI} from "../../api/api";
 
 let initialState = {
-  userId: null,
+  id: null,
   login: null,
   email: null,
   isAuth: false
@@ -29,9 +29,9 @@ export const getAuthUserTC = () => (dispatch) => {
     }
   })
 }
-const setAuthUserAC = (userId, login, email) => ({
+const setAuthUserAC = (id, login, email) => ({
   type: SET_AUTH_USERS,
-  data: {userId, login, email}
+  data: {id, login, email}
 })
 
 
