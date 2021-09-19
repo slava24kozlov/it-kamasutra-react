@@ -13,6 +13,10 @@
     display: flex;
     margin: 10px;
 
+    .div {
+      display: inline-block;
+    }
+
     & > img {
       border-radius: 100%;
       width: 120px;
@@ -20,7 +24,7 @@
     }
 
     .profileDescription{
-      margin-left: 15px;
+      margin: 0 30px 0 15px;
 
       .informationText {
         size: 25px;

@@ -6,6 +6,16 @@ import {withRouter} from "react-router-dom";
 import {compose} from "redux";
 
 class ProfileContainer extends React.Component {
+  state = {
+    status: 'enter your status'
+  }
+
+  onChangeStatus = (message) => {
+    this.setState({
+      status: message
+    })
+  }
+
   componentDidMount() {
     let currentId = this.props.match.params.userId
     currentId && this.props.getProfileTC(currentId)
@@ -19,7 +29,11 @@ class ProfileContainer extends React.Component {
   }
 
   render() {
-    return <Profile {...this.props}/>
+    return <Profile
+      profile={this.props.profile}
+      status={this.state.status}
+      onChangeStatus={this.onChangeStatus}
+    />
   }
 }
 

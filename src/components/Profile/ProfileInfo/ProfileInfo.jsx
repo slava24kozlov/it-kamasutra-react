@@ -1,6 +1,7 @@
 import React from 'react';
 import style from './ProfileInfo.module.scss';
-import imageUser from '../../image/photoUser.png'
+import imageUser from '../../../image/photoUser.png'
+import ProfileStatus from "./ProfileStatus";
 
 const ProfileInfo = (props) => {
   return (
@@ -21,10 +22,17 @@ const ProfileInfo = (props) => {
               <p><i>Description: </i>{props.profile.lookingForAJobDescription}</p>
             </>
           </div>
+          <ProfileStatus
+            status={props.status}
+            onChangeStatus={props.onChangeStatus}
+          />
         </div>
-        : <h1 style={{textAlign: 'center', fontStyle: 'italic'}}>You must log in</h1>
+        : <h1 style={{textAlign: 'center', fontStyle: 'italic'}}>
+          You must log in
+        </h1>
       }
-    </div>)
+    </div>
+  )
 }
 
 export default ProfileInfo;

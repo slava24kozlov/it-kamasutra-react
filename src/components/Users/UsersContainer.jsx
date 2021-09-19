@@ -12,7 +12,6 @@ import {compose} from "redux";
 
 class UsersContainer extends React.Component {
   componentDidMount() {
-    console.log(this.props.isAuthUser)
     if (this.props.users.length === 0) {
       this.props.getUsersTC(this.props.currentPage, this.props.pageSize)
     }
