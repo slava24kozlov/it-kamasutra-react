@@ -2,7 +2,18 @@ import React from 'react';
 
 class ProfileStatus extends React.Component {
   state = {
+    status: this.props.status,
     isEditMode: false,
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.status !== prevProps.status && this.setState({status: this.props.status})
+  }
+
+  onStatusChange = (event) => {
+    this.setState({
+      status: event.currentTarget.value
+    })
   }
 
   setIsEditMode = () => {
@@ -11,8 +22,9 @@ class ProfileStatus extends React.Component {
     })
   }
 
-  setStatus = (message) => {
-    this.props.onChangeStatus(message)
+  setStatus = () => {
+    this.props.onChangeStatus(this.state.status)
+    this.setIsEditMode()
   }
 
   handleFocus = (event) => {
@@ -20,7 +32,6 @@ class ProfileStatus extends React.Component {
   }
 
   render() {
-    const statusRef = React.createRef()
     return (
       <div style={{marginTop: '15px'}}>
         <span
@@ -31,16 +42,15 @@ class ProfileStatus extends React.Component {
         </span>
         {!this.state.isEditMode
           ? <span onDoubleClick={() => this.setIsEditMode()}>
-            {this.props.status}
+            {this.state.status}
             </span>
           : <input
             autoFocus
-            ref={statusRef}
             type='text'
-            onChange={() => this.setStatus(statusRef.current.value)}
-            onBlur={() => this.setIsEditMode()}
+            onChange={this.onStatusChange}
+            onBlur={this.setStatus}
             onFocus={this.handleFocus}
-            value={this.props.status}
+            value={this.state.status}
           />
         }
       </div>

@@ -1,21 +1,11 @@
 import React from 'react';
 import Profile from "./Profile";
 import {connect} from "react-redux";
-import {getProfileTC} from "../../redux/reducer/ProfileReducer";
+import {getProfileTC, updateStatusTC} from "../../redux/reducer/ProfileReducer";
 import {withRouter} from "react-router-dom";
 import {compose} from "redux";
 
 class ProfileContainer extends React.Component {
-  state = {
-    status: 'enter your status'
-  }
-
-  onChangeStatus = (message) => {
-    this.setState({
-      status: message
-    })
-  }
-
   componentDidMount() {
     let currentId = this.props.match.params.userId
     currentId && this.props.getProfileTC(currentId)
@@ -28,10 +18,14 @@ class ProfileContainer extends React.Component {
     }
   }
 
+  onChangeStatus = (status) => {
+    this.props.updateStatusTC(status)
+  }
+
   render() {
     return <Profile
       profile={this.props.profile}
-      status={this.state.status}
+      status={this.props.status}
       onChangeStatus={this.onChangeStatus}
     />
   }
@@ -39,10 +33,11 @@ class ProfileContainer extends React.Component {
 
 let mapStateToProps = (state) => ({
   profile: state.profilePage.profile,
+  status: state.profilePage.status
 })
 
 export default compose(
-  connect(mapStateToProps, {getProfileTC}), withRouter)(ProfileContainer)
+  connect(mapStateToProps, {getProfileTC, updateStatusTC}), withRouter)(ProfileContainer)
 
 
 
