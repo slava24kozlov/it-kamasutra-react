@@ -1,4 +1,4 @@
-import {SET_MESSAGE, UPDATE_MESSAGE_TEXT} from "../action-type";
+import {SET_MESSAGE} from "../action-type";
 
 let initialState = {
     dialogData: [
@@ -35,8 +35,7 @@ let initialState = {
         {id: 4, message: "What do you do?"},
         {id: 5, message: "Hello"}
         ],
-    newMessageText: 'Enter message',
-    counterList: 6
+    counterList: 6,
 }
 
 export const messagesReducer = (state = initialState, action) => {
@@ -44,35 +43,26 @@ export const messagesReducer = (state = initialState, action) => {
         case SET_MESSAGE:
             let dialog = {
                 id: state.counterList,
-                name: "Indefinite Name",
-                image: "https://html5css.ru/w3images/avatar2.png"
+                name: action.name,
+                image: "https://html5css.ru/w3images/avatar2.png",
             }
             let message = {
                 id: state.counterList,
-                message: state.newMessageText
+                message: action.message,
             }
             state.counterList++
             return {
                 ...state,
                 dialogData: [...state.dialogData, dialog],
                 messagesData: [...state.messagesData, message],
-                newMessageText: ''
-            }
-        case UPDATE_MESSAGE_TEXT:
-            return {
-                ...state,
-                newMessageText: action.newMessage
             }
         default:
             return {...state}
     }
 }
 
-export const setMessageAC = () => ({
-    type: SET_MESSAGE
-})
-
-export const updateMessageAC = (newMessage) => ({
-    type: UPDATE_MESSAGE_TEXT,
-    newMessage
+export const setMessageAC = (name, message) => ({
+    type: SET_MESSAGE,
+    name,
+    message,
 })

@@ -9,7 +9,7 @@ import MessagesContainer from "./components/Messages/MessagesContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import HeaderContainer from "./components/Herder/HeaderContainer";
 import NavbarContainer from "./components/Navbar/NavbarContainer";
-import Login from "./components/Registration/Login";
+import LoginContainer from "./components/Registration/LoginContainer";
 
 
 function App() {
@@ -29,7 +29,7 @@ function App() {
             <UsersContainer/>}/>
           <Route path='/communities' component={Communities}/>
           <Route path='/music' component={Music}/>
-          <Route path='/login' component={Login}/>
+          <Route path='/login' component={LoginContainer}/>
           <Redirect from='/' to='/profile'/>
         </div>
       </div>

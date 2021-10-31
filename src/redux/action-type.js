@@ -1,4 +1,4 @@
-// ProfileReducer
+//ProfileReducer
 export const SET_POST = 'SET-POST';
 export const UPDATE_POST_TEXT = 'UPDATE-POST-TEXT';
 export const UPDATE_COUNT_LIKE = 'UPDATE-COUNT-LIKE';
@@ -7,7 +7,6 @@ export const SET_STATUS = 'SET-STATUS';
 
 //MessagesReducer
 export const SET_MESSAGE = 'SET-MESSAGE';
-export const UPDATE_MESSAGE_TEXT = 'UPDATE-MESSAGE-TEXT';
 
 //UsersReducer
 export const FOLLOW = 'FOLLOW';
@@ -20,3 +19,6 @@ export const IS_FOLLOWING_USERS = 'IS-FOLLOWING-USERS';
 
 //auth-reducer
 export const SET_AUTH_USERS = 'SET-AUTH-USER';
+
+//login-reducer
+export const SET_LOGIN_USER = 'SET-LOGIN-USER';

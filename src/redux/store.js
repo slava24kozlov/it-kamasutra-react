@@ -5,14 +5,15 @@ import {messagesReducer} from './reducer/MessagesReducer'
 import {sidebarReducer} from './reducer/SidebarReducer'
 import {usersReducer} from './reducer/UsersReducer'
 import {authReducer} from "./reducer/auth-reducer";
-
+import {loginReducer} from "./reducer/login-reducer";
 
 let reducers = combineReducers({
     profilePage : profileReducer,
     messagesPage: messagesReducer,
     usersPage: usersReducer,
     sidebar: sidebarReducer,
-    authUser: authReducer
+    authUser: authReducer,
+    loginUser: loginReducer,
 })
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
