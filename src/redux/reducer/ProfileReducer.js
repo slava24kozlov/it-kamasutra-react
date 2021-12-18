@@ -10,7 +10,7 @@ let initialState = {
   profile: null,
   defaultPostText: 'Enter new post',
   defaultCountLike: 0,
-  status: 'enter your status'
+  status: 'enter your status',
 }
 
 export const profileReducer = (state = initialState, action) => {

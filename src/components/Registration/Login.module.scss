@@ -20,5 +20,14 @@
       font-weight: bold;
       padding: 5px;
     }
+
+    .responseMessage {
+      display: inline-block;
+      margin-left: 15px;
+      border: 1px solid red;
+      font-weight: bold;
+      font-style: italic;
+      color: red;
+    }
   }
 }

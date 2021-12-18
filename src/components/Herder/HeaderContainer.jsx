@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import {getAuthUserTC} from "../../redux/reducer/auth-reducer";
 import {withRouter} from "react-router-dom";
 import {compose} from "redux";
+import {loginOutUserTC} from "../../redux/reducer/login-reducer";
 
 class HeaderContainer extends React.Component {
   componentDidMount() {
@@ -20,7 +21,8 @@ class HeaderContainer extends React.Component {
 let mapStateToProps = (state) => ({
   isAuthUser: state.authUser.isAuth,
   idAuthUser: state.authUser.id,
-  loginAuthUser: state.authUser.login
+  loginAuthUser: state.authUser.login,
+  rememberMe: state.loginUser.rememberMe,
 })
 
-export default compose(connect(mapStateToProps, {getAuthUserTC}), withRouter)(HeaderContainer)
+export default compose(connect(mapStateToProps, {getAuthUserTC, loginOutUserTC}), withRouter)(HeaderContainer)

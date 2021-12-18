@@ -8,14 +8,26 @@ export const instanceAxios = axios.create({
   }
 })
 
+//authAPI
 export const authAPI = {
   checkAuth() {
     return instanceAxios.get('auth/me').then(response => {
       return response.data
     })
+  },
+  login(email, password, rememberMe) {
+    return instanceAxios.post('auth/login', {email, password, rememberMe}).then(response => {
+      return response.data
+    })
+  },
+  loginOut() {
+    return instanceAxios.delete('auth/login').then(response => {
+      return response.data
+    })
   }
 }
 
+//profileAPI
 export const profileAPI = {
   getProfile(id) {
     return instanceAxios.get(`profile/${id}`).then(response => {
@@ -32,6 +44,7 @@ export const profileAPI = {
   }
 }
 
+//usersAPI
 export const usersAPI = {
   getUsers(currentPage, pageSize) {
     return instanceAxios.get(`users?page=${currentPage}&count=${pageSize}`)

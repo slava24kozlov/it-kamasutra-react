@@ -7,30 +7,30 @@ import {compose} from "redux";
 
 class MessagesContainer extends React.Component {
   state = {
-    name: '',
+    dialog: '',
     message: '',
   }
 
   updateState = (field, value) => {
     this.setState({
-      [field]: value
+      [field]:value
     })
   }
 
   resetState = () => {
     this.setState({
-      name: '',
+      dialog: '',
       message: '',
     })
   }
 
   render() {
     return <Messages
+      fieldDialog={this.state.dialog}
+      fieldMessage={this.state.message}
+      updateField={this.updateState}
+      resetFields={this.resetState}
       {...this.props}
-      name={this.state.name}
-      message={this.state.message}
-      updateState={this.updateState}
-      resetState={this.resetState}
     />
   }
 }

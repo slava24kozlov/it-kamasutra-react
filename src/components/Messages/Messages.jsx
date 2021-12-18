@@ -4,24 +4,29 @@ import style from './Messages.module.scss';
 import Dialog from "./components/Dialog";
 import Message from "./components/Message";
 
-const Messages = (props) => {
-  let dialogElement = props.dialogData.map(d => <Dialog key={d.id} id={d.id} name={d.name} image={d.image}/>);
-  let messageElement = props.messagesData.map(e => <Message key={e.id} id={e.id} message={e.message}/>);
+const Messages = (
+  {
+    dialogData,
+    messagesData,
+    fieldDialog,
+    fieldMessage,
+    updateField,
+    resetFields,
+    setMessageAC
+  }
+) => {
+  let dialogElement = dialogData.map(d => <Dialog key={d.id} id={d.id} name={d.name} image={d.image}/>);
+  let messageElement = messagesData.map(e => <Message key={e.id} id={e.id} message={e.message}/>);
 
   const {register, handleSubmit} = useForm();
 
-  window.form = useForm();
-  console.log(`Name: ${props.name}`)
-  console.log(`Message: ${props.message}`)
-
-  const onSubmit = ({name, message}) => {
-    props.setMessageAC(name, message)
-    props.resetState()
+  const handleChange = (event) => {
+    updateField(event.target.name, event.target.value)
   }
 
-  const handleChange = (event) => {
-    console.log(event)
-    props.updateState(event.currentTarget.name, event.currentTarget.value)
+  const onSubmit = ({dialog, message}) => {
+    setMessageAC(dialog, message)
+    resetFields()
   }
 
   return (
@@ -34,27 +39,20 @@ const Messages = (props) => {
           {messageElement}
         </div>
       </section>
-      <form id="messagesForm" onSubmit={handleSubmit(onSubmit)}>
-        <div className={style.fields}>
-          <input type="text"
-                 {...register("name", {required: true})}
-                 onChange={handleChange}
-                 value={props.name}
-                 placeholder="Enter name"
-          />
-          <input type="text"
-                 {...register("message", {required: true})}
-                 onChange={handleChange}
-                 value={props.message}
-                 placeholder="Enter message"
-          />
-        </div>
-        <button
-          type="submit"
-          disabled={!props.name || !props.message}
-        >
-          Click
-        </button>
+      <form id="messagesForm" onSubmit={handleSubmit(onSubmit)} onChange={handleChange}>
+        <textarea
+          type="text"
+          {...register('dialog', {required: 'field is empty'})}
+          value={fieldDialog}
+          placeholder="Enter name"
+        />
+        <textarea
+          type="text"
+          {...register('message', {required: 'field is empty'})}
+          value={fieldMessage}
+          placeholder="Enter message"
+        />
+        <button type="submit" disabled={!fieldDialog && !fieldMessage}>Click</button>
       </form>
     </div>
   );

@@ -19,8 +19,16 @@
     text-align: center;
     padding-right: 10px;
 
-    &:hover{
-      box-shadow: 1px 1px 2px black;
+    p {
+      margin: 5px 0;
+
+      &:hover {
+        box-shadow: 1px 1px 2px black;
+      }
+    }
+
+    button {
+      font-weight: bold;
     }
   }
 }

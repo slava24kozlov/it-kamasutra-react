@@ -1,40 +1,39 @@
 import React from 'react'
 import style from './Login.module.scss';
 import {connect} from "react-redux";
-import {setLoginUserAC} from "../../redux/reducer/login-reducer";
+import {loginUserTC} from "../../redux/reducer/login-reducer";
 import {useForm} from "react-hook-form";
+import FieldWrapper from "../common/Wrappers/FieldWrapper";
+import {useHistory} from "react-router-dom";
 
-const Login = (props) => {
-  const { register, handleSubmit, reset, formState: {errors} } = useForm()
+const Login = ({login, password, rememberMe, responseMessage, loginUserTC}) => {
+  const history = useHistory();
+  const {register, handleSubmit, reset, formState: {errors, touchedFields}} = useForm()
 
   const onSubmit = (values) => {
     reset()
-    console.log(values)
+    loginUserTC(values, history)
   }
 
   return (
     <div className={style.main}>
       <h1>You must log in</h1>
       <form className={style.formLogin} onSubmit={handleSubmit(onSubmit)} autoComplete="off">
-        <div>
-          <label>Login:</label>
+        <FieldWrapper label="Login" error={errors.login} touched={touchedFields.login}>
           <input type='text'
-                 {...register('login', {required: 'field is required'})}
-                 defaultValue={props.login} placeholder="Enter your login"/>
-          {errors.login && <p style={{color: 'red'}}>{errors.login.message}</p>}
-        </div>
-        <div>
-          <label>Password:</label>
-          <input type='text'
+                 {...register('email', {required: 'field is required'})}
+                 defaultValue={login} placeholder="Enter your login"/>
+        </FieldWrapper>
+        <FieldWrapper label="Password" error={errors.password} touched={touchedFields.password}>
+          <input type='password'
                  {...register('password', {required: 'field is required'})}
-                 defaultValue={props.password} placeholder="Enter your password"/>
-          {errors.password && <p style={{color: 'red'}}>{errors.password.message}</p>}
-        </div>
-        <div>
-          <label>Remember me:</label>
-          <input type='checkbox' {...register('RememberMe')}/>
-        </div>
+                 defaultValue={password} placeholder="Enter your password"/>
+        </FieldWrapper>
+        <FieldWrapper label="Remember me" error={errors.rememberMe} touched={touchedFields.rememberMe}>
+          <input type='checkbox' {...register('rememberMe')} defaultChecked={rememberMe}/>
+        </FieldWrapper>
         <button type='submit'>Submit</button>
+        {responseMessage && <div className={style.responseMessage}>{responseMessage}</div>}
       </form>
     </div>
   )
@@ -44,6 +43,7 @@ const mapStateToProps = (state) => ({
   login: state.loginUser.login,
   password: state.loginUser.password,
   rememberMe: state.loginUser.rememberMe,
+  responseMessage: state.loginUser.responseMessage,
 })
 
-export default connect(mapStateToProps, {setLoginUserAC})(Login)
+export default connect(mapStateToProps, {loginUserTC})(Login)

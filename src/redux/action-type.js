@@ -19,6 +19,7 @@ export const IS_FOLLOWING_USERS = 'IS-FOLLOWING-USERS';
 
 //auth-reducer
 export const SET_AUTH_USERS = 'SET-AUTH-USER';
+export const SET_AUTH_LOGIN_DATA = 'SET-AUTH-LOGIN-DATA';
+export const SET_AUTH_RESPONSE_MESSAGE = 'SET-RESPONSE-MESSAGE';
 
-//login-reducer
-export const SET_LOGIN_USER = 'SET-LOGIN-USER';
+

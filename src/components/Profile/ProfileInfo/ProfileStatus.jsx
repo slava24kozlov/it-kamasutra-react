@@ -35,13 +35,13 @@ class ProfileStatus extends React.Component {
     return (
       <div style={{marginTop: '15px'}}>
         <span
-          onDoubleClick={() => this.setIsEditMode()}
+          onDoubleClick={this.props.isAuthProfile ? this.setIsEditMode : null}
           style={{fontWeight: 'bold'}}
         >
           Status:&nbsp;
         </span>
         {!this.state.isEditMode
-          ? <span onDoubleClick={() => this.setIsEditMode()}>
+          ? <span onDoubleClick={this.props.isAuthProfile ? this.setIsEditMode : null}>
             {this.state.status}
             </span>
           : <input
