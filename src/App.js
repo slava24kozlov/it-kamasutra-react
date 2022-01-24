@@ -10,31 +10,40 @@ import HeaderContainer from "./components/Herder/HeaderContainer";
 import NavbarContainer from "./components/Navbar/NavbarContainer";
 import LoginContainer from "./components/Registration/LoginContainer";
 import FriendsContainer from "./components/Friends/FriendsContainer";
+import {connect} from "react-redux";
+import {compose} from "redux";
+import {getAuthUserTC} from "./redux/reducer/auth-reducer";
 
+class App extends React.Component {
 
-function App() {
-  return (
-    <BrowserRouter>
-      <div className="app-main">
-        <HeaderContainer/>
-        <NavbarContainer/>
-        <div className="app-profile">
-          <Route path='/profile/:userId?' render={() =>
-            <ProfileContainer/>}/>
-          <Route path='/friends' render={() =>
-            <FriendsContainer/>}/>
-          <Route path='/messages' render={() =>
-            <MessagesContainer/>}/>
-          <Route path='/users' render={() =>
-            <UsersContainer/>}/>
-          <Route path='/communities' component={Communities}/>
-          <Route path='/music' component={Music}/>
-          <Route path='/login' component={LoginContainer}/>
-          <Redirect from='/' to='/profile'/>
+  componentDidMount() {
+    this.props.getAuthUserTC()
+  }
+
+  render() {
+    return (
+      <BrowserRouter>
+        <div className="app-main">
+          <HeaderContainer/>
+          <NavbarContainer/>
+          <div className="app-profile">
+            <Route path='/profile/:userId?' render={() =>
+              <ProfileContainer/>}/>
+            <Route path='/friends' render={() =>
+              <FriendsContainer/>}/>
+            <Route path='/messages' render={() =>
+              <MessagesContainer/>}/>
+            <Route path='/users' render={() =>
+              <UsersContainer/>}/>
+            <Route path='/communities' component={Communities}/>
+            <Route path='/music' component={Music}/>
+            <Route path='/login' component={LoginContainer}/>
+            <Redirect from='/' to="/profile"/>
+          </div>
         </div>
-      </div>
-    </BrowserRouter>
-  );
+      </BrowserRouter>
+    );
+  }
 }
 
-export default App;
+export default compose(connect(null, {getAuthUserTC}))(App);

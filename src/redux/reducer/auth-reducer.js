@@ -32,7 +32,7 @@ export const getAuthUserTC = (history) => (dispatch) => {
     if (data.resultCode === 0) {
       let {id, login, email} = data.data
       dispatch(setAuthUserAC(id, login, email, true))
-      history.push(`/profile/${id}`)
+      history && history.push(`/profile/${id}`)
     } else {
       dispatch(setAuthUserAC(null, null, null, false))
     }

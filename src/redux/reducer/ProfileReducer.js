@@ -50,6 +50,7 @@ export const getProfileTC = (currentId) => {
     profileAPI.getStatus(currentId).then(data => data.status === 200 && dispatch(setStatusAC(data.data)))
   };
 }
+
 export const updateStatusTC = (status) => (dispatch) => {
   profileAPI.setStatus(status).then(data => {
     data.resultCode === 0 ? dispatch(setStatusAC(status)) : console.error('Error status')

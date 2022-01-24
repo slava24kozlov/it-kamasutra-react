@@ -59,7 +59,6 @@ export const loginOutUserTC = (rememberMe) => (dispatch) => {
           dispatch(getAuthUserTC())
         } else {
           dispatch(setResponseMessage(r.messages[0]))
-
         }
       }
     ).catch(e => console.error(e))

@@ -18,7 +18,7 @@ const Login = ({login, password, rememberMe, responseMessage, loginUserTC}) => {
   return (
     <div className={style.main}>
       <h1>You must log in</h1>
-      <form className={style.formLogin} onSubmit={handleSubmit(onSubmit)} autoComplete="off">
+      <form className={style.formLogin} onSubmit={handleSubmit(onSubmit)}>
         <FieldWrapper label="Login" error={errors.login} touched={touchedFields.login}>
           <input type='text'
                  {...register('email', {required: 'field is required'})}
