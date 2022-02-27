@@ -4,6 +4,8 @@ import FriendElement from "./FriendElement";
 import {withAuthRedirect} from "../../hoc/AuthRedirect";
 import {compose} from "redux";
 import {connect} from "react-redux";
+import {getFriends} from "../../redux/selectors/SidebarSelectors";
+import {getIsAuth} from "../../redux/selectors/AuthSelectors";
 
 const Friends = (props) => {
     let friendsElement = props.friendsBar.map(f => <FriendElement key={f.name} name={f.name} image={f.image}/>);
@@ -15,8 +17,8 @@ const Friends = (props) => {
 }
 
 const mapStateToProps = (state) => ({
-    friendsBar: state.sidebar.FriendsBar,
-    isAuthUser: state.authUser.isAuth,
+    friendsBar: getFriends(state),
+    isAuthUser: getIsAuth(state),
 })
 
 export default compose(connect(mapStateToProps), withAuthRedirect)(Friends);

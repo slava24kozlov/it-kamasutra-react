@@ -5,6 +5,7 @@ import {loginUserTC} from "../../redux/reducer/login-reducer";
 import {useForm} from "react-hook-form";
 import FieldWrapper from "../common/Wrappers/FieldWrapper";
 import {useHistory} from "react-router-dom";
+import {getLogin, getPassword, getRememberMe, getResponseMessage} from "../../redux/selectors/LoginSelectors";
 
 const Login = ({login, password, rememberMe, responseMessage, loginUserTC}) => {
   const history = useHistory();
@@ -40,10 +41,10 @@ const Login = ({login, password, rememberMe, responseMessage, loginUserTC}) => {
 }
 
 const mapStateToProps = (state) => ({
-  login: state.loginUser.login,
-  password: state.loginUser.password,
-  rememberMe: state.loginUser.rememberMe,
-  responseMessage: state.loginUser.responseMessage,
+  login: getLogin(state),
+  password: getPassword(state),
+  rememberMe: getRememberMe(state),
+  responseMessage: getResponseMessage(state),
 })
 
 export default connect(mapStateToProps, {loginUserTC})(Login)

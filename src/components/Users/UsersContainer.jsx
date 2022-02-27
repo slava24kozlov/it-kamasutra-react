@@ -8,6 +8,14 @@ import Users from "./Users";
 import {FOLLOW, UNFOLLOW} from "../../redux/action-type";
 import {withAuthRedirect} from "../../hoc/AuthRedirect";
 import {compose} from "redux";
+import {
+  getCurrentPage,
+  getIsFetching, getIsFollowing,
+  getPageSize,
+  getTotalUsersCount,
+  getUsers
+} from "../../redux/selectors/UsersSelectors";
+import {getIsAuth} from "../../redux/selectors/AuthSelectors";
 
 
 class UsersContainer extends React.Component {
@@ -47,13 +55,13 @@ class UsersContainer extends React.Component {
 }
 
 let mapStateToProps = (state) => ({
-  users: state.usersPage.users,
-  currentPage: state.usersPage.currentPage,
-  totalUsersCount: state.usersPage.totalUsersCount,
-  pageSize: state.usersPage.pageSize,
-  isFetching: state.usersPage.isFetching,
-  isFollowing: state.usersPage.isFollowing,
-  isAuthUser: state.authUser.isAuth
+  users: getUsers(state),
+  currentPage: getCurrentPage(state),
+  totalUsersCount: getTotalUsersCount(state),
+  pageSize: getPageSize(state),
+  isFetching: getIsFetching(state),
+  isFollowing: getIsFollowing(state),
+  isAuthUser: getIsAuth(state)
 })
 
 export default compose(
