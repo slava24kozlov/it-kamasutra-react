@@ -1,12 +1,7 @@
 import React from 'react';
-import m from './Music.module.css';
+import style from './Music.module.css';
+import Wrapper from "../common/Wrappers/WrapperComponents";
 
-const Music = () => {
-    return (
-        <div className={m.main}>
-            Music
-        </div>
-    );
-}
+const Music = () => <Wrapper title="MUSIC" className={style.main}/>
 
 export default Music;

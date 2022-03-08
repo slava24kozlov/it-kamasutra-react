@@ -1,0 +1,18 @@
+.main {
+  .content {
+    display: flex;
+    align-items: center;
+
+    & > img {
+      height: 30px;
+      border-radius: 30px;
+    }
+  }
+
+  & > p {
+    margin-top: 0;
+    color: red;
+    font-weight: bold;
+    font-size: 10px;
+  }
+}

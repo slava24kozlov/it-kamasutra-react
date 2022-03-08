@@ -1,5 +1,7 @@
-.main{
-    display: inline-block;
+.main {
+    position: absolute;
+    left: calc(50vw - 50px);
+    transform: translateX(-100%);
     width: 100px;
     height: 100px;
     border: 25px solid #497DDD;

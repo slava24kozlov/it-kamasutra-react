@@ -20,41 +20,39 @@ const MyPosts = (props) => {
 
   return (
     <div className={p.main}>
-      {props.isAuthProfile && (
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className={p.fields}>
-            <FieldWrapper label="Enter new post" error={errors.post} touched={touchedFields.post}>
-              <input
-                type="text"
-                {...register('post', {
-                  required: {value: true, message: 'Text required'},
-                  minLength: {value: 3, message: 'Text length < 3'},
-                  maxLength: {value: 10, message: 'Text length > 10'},
-                })}
-                onFocus={handleFocus}
-                defaultValue={props.postText}
-              />
-            </FieldWrapper>
-            <FieldWrapper label="Enter count likes" error={errors.like} touched={touchedFields.like}>
-              <input
-                type="number"
-                min="1"
-                max="10"
-                {...register('like', {
-                  required: {value: true, message: 'Value required'},
-                  min: {value: 3, message: 'Min value 3'},
-                  max: {value: 10, message: 'Max value 10'},
-                })}
-                defaultValue={props.countLike}
-              />
-            </FieldWrapper>
-          </div>
-          <button type="submit">Add post</button>
-        </form>
-      )}
-      <div className={p.posts}>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className={p.fields}>
+          <FieldWrapper label="Enter new post" error={errors.post} touched={touchedFields.post}>
+            <input
+              type="text"
+              {...register('post', {
+                required: {value: true, message: 'Text required'},
+                minLength: {value: 3, message: 'Text length < 3'},
+                maxLength: {value: 10, message: 'Text length > 10'},
+              })}
+              onFocus={handleFocus}
+              defaultValue={props.postText}
+            />
+          </FieldWrapper>
+          <FieldWrapper label="Enter count likes" error={errors.like} touched={touchedFields.like}>
+            <input
+              type="number"
+              min="1"
+              max="10"
+              {...register('like', {
+                required: {value: true, message: 'Value required'},
+                min: {value: 3, message: 'Min value 3'},
+                max: {value: 10, message: 'Max value 10'},
+              })}
+              defaultValue={props.countLike}
+            />
+          </FieldWrapper>
+        </div>
+        <button type="submit">Add post</button>
+      </form>
+      <ol className={p.posts}>
         {postElement}
-      </div>
+      </ol>
     </div>
   );
 };

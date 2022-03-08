@@ -3,28 +3,31 @@ import Preloader from "../common/Preloader/Preloader";
 import photoUser from '../../image/photoUser.png'
 import style from './Users.module.scss'
 import {NavLink} from "react-router-dom";
+import Pagination from "../common/Pagination/Pagination";
+import Wrapper from "../common/Wrappers/WrapperComponents";
 
 const Users = (props) => {
   const [value, setValue] = useState('');
-  let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
-  let pages = []
-  for (let i = 1; i <= pagesCount; i++) {
-    pages.push(i)
+  let [currentLine, setCurrentLine] = useState(1);
+
+  const handleChange = (event) => {
+    setValue(event.target.value)
   }
 
   return (
-    <div>
-      <div className={style.pagesList}>
-        {pages.map(page =>
-          <span key={page} className={props.currentPage === page ? style.currentPage : null}
-                onClick={() => props.onChangeCurrentPage(page)}>{page} </span>)}
-      </div>
+    <Wrapper title="USERS">
       {props.isFetching ? <Preloader/> : (
         <>
-          <label style={{fontWeight: 'bold'}}>Enter a search name:</label>
-          <input type="text" value={value} onChange={setValue} placeholder="enter a search name"/>
+          <Pagination currentPage={props.currentPage}
+                      onChangeCurrentPage={props.onChangeCurrentPage}
+                      currentLine={currentLine}
+                      onChangeCurrentLine={setCurrentLine}
+                      pagesCount={Math.ceil(props.totalUsersCount / props.pageSize)}
+          />
+          <label><b>Enter a search name: </b></label>
+          <input type="text" value={value} onChange={handleChange} placeholder="enter a search name"/>
           <div className={style.usersMain}>
-            {props.users.map(el =>
+            {props.users.filter(({name}) => name.startsWith(value)).map(el =>
               <div key={el.id} className={style.userItem}>
                 <section className={style.userHead}>
                   <NavLink to={`/profile/${el.id}`} style={{textDecoration: 'none', color: 'black'}}>
@@ -54,9 +57,16 @@ const Users = (props) => {
               </div>
             )}
           </div>
+          <Pagination currentPage={props.currentPage}
+                      onChangeCurrentPage={props.onChangeCurrentPage}
+                      currentLine={currentLine}
+                      onChangeCurrentLine={setCurrentLine}
+                      pagesCount={Math.ceil(props.totalUsersCount / props.pageSize)}
+          />
         </>
       )}
-    </div>);
+    </Wrapper>
+  );
 }
 
 export default Users;

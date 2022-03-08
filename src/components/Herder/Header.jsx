@@ -1,20 +1,26 @@
 import React from 'react';
-import logotype from '../../logo.svg';
 import style from './Headers.module.scss';
 import {NavLink} from "react-router-dom";
+import Logotype from "../../Logotype";
+import Navbar from "./Navbar/Navbar";
 
-const Header = (props) => {
+const Header = ({isAuthUser, idAuthUser, loginAuthUser, rememberMe, loginOutUserTC}) => {
   return (
     <header className={style.main}>
-      <NavLink to={props.isAuthUser ? `/profile/${props.idAuthUser}` : '/profile'}>
-        <img src={logotype} alt="header"/>
+      <NavLink to={isAuthUser ? `/profile/${idAuthUser}` : '/profile'}>
+        <Logotype/>
       </NavLink>
-      <p className={style.textHead}>THE PAGE IS TEST LESSON OF IT</p>
+      <Navbar {...{isAuthUser, idAuthUser}}/>
       <div className={style.login}>
-        {props.isAuthUser
-          ? <p>{props.loginAuthUser}</p>
+        {isAuthUser
+          ? <p>{loginAuthUser}</p>
           : <NavLink to='/login'><button>Log in</button></NavLink>}
-        {props.isAuthUser && <button style={{fontWeight: "bold"}} onClick={() => props.loginOutUserTC(props.rememberMe)}>EXIT</button>}
+        {isAuthUser &&
+          <button style={{fontWeight: "bold"}}
+                  onClick={() => loginOutUserTC(rememberMe)}>
+            EXIT
+          </button>
+        }
       </div>
     </header>
   );

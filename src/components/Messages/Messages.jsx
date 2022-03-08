@@ -1,8 +1,7 @@
 import React from 'react';
-import {useForm} from "react-hook-form";
 import style from './Messages.module.scss';
-import Dialog from "./components/Dialog";
-import Message from "./components/Message";
+import {useForm} from "react-hook-form";
+import Wrapper from "../common/Wrappers/WrapperComponents";
 
 const Messages = (
   {
@@ -15,9 +14,6 @@ const Messages = (
     setMessageAC
   }
 ) => {
-  let dialogElement = dialogData.map(d => <Dialog key={d.id} id={d.id} name={d.name} image={d.image}/>);
-  let messageElement = messagesData.map(e => <Message key={e.id} id={e.id} message={e.message}/>);
-
   const {register, handleSubmit} = useForm();
 
   const handleChange = (event) => {
@@ -30,31 +26,35 @@ const Messages = (
   }
 
   return (
-    <div className={style.main}>
-      <section>
-        <div className={style.dialogs}>
-          {dialogElement}
-        </div>
-        <div className={style.messages}>
-          {messageElement}
-        </div>
-      </section>
-      <form id="messagesForm" onSubmit={handleSubmit(onSubmit)} onChange={handleChange}>
+    <Wrapper title="DIALOGS">
+      <div className={style.main}>
+        <table>
+          <tr>
+            <th>Users</th>
+            <th>Messages</th>
+          </tr>
+          {dialogData.map(({name, image}, index) =>
+            <tr key={name}>
+              <td><img src={image} alt={`avatar ${name}`} width="25" height="25"/><span>{name}</span></td>
+              <td>{messagesData[index]}</td>
+            </tr>)}
+        </table>
+
+        <form id="messagesForm" onSubmit={handleSubmit(onSubmit)} onChange={handleChange}>
         <textarea
-          type="text"
           {...register('dialog', {required: 'field is empty'})}
           value={fieldDialog}
           placeholder="Enter name"
         />
-        <textarea
-          type="text"
-          {...register('message', {required: 'field is empty'})}
-          value={fieldMessage}
-          placeholder="Enter message"
-        />
-        <button type="submit" disabled={!fieldDialog && !fieldMessage}>Click</button>
-      </form>
-    </div>
+          <textarea
+            {...register('message', {required: 'field is empty'})}
+            value={fieldMessage}
+            placeholder="Enter message"
+          />
+          <button type="submit" disabled={!fieldDialog && !fieldMessage}>Click</button>
+        </form>
+      </div>
+    </Wrapper>
   );
 }
 

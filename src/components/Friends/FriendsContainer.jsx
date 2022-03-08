@@ -1,24 +1,27 @@
 import React from 'react';
-import f from './Friends.module.css';
-import FriendElement from "./FriendElement";
+import style from './Friends.module.scss';
 import {withAuthRedirect} from "../../hoc/AuthRedirect";
 import {compose} from "redux";
 import {connect} from "react-redux";
 import {getFriends} from "../../redux/selectors/SidebarSelectors";
 import {getIsAuth} from "../../redux/selectors/AuthSelectors";
+import Wrapper from "../common/Wrappers/WrapperComponents";
 
-const Friends = (props) => {
-    let friendsElement = props.friendsBar.map(f => <FriendElement key={f.name} name={f.name} image={f.image}/>);
-    return (
-        <div className={f.main}>
-            {friendsElement}
-        </div>
-    );
-}
+const Friends = ({friendsBar}) => (
+  <Wrapper title="FRIENDS" className={style.main}>
+    <div className={style.main}>
+      {friendsBar.map(({name, image}) =>
+        <div key={name}>
+          <img src={image} alt={name} width="50" height="50"/>
+          <b>{name}</b>
+        </div>)}
+    </div>
+  </Wrapper>
+)
 
 const mapStateToProps = (state) => ({
-    friendsBar: getFriends(state),
-    isAuthUser: getIsAuth(state),
+  friendsBar: getFriends(state),
+  isAuthUser: getIsAuth(state),
 })
 
 export default compose(connect(mapStateToProps), withAuthRedirect)(Friends);

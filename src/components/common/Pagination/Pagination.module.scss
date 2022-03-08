@@ -1,0 +1,28 @@
+.pagesList {
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+  width: 300px;
+
+  button {
+    font-weight: bold;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #bcbcbc;
+      transition-duration: 0.5s;
+    }
+  }
+
+  span {
+    cursor: pointer;
+  }
+
+  .selected {
+    margin: 0 10px;
+  }
+
+  .selected[datatype='active'] {
+    font-weight: bold;
+  }
+}

@@ -1,12 +1,6 @@
 import React from 'react';
-import c from './Communities.module.css';
+import Wrapper from "../common/Wrappers/WrapperComponents";
 
-const Communities = (props) => {
-    return (
-        <div className={c.main}>
-            Communities
-        </div>
-    );
-}
+const Communities = () => <Wrapper title="COMMUNITIES"/>;
 
 export default Communities;

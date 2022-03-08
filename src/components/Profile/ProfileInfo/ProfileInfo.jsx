@@ -5,27 +5,19 @@ import ProfileStatus from "./ProfileStatus";
 
 const ProfileInfo = (props) => {
   return (
-    <div className={style.main}>
-      <div className={style.head}>
-        <span>Profile</span>
-      </div>
-      <div className={style.profile}>
-        <img src={props.profile?.photos.small ?? imageUser}
-             alt='profile avatar'/>
-        <div className={style.profileDescription}>
-          <>
-            <p><b>Name: </b>{props.profile?.fullName}</p>
-            <p><b>About me: </b>{props.profile?.aboutMe}</p>
-            <p><i>Looking for Job: </i>{props.profile?.lookingForAJob ? 'Yes' : 'No'}</p>
-            <p><i>Description: </i>{props.profile?.lookingForAJobDescription}</p>
-          </>
-        </div>
-        <ProfileStatus
-          status={props.status}
-          onChangeStatus={props.onChangeStatus}
-          isAuthProfile={props.isAuthProfile}
-        />
-      </div>
+    <div className={style.profile}>
+      <img src={props.profile?.photos.small ?? imageUser} alt='profile avatar'/>
+      <ul>
+        <li><b>Name: </b>{props.profile?.fullName}</li>
+        <li><b>About me: </b>{props.profile?.aboutMe}</li>
+        <li><i>Looking for Job: </i>{props.profile?.lookingForAJob ? 'Yes' : 'No'}</li>
+        <li><i>Description: </i>{props.profile?.lookingForAJobDescription}</li>
+      </ul>
+      <ProfileStatus
+        status={props.status}
+        onChangeStatus={props.onChangeStatus}
+        isAuthProfile={props.isAuthProfile}
+      />
     </div>
   )
 }

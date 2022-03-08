@@ -6,6 +6,7 @@ import {useForm} from "react-hook-form";
 import FieldWrapper from "../common/Wrappers/FieldWrapper";
 import {useHistory} from "react-router-dom";
 import {getLogin, getPassword, getRememberMe, getResponseMessage} from "../../redux/selectors/LoginSelectors";
+import Wrapper from "../common/Wrappers/WrapperComponents";
 
 const Login = ({login, password, rememberMe, responseMessage, loginUserTC}) => {
   const history = useHistory();
@@ -17,26 +18,27 @@ const Login = ({login, password, rememberMe, responseMessage, loginUserTC}) => {
   }
 
   return (
-    <div className={style.main}>
-      <h1>You must log in</h1>
-      <form className={style.formLogin} onSubmit={handleSubmit(onSubmit)}>
-        <FieldWrapper label="Login" error={errors.login} touched={touchedFields.login}>
-          <input type='text'
-                 {...register('email', {required: 'field is required'})}
-                 defaultValue={login} placeholder="Enter your login"/>
-        </FieldWrapper>
-        <FieldWrapper label="Password" error={errors.password} touched={touchedFields.password}>
-          <input type='password'
-                 {...register('password', {required: 'field is required'})}
-                 defaultValue={password} placeholder="Enter your password"/>
-        </FieldWrapper>
-        <FieldWrapper label="Remember me" error={errors.rememberMe} touched={touchedFields.rememberMe}>
-          <input type='checkbox' {...register('rememberMe')} defaultChecked={rememberMe}/>
-        </FieldWrapper>
-        <button type='submit'>Submit</button>
-        {responseMessage && <div className={style.responseMessage}>{responseMessage}</div>}
-      </form>
-    </div>
+    <Wrapper title="YOU MUST LOG IN">
+      <div className={style.main}>
+        <form className={style.formLogin} onSubmit={handleSubmit(onSubmit)}>
+          <FieldWrapper label="Login" error={errors.login} touched={touchedFields.login}>
+            <input type='text'
+                   {...register('email', {required: 'field is required'})}
+                   defaultValue={login} placeholder="Enter your login"/>
+          </FieldWrapper>
+          <FieldWrapper label="Password" error={errors.password} touched={touchedFields.password}>
+            <input type='password'
+                   {...register('password', {required: 'field is required'})}
+                   defaultValue={password} placeholder="Enter your password"/>
+          </FieldWrapper>
+          <FieldWrapper label="Remember me" error={errors.rememberMe} touched={touchedFields.rememberMe}>
+            <input type='checkbox' {...register('rememberMe')} defaultChecked={rememberMe}/>
+          </FieldWrapper>
+          <button type='submit'>Submit</button>
+          {responseMessage && <div className={style.responseMessage}>{responseMessage}</div>}
+        </form>
+      </div>
+    </Wrapper>
   )
 }
 
