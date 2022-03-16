@@ -7,7 +7,7 @@ import Navbar from "./Navbar/Navbar";
 const Header = ({isAuthUser, idAuthUser, loginAuthUser, rememberMe, loginOutUserTC}) => {
   return (
     <header className={style.main}>
-      <NavLink to={isAuthUser ? `/profile/${idAuthUser}` : '/profile'}>
+      <NavLink to={isAuthUser ? `/profile/${idAuthUser}` : '/login'}>
         <Logotype/>
       </NavLink>
       <Navbar {...{isAuthUser, idAuthUser}}/>

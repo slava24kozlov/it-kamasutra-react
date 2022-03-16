@@ -1,37 +1,46 @@
 .usersMain {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-column-gap: 10px;
-  grid-row-gap: 10px;
-  width: 85%;
-  padding: 10px;
-  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
 
   .userItem {
+    min-width: 300px;
+    display: flex;
     border: 1px solid black;
-    display: grid;
-    grid-template-columns: 1fr 3.6fr;
+    margin: 10px 0;
     padding: 10px 5px;
     background-color: white;
     opacity: 0.9;
-    border-radius: 30px;
+    border-radius: 20px;
+
+    a {
+      text-decoration: none;
+      color: black;
+    }
 
     //leftInfo
-    .userHead {
-      padding-left: 5px;
+    & > div:first-child {
+      width: 100px;
 
       img {
+        display: block;
+        margin: auto;
         height: 60px;
         width: 60px;
         border-radius: 100%;
       }
 
       button {
-        margin-top: 5px;
+        display: block;
+        margin: 5px auto 0;
         background-color: green;
         color: white;
         font-weight: bold;
         cursor: pointer;
+
+        &[data-follow='true'] {
+          background-color: darkorange;
+        }
 
         &:disabled {
           background-color: grey;
@@ -40,18 +49,13 @@
     }
 
     //rightInfo
-    .userInformation {
-      border: 1px black solid;
-      max-width: 334px;
-      border-radius: 15px;
-      padding: 5px;
-
+    & > div:last-child {
+      margin-left: 3%;
       p {
-        margin: 3px;
+        margin: 3px 0;
         overflow: hidden;
       }
     }
-
   }
 }
 

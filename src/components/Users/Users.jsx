@@ -6,62 +6,75 @@ import {NavLink} from "react-router-dom";
 import Pagination from "../common/Pagination/Pagination";
 import Wrapper from "../common/Wrappers/WrapperComponents";
 
-const Users = (props) => {
+const Users = ({
+                 users,
+                 currentPage,
+                 totalUsersCount,
+                 pageSize,
+                 isFetching,
+                 isFollowing,
+                 onChangeCurrentPage,
+                 follow,
+                 unfollow
+               }) => {
   const [value, setValue] = useState('');
-  let [currentLine, setCurrentLine] = useState(1);
+  const [currentLine, setCurrentLine] = useState(1);
 
   const handleChange = (event) => {
     setValue(event.target.value)
   }
 
+  const handleFollow = (isFollow, id) => {
+    isFollow ? unfollow(id) : follow(id);
+  }
+
   return (
     <Wrapper title="USERS">
-      {props.isFetching ? <Preloader/> : (
+      {isFetching ? <Preloader/> : (
         <>
-          <Pagination currentPage={props.currentPage}
-                      onChangeCurrentPage={props.onChangeCurrentPage}
+          <Pagination currentPage={currentPage}
+                      onChangeCurrentPage={onChangeCurrentPage}
                       currentLine={currentLine}
                       onChangeCurrentLine={setCurrentLine}
-                      pagesCount={Math.ceil(props.totalUsersCount / props.pageSize)}
+                      pagesCount={Math.ceil(totalUsersCount / pageSize)}
           />
           <label><b>Enter a search name: </b></label>
           <input type="text" value={value} onChange={handleChange} placeholder="enter a search name"/>
           <div className={style.usersMain}>
-            {props.users.filter(({name}) => name.startsWith(value)).map(el =>
-              <div key={el.id} className={style.userItem}>
-                <section className={style.userHead}>
-                  <NavLink to={`/profile/${el.id}`} style={{textDecoration: 'none', color: 'black'}}>
-                    <img src={el.photos.small != null ? el.photos.small : photoUser} alt='user avatar'/>
-                  </NavLink>
+            {users.filter(({name}) => name.startsWith(value))
+              .map(({
+                      id,
+                      followed,
+                      name,
+                      status,
+                      photos: {small}
+                    }) =>
+                <article key={id} className={style.userItem}>
                   <div>
-                    {el.followed
-                      ? <button
-                        disabled={props.isFollowing.some(user => user === el.id)}
-                        onClick={() => props.unfollow(el.id)}
-                      >
-                        UNFOLLOW
-                      </button>
-                      : <button
-                        disabled={props.isFollowing.some(user => user === el.id)}
-                        onClick={() => props.follow(el.id)}
-                      >
-                        FOLLOW
-                      </button>}
+                    <NavLink to={`/profile/${id}`}>
+                      <img src={small != null ? small : photoUser} alt='user avatar'/>
+                    </NavLink>
+                    <button
+                      data-follow={followed}
+                      disabled={isFollowing.some(user => user === id)}
+                      onClick={() => handleFollow(followed, id)}>
+                      {followed ? "UNFOLLOW" : "FOLLOW"}
+                    </button>
                   </div>
-                </section>
-                <NavLink className={style.userInformation} to={`/profile/${el.id}`}
-                         style={{textDecoration: 'none', color: 'black'}}>
-                  <p><b>Name: </b>{el.name}</p>
-                  <p><b>Status: </b>{el.status}</p>
-                </NavLink>
-              </div>
-            )}
+                  <div>
+                    <NavLink to={`/profile/${id}`}>
+                      <p><b>Name: </b>{name}</p>
+                      <p><b>Status: </b>{status}</p>
+                    </NavLink>
+                  </div>
+                </article>
+              )}
           </div>
-          <Pagination currentPage={props.currentPage}
-                      onChangeCurrentPage={props.onChangeCurrentPage}
+          <Pagination currentPage={currentPage}
+                      onChangeCurrentPage={onChangeCurrentPage}
                       currentLine={currentLine}
                       onChangeCurrentLine={setCurrentLine}
-                      pagesCount={Math.ceil(props.totalUsersCount / props.pageSize)}
+                      pagesCount={Math.ceil(totalUsersCount / pageSize)}
           />
         </>
       )}
