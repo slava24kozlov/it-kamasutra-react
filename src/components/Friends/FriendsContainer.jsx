@@ -24,4 +24,4 @@ const mapStateToProps = (state) => ({
   isAuthUser: getIsAuth(state),
 })
 
-export default compose(connect(mapStateToProps), withAuthRedirect)(Friends);
+export default connect(mapStateToProps)(Friends);

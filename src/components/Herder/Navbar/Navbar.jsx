@@ -3,6 +3,9 @@ import style from './Navbar.module.scss';
 import {NavLink} from "react-router-dom";
 
 const Navbar = ({isAuthUser, idAuthUser}) => {
+  if (!isAuthUser) {
+    return <h1 style={{margin: 0}}>You must log in</h1>
+  }
   return (
     <nav className={style.main}>
       <NavLink to={isAuthUser ? `/profile/${idAuthUser}` : '/profile'}

@@ -64,6 +64,4 @@ let mapStateToProps = (state) => ({
   isAuthUser: getIsAuth(state)
 })
 
-export default compose(
-  connect(mapStateToProps, {getUsersTC, followingTC}), withAuthRedirect)
-(UsersContainer)
+export default connect(mapStateToProps, {getUsersTC, followingTC})(UsersContainer);
