@@ -5,7 +5,8 @@ let initialState = {
   id: null,
   login: null,
   email: null,
-  isAuth: false
+  isAuth: false,
+  isFetching: true,
 }
 
 export const authReducer = (state = initialState, action) => {
@@ -15,6 +16,7 @@ export const authReducer = (state = initialState, action) => {
         ...state,
         ...action.data,
         isAuth: action.isAuth,
+        isFetching: false,
       }
     default:
       return {...state}
@@ -27,7 +29,7 @@ const setAuthUserAC = (id, login, email, isAuth) => ({
   isAuth
 })
 
-export const getAuthUserTC = (history) => (dispatch) => {
+export const getAuthUserTC = () => (dispatch) => {
   authAPI.checkAuth().then(data => {
     if (data.resultCode === 0) {
       let {id, login, email} = data.data

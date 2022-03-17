@@ -9,14 +9,9 @@ import Music from "./Music/Music";
 import {compose} from "redux";
 import {getAuthId, getIsAuth} from "../redux/selectors/AuthSelectors";
 import {connect} from "react-redux";
-import {getAuthUserTC} from "../redux/reducer/auth-reducer";
 import {withAuthRedirect} from "../hoc/AuthRedirect";
 
 class MainContent extends React.Component {
-  componentDidMount() {
-    this.props.getAuthUserTC()
-  }
-
   render() {
     return (
       <>
@@ -41,4 +36,4 @@ const mapStateToProps = (state) => ({
   idAuthUser: getAuthId(state),
 })
 
-export default compose(connect(mapStateToProps, {getAuthUserTC}), withAuthRedirect)(MainContent);
+export default compose(connect(mapStateToProps, null), withAuthRedirect)(MainContent);

@@ -13,3 +13,7 @@ export const getLoginAuthUser = (state) => (
 export const getIsRememberMe = (state) => (
   state.loginUser.rememberMe
 )
+
+export const getIsFetchingAuth = (state) => (
+  state.authUser.isFetching
+)

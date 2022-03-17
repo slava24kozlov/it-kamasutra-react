@@ -1,13 +1,9 @@
 .usersMain {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-
   .userItem {
-    min-width: 300px;
+    width: 75%;
+    margin: 10px auto;
     display: flex;
     border: 1px solid black;
-    margin: 10px 0;
     padding: 10px 5px;
     background-color: white;
     opacity: 0.9;
@@ -51,10 +47,25 @@
     //rightInfo
     & > div:last-child {
       margin-left: 3%;
+
       p {
         margin: 3px 0;
         overflow: hidden;
       }
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .usersMain {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+    .userItem {
+      width: 40%;
+      max-width: 300px;
+      margin: 10px 0;
     }
   }
 }
