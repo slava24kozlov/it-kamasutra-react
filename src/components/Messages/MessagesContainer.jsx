@@ -2,8 +2,6 @@ import React from 'react';
 import {setMessageAC} from '../../redux/reducer/MessagesReducer';
 import {connect} from "react-redux";
 import Messages from "./Messages";
-import {withAuthRedirect} from "../../hoc/AuthRedirect";
-import {compose} from "redux";
 import {getDialogs, getMessages} from "../../redux/selectors/MessagesSelectors";
 import {getIsAuth} from "../../redux/selectors/AuthSelectors";
 

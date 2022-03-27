@@ -19,8 +19,8 @@
       width: 100px;
 
       img {
-        display: block;
         margin: auto;
+        display: block;
         height: 60px;
         width: 60px;
         border-radius: 100%;
@@ -46,11 +46,12 @@
 
     //rightInfo
     & > div:last-child {
-      margin-left: 3%;
-
+      width: 75%;
       p {
-        margin: 3px 0;
+        white-space: nowrap;
         overflow: hidden;
+        text-overflow: ellipsis;
+        margin: 3px 0;
       }
     }
   }
@@ -64,7 +65,7 @@
 
     .userItem {
       width: 40%;
-      max-width: 300px;
+      max-width: 450px;
       margin: 10px 0;
     }
   }

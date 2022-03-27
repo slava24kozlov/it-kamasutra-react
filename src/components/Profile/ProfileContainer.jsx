@@ -4,7 +4,6 @@ import {connect} from "react-redux";
 import {getProfileTC, updateStatusTC} from "../../redux/reducer/ProfileReducer";
 import {withRouter} from "react-router-dom";
 import {compose} from "redux";
-import {withAuthRedirect} from "../../hoc/AuthRedirect";
 import {getProfile, getStatus} from "../../redux/selectors/ProfileSelectors";
 import {getAuthId, getIsAuth} from "../../redux/selectors/AuthSelectors";
 

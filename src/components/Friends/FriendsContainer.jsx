@@ -1,7 +1,5 @@
 import React from 'react';
 import style from './Friends.module.scss';
-import {withAuthRedirect} from "../../hoc/AuthRedirect";
-import {compose} from "redux";
 import {connect} from "react-redux";
 import {getFriends} from "../../redux/selectors/SidebarSelectors";
 import {getIsAuth} from "../../redux/selectors/AuthSelectors";

@@ -1,9 +1,15 @@
 import React from 'react'
 import LoginContainer from "../components/Registration/LoginContainer";
+import {Redirect} from "react-router-dom";
 
 export const withAuthRedirect = (Component) => (props) => {
   if (!props.isAuthUser) {
-    return <LoginContainer/>
+    return (
+      <>
+        <LoginContainer/>
+        <Redirect to="/login"/>
+      </>
+    )
   }
   return <Component {...props}/>
 }

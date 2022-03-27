@@ -1,6 +1,22 @@
 import {SET_MESSAGE} from "../action-type";
 
-let initialState = {
+type DialogDataType = {
+  name: string
+  image: string
+}
+
+interface InitialStateType {
+  dialogData: Array<DialogDataType>
+  messagesData: string[]
+}
+
+type SetMessageAC = {
+  type: typeof SET_MESSAGE
+  name: string
+  message: string
+}
+
+let initialState: InitialStateType = {
   dialogData: [
     {
       name: "Slava",
@@ -30,10 +46,10 @@ let initialState = {
   ],
 }
 
-export const messagesReducer = (state = initialState, action) => {
+export const messagesReducer = (state = initialState, action: SetMessageAC): InitialStateType => {
   switch (action.type) {
     case SET_MESSAGE:
-      let dialog = {
+      let dialog: DialogDataType = {
         name: action.name,
         image: "https://html5css.ru/w3images/avatar2.png",
       }
@@ -43,11 +59,11 @@ export const messagesReducer = (state = initialState, action) => {
         messagesData: [...state.messagesData, action.message],
       }
     default:
-      return {...state}
+      return state
   }
 }
 
-export const setMessageAC = (name, message) => ({
+export const setMessageAC = (name: string, message: string): SetMessageAC => ({
   type: SET_MESSAGE,
   name,
   message,
