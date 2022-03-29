@@ -1,5 +1,5 @@
 export const getLogin = (state) => (
-  state.loginUser.login
+  state.loginUser.email
 )
 
 export const getPassword = (state) => (

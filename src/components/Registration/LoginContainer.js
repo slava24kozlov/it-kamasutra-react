@@ -4,17 +4,15 @@ import {connect} from "react-redux";
 import {loginUserTC} from "../../redux/reducer/login-reducer";
 import {useForm} from "react-hook-form";
 import FieldWrapper from "../common/Wrappers/FieldWrapper";
-import {useHistory} from "react-router-dom";
 import {getLogin, getPassword, getRememberMe, getResponseMessage} from "../../redux/selectors/LoginSelectors";
 import Wrapper from "../common/Wrappers/WrapperComponents";
 
 const Login = ({login, password, rememberMe, responseMessage, loginUserTC}) => {
-  const history = useHistory();
   const {register, handleSubmit, reset, formState: {errors, touchedFields}} = useForm()
 
   const onSubmit = (values) => {
     reset()
-    loginUserTC(values, history)
+    loginUserTC(values)
   }
 
   return (

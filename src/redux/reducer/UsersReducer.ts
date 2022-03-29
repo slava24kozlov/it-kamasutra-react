@@ -9,8 +9,64 @@ import {
   UNFOLLOW
 } from "../action-type";
 
+type UserType = {
+  id: number
+  name: string
+  status: string
+  photos: {
+    small: string
+    large: string
+  }
+  followed: boolean
+}
 
-let initialState = {
+interface InitialStateType {
+  users: Array<UserType>
+  currentPage: number
+  pageSize: number
+  totalUsersCount: number
+  isFetching: boolean
+  isFollowing: Array<UserType["id"]>
+}
+
+type FollowACType = {
+  type: typeof FOLLOW
+  userId: number
+}
+
+type UnfollowACType = {
+  type: typeof UNFOLLOW
+  userId: number
+}
+
+type SetUsersACType = {
+  type: typeof SET_USERS
+  users: Array<UserType>
+}
+
+type SetCurrentPageACType = {
+  type: typeof SET_CURRENT_PAGE
+  currentPage: number
+}
+
+type SetTotalUsersCountACType = {
+  type: typeof SET_TOTAL_USERS_COUNT
+  totalUsersCount: number
+}
+
+type IsFetchingUsersACType = {
+  type: typeof IS_FETCHING_USERS
+  isFetching: boolean
+}
+
+type IsFollowingUsersACType = {
+  type: typeof IS_FOLLOWING_USERS
+  isFollowing: number
+}
+
+type ActionsType = FollowACType | UnfollowACType | SetUsersACType | SetCurrentPageACType | SetTotalUsersCountACType | IsFetchingUsersACType | IsFollowingUsersACType
+
+let initialState: InitialStateType = {
   users: [],
   currentPage: 1,
   pageSize: 100,
@@ -19,7 +75,7 @@ let initialState = {
   isFollowing: []
 }
 
-export const usersReducer = (state = initialState, action) => {
+export const usersReducer = (state = initialState, action: ActionsType) => {
   switch (action.type) {
     case FOLLOW:
       return {
@@ -74,7 +130,7 @@ export const usersReducer = (state = initialState, action) => {
   }
 }
 
-export const getUsersTC = (currentPage, pageSize) => (dispatch) => {
+export const getUsersTC = (currentPage: number, pageSize: number) => (dispatch: any) => {
   dispatch(setCurrentPageAC(currentPage))
   dispatch(isFetchingUsersAC(true))
   usersAPI.getUsers(currentPage, pageSize)
@@ -85,7 +141,7 @@ export const getUsersTC = (currentPage, pageSize) => (dispatch) => {
       }
     )
 }
-export const followingTC = (type, id) => (dispatch) => {
+export const followingTC = (type: typeof FOLLOW | typeof UNFOLLOW, id: number) => (dispatch: any) => {
   dispatch(isFollowingUsersAC(id))
   if (type === FOLLOW) {
     usersAPI.follow(id).then(result => {
@@ -98,31 +154,31 @@ export const followingTC = (type, id) => (dispatch) => {
   }
 }
 
-const followAC = (userId) => ({
+const followAC = (userId: number): FollowACType => ({
   type: FOLLOW,
   userId
 })
-const unfollowAC = (userId) => ({
+const unfollowAC = (userId: number): UnfollowACType => ({
   type: UNFOLLOW,
   userId
 })
-const setUsersAC = (users) => ({
+const setUsersAC = (users: Array<UserType>): SetUsersACType => ({
   type: SET_USERS,
   users
 })
-const setCurrentPageAC = (currentPage) => ({
+const setCurrentPageAC = (currentPage: number): SetCurrentPageACType => ({
   type: SET_CURRENT_PAGE,
   currentPage
 })
-const setTotalUsersCountAC = (totalUsersCount) => ({
+const setTotalUsersCountAC = (totalUsersCount: number): SetTotalUsersCountACType => ({
   type: SET_TOTAL_USERS_COUNT,
   totalUsersCount
 })
-const isFetchingUsersAC = (isFetching) => ({
+const isFetchingUsersAC = (isFetching: boolean): IsFetchingUsersACType => ({
   type: IS_FETCHING_USERS,
   isFetching
 })
-const isFollowingUsersAC = (isFollowing) => ({
+const isFollowingUsersAC = (isFollowing: number): IsFollowingUsersACType => ({
   type: IS_FOLLOWING_USERS,
   isFollowing
 })

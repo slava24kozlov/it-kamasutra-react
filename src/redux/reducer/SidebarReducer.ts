@@ -1,4 +1,13 @@
-let initialState = {
+type ItemType = {
+  name: string
+  image: string
+}
+
+interface InitialStateType {
+  FriendsBar: Array<ItemType>
+}
+
+const initialState: InitialStateType = {
   FriendsBar: [
     {
       name: "Name 1",
@@ -23,6 +32,6 @@ let initialState = {
   ]
 }
 
-export const sidebarReducer = (state = initialState) => {
-  return {...state}
+export const sidebarReducer = (state = initialState): InitialStateType => {
+  return state;
 }
