@@ -1,7 +1,7 @@
 import React from 'react'
 import style from './Login.module.scss';
 import {connect} from "react-redux";
-import {loginUserTC} from "../../redux/reducer/login-reducer";
+import {loginUserTC} from "../../redux/reducer/LoginReducer";
 import {useForm} from "react-hook-form";
 import FieldWrapper from "../common/Wrappers/FieldWrapper";
 import {getLogin, getPassword, getRememberMe, getResponseMessage} from "../../redux/selectors/LoginSelectors";

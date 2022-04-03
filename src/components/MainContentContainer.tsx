@@ -8,10 +8,11 @@ import Communities from "./Communities/Communities";
 import Music from "./Music/Music";
 import {compose} from "redux";
 import {getAuthId, getIsAuth} from "../redux/selectors/AuthSelectors";
-import {connect} from "react-redux";
+import {connect, ConnectedProps} from "react-redux";
 import {withAuthRedirect} from "../hoc/AuthRedirect";
+import {AppStateType} from "../redux/store";
 
-const MainContent = (props) => (
+const MainContent = (props: PropsFromRedux) => (
   <>
     <Route path='/profile/:userId?' render={() =>
       <ProfileContainer/>}/>
@@ -25,11 +26,14 @@ const MainContent = (props) => (
     <Route path='/music' component={Music}/>
     <Redirect from='/' to={`/profile/${props.idAuthUser}`}/>
   </>
-);
+)
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: AppStateType) => ({
   isAuthUser: getIsAuth(state),
   idAuthUser: getAuthId(state),
 })
 
-export default compose(connect(mapStateToProps), withAuthRedirect)(MainContent);
+const connector = connect(mapStateToProps)
+export type PropsFromRedux = ConnectedProps<typeof connector>
+
+export default compose(connector, withAuthRedirect)(MainContent)

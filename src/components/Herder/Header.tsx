@@ -3,8 +3,9 @@ import style from './Headers.module.scss';
 import {NavLink} from "react-router-dom";
 import Logotype from "../../Logotype";
 import Navbar from "./Navbar/Navbar";
+import {PropsFromRedux} from "./HeaderContainer";
 
-const Header = ({isAuthUser, idAuthUser, loginAuthUser, rememberMe, loginOutUserTC}) => {
+const Header: React.FC<PropsFromRedux> = ({isAuthUser, idAuthUser, loginAuthUser, rememberMe, loginOutUserTC}) => {
   return (
     <header className={style.main}>
       <NavLink to={isAuthUser ? `/profile/${idAuthUser}` : '/login'}>

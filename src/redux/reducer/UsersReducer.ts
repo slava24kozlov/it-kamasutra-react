@@ -20,7 +20,7 @@ type UserType = {
   followed: boolean
 }
 
-interface InitialStateType {
+export interface InitialStateType {
   users: Array<UserType>
   currentPage: number
   pageSize: number

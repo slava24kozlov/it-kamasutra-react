@@ -1,6 +1,6 @@
 import {SET_AUTH_LOGIN_DATA, SET_AUTH_RESPONSE_MESSAGE} from "../action-type";
 import {authAPI} from "../../api/api";
-import {getAuthUserTC} from "./auth-reducer";
+import {getAuthUserTC} from "./AuthReducer";
 
 type SetLoginDataType = {
   type: typeof SET_AUTH_LOGIN_DATA
@@ -23,7 +23,7 @@ let initialState = {
   responseMessage: '' as string,
 }
 
-type InitialStateType = typeof initialState
+export type InitialStateType = typeof initialState
 
 export const loginReducer = (state = initialState, action: SetLoginDataType | SetResponseMessageType): InitialStateType => {
   switch (action.type) {

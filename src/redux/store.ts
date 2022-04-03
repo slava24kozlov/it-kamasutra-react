@@ -4,10 +4,10 @@ import {profileReducer} from './reducer/ProfileReducer'
 import {messagesReducer} from './reducer/MessagesReducer'
 import {sidebarReducer} from './reducer/SidebarReducer'
 import {usersReducer} from './reducer/UsersReducer'
-import {authReducer} from "./reducer/auth-reducer";
-import {loginReducer} from "./reducer/login-reducer";
+import {authReducer} from "./reducer/AuthReducer";
+import {loginReducer} from "./reducer/LoginReducer";
 
-let reducers = combineReducers({
+let rootReducers = combineReducers({
     profilePage : profileReducer,
     messagesPage: messagesReducer,
     usersPage: usersReducer,
@@ -16,8 +16,12 @@ let reducers = combineReducers({
     loginUser: loginReducer,
 })
 
+type RootReducerType = typeof rootReducers;
+export type AppStateType = ReturnType<RootReducerType>;
+
+// @ts-ignore
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(reducers, composeEnhancers(applyMiddleware(thunk)));
+const store = createStore(rootReducers, composeEnhancers(applyMiddleware(thunk)));
 
 export default store;
 

@@ -5,7 +5,7 @@ type DialogDataType = {
   image: string
 }
 
-interface InitialStateType {
+export interface InitialStateType {
   dialogData: Array<DialogDataType>
   messagesData: string[]
 }

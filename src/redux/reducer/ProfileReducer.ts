@@ -29,7 +29,7 @@ interface ProfileType {
   }
 }
 
-interface InitialStateType {
+export interface InitialStateType {
   postData: Array<PostDataType>
   profile: ProfileType | null
   defaultPostText: string

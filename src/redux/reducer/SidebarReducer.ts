@@ -3,7 +3,7 @@ type ItemType = {
   image: string
 }
 
-interface InitialStateType {
+export interface InitialStateType {
   FriendsBar: Array<ItemType>
 }
 

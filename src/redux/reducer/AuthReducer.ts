@@ -19,7 +19,7 @@ const initialState = {
   isFetching: true as boolean,
 }
 
-type InitialStateType = typeof initialState
+export type InitialStateType = typeof initialState
 
 export const authReducer = (state = initialState, action: SetAuthUserACType): InitialStateType => {
   switch (action.type) {
