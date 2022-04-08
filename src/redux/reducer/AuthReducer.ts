@@ -1,7 +1,10 @@
 import {SET_AUTH_USERS} from "../action-type";
 import {authAPI} from "../../api/api";
+import {ThunkAction} from "redux-thunk";
+import {AppStateType} from "../store";
+import {Dispatch} from "redux";
 
-type SetAuthUserACType = {
+export type SetAuthUserACType = {
   type: typeof SET_AUTH_USERS
   data: {
     id: number | null
@@ -41,7 +44,7 @@ const setAuthUserAC = (id: number | null, login: string | null, email: string | 
   isAuth
 })
 
-export const getAuthUserTC = () => (dispatch: any) => {
+export const getAuthUserTC = () => (dispatch: Dispatch<SetAuthUserACType>): void => {
   authAPI.checkAuth().then(data => {
     if (data.resultCode === 0) {
       let {id, login, email} = data.data
