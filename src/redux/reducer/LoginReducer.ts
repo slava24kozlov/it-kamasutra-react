@@ -1,5 +1,5 @@
 import {SET_AUTH_LOGIN_DATA, SET_AUTH_RESPONSE_MESSAGE} from "../action-type";
-import {authAPI} from "../../api/api";
+import {authAPI, ResultCode} from "../../api/api";
 import {getAuthUserTC, SetAuthUserACType} from "./AuthReducer";
 import {ThunkAction} from "redux-thunk";
 import {AppStateType} from "../store";
@@ -19,7 +19,6 @@ type SetResponseMessageType = {
 }
 
 type ActionCreatorTypes = SetLoginDataType | SetResponseMessageType
-
 type ThunkCreatorType = ThunkAction<void, AppStateType, unknown, ActionCreatorTypes | SetAuthUserACType>
 
 let initialState = {
@@ -62,18 +61,16 @@ const setResponseMessage = (message: string): SetResponseMessageType => ({
 
 export const loginUserTC = ({email, password, rememberMe}: SetLoginDataType['data']): ThunkCreatorType => (dispatch) => {
   authAPI.login(email, password, rememberMe)
-    .then(r => {
-        if (r.resultCode === 0) {
+    .then(res => {
+        if (res.resultCode === ResultCode.success) {
           rememberMe && dispatch(setLoginData(email, password, rememberMe))
           dispatch(getAuthUserTC())
         } else {
-          dispatch(setResponseMessage(r.messages[0]))
+          dispatch(setResponseMessage(res.messages[0]))
         }
       }
     ).catch(e => console.error(e))
 }
-
-
 
 export const loginOutUserTC = (rememberMe: boolean): ThunkCreatorType => (dispatch): void => {
   authAPI.loginOut()

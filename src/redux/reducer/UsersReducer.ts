@@ -1,4 +1,4 @@
-import {usersAPI} from "../../api/api";
+import {usersAPI, UserType} from "../../api/api";
 import {
   FOLLOW,
   IS_FETCHING_USERS,
@@ -8,17 +8,7 @@ import {
   SET_USERS,
   UNFOLLOW
 } from "../action-type";
-
-type UserType = {
-  id: number
-  name: string
-  status: string
-  photos: {
-    small: string
-    large: string
-  }
-  followed: boolean
-}
+import {Dispatch} from "redux";
 
 export interface InitialStateType {
   users: Array<UserType>
@@ -64,7 +54,9 @@ type IsFollowingUsersACType = {
   isFollowing: number
 }
 
-type ActionsType = FollowACType | UnfollowACType | SetUsersACType | SetCurrentPageACType | SetTotalUsersCountACType | IsFetchingUsersACType | IsFollowingUsersACType
+type ActionsTypeGetUserTC = SetCurrentPageACType | IsFetchingUsersACType | SetUsersACType | SetTotalUsersCountACType
+type ActionsTypeFollowingTC = IsFollowingUsersACType | FollowACType | UnfollowACType
+type ActionsType = ActionsTypeFollowingTC | ActionsTypeGetUserTC
 
 let initialState: InitialStateType = {
   users: [],
@@ -130,7 +122,7 @@ export const usersReducer = (state = initialState, action: ActionsType) => {
   }
 }
 
-export const getUsersTC = (currentPage: number, pageSize: number) => (dispatch: any) => {
+export const getUsersTC = (currentPage: number, pageSize: number) => (dispatch: Dispatch<ActionsTypeGetUserTC>): void => {
   dispatch(setCurrentPageAC(currentPage))
   dispatch(isFetchingUsersAC(true))
   usersAPI.getUsers(currentPage, pageSize)
@@ -141,7 +133,7 @@ export const getUsersTC = (currentPage: number, pageSize: number) => (dispatch: 
       }
     )
 }
-export const followingTC = (type: typeof FOLLOW | typeof UNFOLLOW, id: number) => (dispatch: any) => {
+export const followingTC = (type: typeof FOLLOW | typeof UNFOLLOW, id: number) => (dispatch: Dispatch<ActionsTypeFollowingTC>): void => {
   dispatch(isFollowingUsersAC(id))
   if (type === FOLLOW) {
     usersAPI.follow(id).then(result => {

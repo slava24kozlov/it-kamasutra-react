@@ -14,6 +14,7 @@ const ProfileInfo = (props) => {
         <li><i>Description: </i>{props.profile?.lookingForAJobDescription}</li>
       </ul>
       <ProfileStatus
+
         status={props.status}
         onChangeStatus={props.onChangeStatus}
         isAuthProfile={props.isAuthProfile}

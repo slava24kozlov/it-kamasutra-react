@@ -1,7 +1,5 @@
 import {SET_AUTH_USERS} from "../action-type";
-import {authAPI} from "../../api/api";
-import {ThunkAction} from "redux-thunk";
-import {AppStateType} from "../store";
+import {authAPI, ResultCode} from "../../api/api";
 import {Dispatch} from "redux";
 
 export type SetAuthUserACType = {
@@ -45,9 +43,9 @@ const setAuthUserAC = (id: number | null, login: string | null, email: string | 
 })
 
 export const getAuthUserTC = () => (dispatch: Dispatch<SetAuthUserACType>): void => {
-  authAPI.checkAuth().then(data => {
-    if (data.resultCode === 0) {
-      let {id, login, email} = data.data
+  authAPI.checkAuth().then(res => {
+    if (res.resultCode === ResultCode.success) {
+      let {id, login, email} = res.data
       dispatch(setAuthUserAC(id, login, email, true))
     } else {
       dispatch(setAuthUserAC(null, null, null, false))

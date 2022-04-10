@@ -1,32 +1,12 @@
 import {SET_POST, SET_PROFILE, SET_STATUS} from "../action-type";
-import {profileAPI} from "../../api/api";
+import {profileAPI, ProfileType} from "../../api/api";
+import { Dispatch } from "redux";
 
 interface PostDataType {
   id: number
   message: string
   author: string
   like: number
-}
-
-interface ProfileType {
-  userId: number
-  lookingForAJob: boolean
-  lookingForAJobDescription: string
-  fullName: string
-  contacts: {
-    github: string
-    vk: string
-    facebook: string
-    instagram: string
-    twitter: string
-    website: string
-    youtube: string
-    mainLink: string
-  }
-  photos: {
-    small: string | null
-    large: string | null
-  }
 }
 
 export interface InitialStateType {
@@ -95,7 +75,7 @@ export const profileReducer = (state = initialState, action: ActionsType) => {
   }
 }
 
-export const getProfileTC = (currentId: number) => (dispatch: Function) => {
+export const getProfileTC = (currentId: number) => (dispatch: Dispatch<SetProfileAC | SetStatusAC>): void => {
   profileAPI.getProfile(currentId)
     .then(data => {
       dispatch(setProfileAC(data))
@@ -103,7 +83,7 @@ export const getProfileTC = (currentId: number) => (dispatch: Function) => {
   profileAPI.getStatus(currentId).then(data => data.status === 200 && dispatch(setStatusAC(data.data)))
 };
 
-export const updateStatusTC = (status: string) => (dispatch: Function) => {
+export const updateStatusTC = (status: string) => (dispatch: Dispatch<SetStatusAC>): void => {
   profileAPI.setStatus(status).then(data => {
     data.resultCode === 0 ? dispatch(setStatusAC(status)) : console.error('Error status')
   })
