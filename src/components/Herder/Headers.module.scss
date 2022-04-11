@@ -1,6 +1,4 @@
-.main {
-  display: flex;
-  justify-content: space-between;
+header {
   position: fixed;
   top: 0;
   z-index: 1;
@@ -11,26 +9,35 @@
   box-shadow: 0 6px 50px 0 rgba(119, 119, 119, 0.7);
   box-sizing: border-box;
 
-  p {
-    color: black;
-    font-weight: bold;
-  }
-
-  .login {
-    margin-top: auto;
-    margin-bottom: auto;
-    text-align: center;
-    padding-right: 10px;
+  .main {
+    max-width: 1300px;
+    height: 100%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
 
     p {
-      margin: 0;
-      &:hover {
-        box-shadow: 1px 1px 2px black;
-      }
+      color: black;
+      font-weight: bold;
     }
 
-    button {
-      font-weight: bold;
+    .login {
+      margin-top: auto;
+      margin-bottom: auto;
+      text-align: center;
+      padding-right: 10px;
+
+      p {
+        margin: 0;
+
+        &:hover {
+          box-shadow: 1px 1px 2px black;
+        }
+      }
+
+      button {
+        font-weight: bold;
+      }
     }
   }
 }

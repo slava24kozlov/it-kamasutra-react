@@ -6,7 +6,7 @@ type PropsType = {
   children: typeof React.Component
 }
 
-const Wrapper = ({title, children}: PropsType) => (
+const Wrapper: React.FC<PropsType> = ({title, children}): JSX.Element => (
   <section className={style.main}>
     {title && <h1>{title}</h1>}
     {children}

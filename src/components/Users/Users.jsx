@@ -18,7 +18,6 @@ const Users = ({
                  unfollow
                }) => {
   const [value, setValue] = useState('');
-  const [currentLine, setCurrentLine] = useState(1);
 
   const handleChange = (event) => {
     setValue(event.target.value)
@@ -31,13 +30,11 @@ const Users = ({
   return (
     <Wrapper title="USERS">
       {isFetching ? <Preloader/> : (
-        <>
-          <Pagination currentPage={currentPage}
-                      onChangeCurrentPage={onChangeCurrentPage}
-                      currentLine={currentLine}
-                      onChangeCurrentLine={setCurrentLine}
-                      pagesCount={Math.ceil(totalUsersCount / pageSize)}
-          />
+        <Pagination currentPage={currentPage}
+                    onChangeCurrentPage={onChangeCurrentPage}
+                    pagesCount={Math.ceil(totalUsersCount / pageSize)}
+                    double
+        >
           <label><b>Enter a search name: </b></label>
           <input type="text" value={value} onChange={handleChange} placeholder="enter a search name"/>
           <div className={style.usersMain}>
@@ -70,13 +67,7 @@ const Users = ({
                 </article>
               )}
           </div>
-          <Pagination currentPage={currentPage}
-                      onChangeCurrentPage={onChangeCurrentPage}
-                      currentLine={currentLine}
-                      onChangeCurrentLine={setCurrentLine}
-                      pagesCount={Math.ceil(totalUsersCount / pageSize)}
-          />
-        </>
+        </Pagination>
       )}
     </Wrapper>
   );

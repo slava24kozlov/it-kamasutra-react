@@ -1,17 +1,19 @@
-import React from "react";
+import React, {useState} from "react";
 import style from './Pagination.module.scss';
 
-const Pagination = ({currentPage, onChangeCurrentPage, currentLine, onChangeCurrentLine, pagesCount}) => {
+const Pagination = ({currentPage, onChangeCurrentPage, pagesCount, double, children}) => {
+  const [currentLine, setCurrentLine] = useState(1);
 
   const handleChangePaginationLine = (event) => {
     const value = event.target.dataset.name;
     if (value === 'arrowLeft') {
-      onChangeCurrentLine(prev => currentLine - 5 <= 0 ? 1 : prev - 5)
+      setCurrentLine(prev => currentLine - 5 <= 0 ? 1 : prev - 5)
     } else if (value === 'arrowRight') {
-      onChangeCurrentLine(prev => currentLine + 5 > pagesCount ? pagesCount - 4 : prev + 5)
+      setCurrentLine(prev => currentLine + 5 > pagesCount ? pagesCount - 4 : prev + 5)
     }
   }
-  return (
+
+  const contentPagination = () => (
     <div className={style.pagesList}>
       <button data-name="arrowLeft"
               onClick={handleChangePaginationLine}
@@ -33,6 +35,14 @@ const Pagination = ({currentPage, onChangeCurrentPage, currentLine, onChangeCurr
         &#8594;
       </button>
     </div>
+  )
+
+  return (
+    <>
+      {contentPagination()}
+      {children}
+      {double && contentPagination()}
+    </>
   )
 }
 
