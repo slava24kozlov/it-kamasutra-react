@@ -1,13 +1,23 @@
 import React from 'react';
 
-const FieldWrapper = (
+type ErrorMessage = {
+  message: string
+}
+
+type PropsType = {
+  label: string
+  error: ErrorMessage | undefined
+  touched: boolean
+  children: typeof React.Component
+}
+
+const FieldWrapper: React.FC<PropsType> = (
   {
     children,
     label,
     error,
     touched,
-  }) => {
-
+  }): JSX.Element => {
   return (
     <div>
       {label && <label style={{fontWeight: 'bold'}}>{`${label}:`}</label>}
