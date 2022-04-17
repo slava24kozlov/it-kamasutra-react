@@ -1,14 +1,11 @@
 import {SET_AUTH_USERS} from "../action-type";
-import {authAPI, ResultCode} from "../../api/api";
 import {Dispatch} from "redux";
+import authAPI, {CheckAuthDataType} from "../../api/authAPI";
+import {ResultCode} from "../../api/api";
 
 export type SetAuthUserACType = {
   type: typeof SET_AUTH_USERS
-  data: {
-    id: number | null
-    login: string | null
-    email: string | null
-  }
+  data: CheckAuthDataType
   isAuth: boolean
 }
 

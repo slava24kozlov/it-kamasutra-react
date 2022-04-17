@@ -1,4 +1,3 @@
-import {usersAPI, UserType} from "../../api/api";
 import {
   FOLLOW,
   IS_FETCHING_USERS,
@@ -9,6 +8,7 @@ import {
   UNFOLLOW
 } from "../action-type";
 import {Dispatch} from "redux";
+import usersAPI, { UserType } from "../../api/usersAPI";
 
 export interface InitialStateType {
   users: Array<UserType>

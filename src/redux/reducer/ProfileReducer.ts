@@ -1,6 +1,6 @@
 import {SET_POST, SET_PROFILE, SET_STATUS} from "../action-type";
-import {profileAPI, ProfileType} from "../../api/api";
 import { Dispatch } from "redux";
+import profileAPI, {ProfileType} from "../../api/profileAPI";
 
 interface PostDataType {
   id: number
@@ -75,7 +75,7 @@ export const profileReducer = (state = initialState, action: ActionsType) => {
   }
 }
 
-export const getProfileTC = (currentId: number) => (dispatch: Dispatch<SetProfileAC | SetStatusAC>): void => {
+export const getProfileTC = (currentId: number) => (dispatch: Dispatch<SetProfileAC | SetStatusAC>) => {
   profileAPI.getProfile(currentId)
     .then(data => {
       dispatch(setProfileAC(data))
