@@ -17,7 +17,7 @@ interface UsersType {
   error: string | null
 }
 
-export default {
+export const usersAPI = {
   getUsers(currentPage: number, pageSize: number) {
     return instanceAxios.get<UsersType>(`users?page=${currentPage}&count=${pageSize}`)
       .then(response => {

@@ -29,7 +29,7 @@ const Users = ({
 
   return (
     <Wrapper title="USERS">
-      {isFetching ? <Preloader/> : (
+      {true ? <Preloader/> : (
         <Pagination currentPage={currentPage}
                     onChangeCurrentPage={onChangeCurrentPage}
                     pagesCount={Math.ceil(totalUsersCount / pageSize)}

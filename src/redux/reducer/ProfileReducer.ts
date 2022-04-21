@@ -1,6 +1,6 @@
-import {SET_POST, SET_PROFILE, SET_STATUS} from "../action-type";
 import { Dispatch } from "redux";
-import profileAPI, {ProfileType} from "../../api/profileAPI";
+import {profileAPI, ProfileType} from "../../api/profileAPI";
+import {InferActionsType} from "../store";
 
 interface PostDataType {
   id: number
@@ -8,7 +8,6 @@ interface PostDataType {
   author: string
   like: number
 }
-
 export interface InitialStateType {
   postData: Array<PostDataType>
   profile: ProfileType | null
@@ -16,24 +15,7 @@ export interface InitialStateType {
   defaultCountLike: number
   status: string | number
 }
-
-interface SetProfileAC {
-  type: typeof SET_PROFILE
-  profile: ProfileType
-}
-
-interface SetPostAC {
-  type: typeof SET_POST
-  postText: string
-  countLike: number
-}
-
-interface SetStatusAC {
-  type: typeof SET_STATUS
-  status: string
-}
-
-type ActionsType = SetProfileAC | SetPostAC | SetStatusAC
+type ActionsType = InferActionsType<typeof actionCreators>
 
 const initialState: InitialStateType = {
   postData: [
@@ -49,7 +31,7 @@ const initialState: InitialStateType = {
 
 export const profileReducer = (state = initialState, action: ActionsType) => {
   switch (action.type) {
-    case SET_POST:
+    case "SN/PROFILE/SET-POST":
       let post = {
         id: state.postData[state.postData.length - 1].id + 1,
         message: action.postText,
@@ -60,12 +42,12 @@ export const profileReducer = (state = initialState, action: ActionsType) => {
         ...state,
         postData: [...state.postData, post],
       }
-    case SET_PROFILE:
+    case "SN/PROFILE/SET-PROFILE":
       return {
         ...state,
         profile: {...action.profile}
       }
-    case SET_STATUS:
+    case "SN/PROFILE/SET-STATUS":
       return {
         ...state,
         status: action.status
@@ -75,34 +57,34 @@ export const profileReducer = (state = initialState, action: ActionsType) => {
   }
 }
 
-export const getProfileTC = (currentId: number) => (dispatch: Dispatch<SetProfileAC | SetStatusAC>) => {
+export const getProfileTC = (currentId: number) => (dispatch: Dispatch<ActionsType>) => {
   profileAPI.getProfile(currentId)
     .then(data => {
-      dispatch(setProfileAC(data))
+      dispatch(actionCreators.setProfile(data))
     })
-  profileAPI.getStatus(currentId).then(data => data.status === 200 && dispatch(setStatusAC(data.data)))
+  profileAPI.getStatus(currentId).then(data => data.status === 200 && dispatch(actionCreators.setStatus(data.data)))
 };
 
-export const updateStatusTC = (status: string) => (dispatch: Dispatch<SetStatusAC>): void => {
+export const updateStatusTC = (status: string) => (dispatch: Dispatch<ActionsType>): void => {
   profileAPI.setStatus(status).then(data => {
-    data.resultCode === 0 ? dispatch(setStatusAC(status)) : console.error('Error status')
+    data.resultCode === 0 ? dispatch(actionCreators.setStatus(status)) : console.error('Error status')
   })
 }
 
-const setProfileAC = (profile: ProfileType): SetProfileAC => ({
-  type: SET_PROFILE,
-  profile
-})
-
-export const setPostAC = (postText: string, countLike: number): SetPostAC => ({
-  type: SET_POST,
-  postText,
-  countLike,
-})
-
-export const setStatusAC = (status: string): SetStatusAC => ({
-  type: SET_STATUS,
-  status
-})
+export const actionCreators = {
+  setProfile: (profile: ProfileType) => ({
+    type: 'SN/PROFILE/SET-PROFILE',
+    profile
+  } as const),
+  setPost: (postText: string, countLike: number) => ({
+    type: 'SN/PROFILE/SET-POST',
+    postText,
+    countLike,
+  } as const),
+  setStatus: (status: string) => ({
+    type: 'SN/PROFILE/SET-STATUS',
+    status
+  } as const)
+}
 
 

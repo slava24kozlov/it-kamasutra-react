@@ -5,13 +5,12 @@ import Wrapper from "../common/Wrappers/WrapperComponents";
 
 const Messages = (
   {
-    dialogData,
-    messagesData,
+    dataMessages,
     fieldDialog,
     fieldMessage,
     updateField,
     resetFields,
-    setMessageAC
+    setMessage
   }
 ) => {
   const {register, handleSubmit} = useForm();
@@ -21,7 +20,7 @@ const Messages = (
   }
 
   const onSubmit = ({dialog, message}) => {
-    setMessageAC(dialog, message)
+    setMessage(dialog, message)
     resetFields()
   }
 
@@ -29,29 +28,33 @@ const Messages = (
     <Wrapper title="DIALOGS">
       <div className={style.main}>
         <table>
+          <thead>
           <tr>
             <th>Users</th>
             <th>Messages</th>
           </tr>
-          {dialogData.map(({name, image}, index) =>
-            <tr key={name}>
+          </thead>
+          <tbody>
+          {dataMessages.map(({key, name, image, message}) =>
+            <tr key={key}>
               <td><img src={image} alt={`avatar ${name}`} width="25" height="25"/><span>{name}</span></td>
-              <td>{messagesData[index]}</td>
+              <td>{message}</td>
             </tr>)}
+          </tbody>
         </table>
 
         <form id="messagesForm" onSubmit={handleSubmit(onSubmit)} onChange={handleChange}>
-        <textarea
-          {...register('dialog', {required: 'field is empty'})}
-          value={fieldDialog}
-          placeholder="Enter name"
-        />
+          <textarea
+            {...register('dialog', {required: 'field is empty'})}
+            value={fieldDialog}
+            placeholder="Enter name"
+          />
           <textarea
             {...register('message', {required: 'field is empty'})}
             value={fieldMessage}
             placeholder="Enter message"
           />
-          <button type="submit" disabled={!fieldDialog && !fieldMessage}>Click</button>
+          <button type="submit" disabled={!fieldDialog || !fieldMessage}>Click</button>
         </form>
       </div>
     </Wrapper>

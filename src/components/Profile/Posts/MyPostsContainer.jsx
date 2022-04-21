@@ -1,6 +1,6 @@
 import MyPosts from "./MyPosts";
-import {setPostAC} from '../../../redux/reducer/ProfileReducer';
 import {connect} from "react-redux";
+import {actionCreators} from "../../../redux/reducer/ProfileReducer";
 
 let mapStateToProps = (state) => (
   {
@@ -10,7 +10,7 @@ let mapStateToProps = (state) => (
   }
 )
 
-export default connect(mapStateToProps, {setPostAC})(MyPosts);
+export default connect(mapStateToProps, {setPost: actionCreators.setPost})(MyPosts);
 
 
 

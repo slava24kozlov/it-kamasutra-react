@@ -11,7 +11,7 @@ const MyPosts = (props) => {
   const {register, handleSubmit, formState: {errors, touchedFields}} = useForm();
 
   const onSubmit = ({post, like}) => {
-    props.setPostAC(post, like)
+    props.setPost(post, like)
   }
 
   const handleFocus = (event) => {

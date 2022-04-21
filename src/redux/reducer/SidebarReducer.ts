@@ -2,7 +2,6 @@ type ItemType = {
   name: string
   image: string
 }
-
 export interface InitialStateType {
   FriendsBar: Array<ItemType>
 }

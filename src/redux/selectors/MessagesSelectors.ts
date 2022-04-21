@@ -1,10 +1,6 @@
 import {AppStateType} from "../store";
 import {InitialStateType} from "../reducer/MessagesReducer";
 
-export const getDialogs = (state: AppStateType): InitialStateType["dialogData"] => (
-  state.messagesPage.dialogData
-)
-
-export const getMessages = (state: AppStateType): InitialStateType["messagesData"] => (
-  state.messagesPage.messagesData
+export const getDataMessages = (state: AppStateType): InitialStateType["data"] => (
+  state.messagesPage.data
 )

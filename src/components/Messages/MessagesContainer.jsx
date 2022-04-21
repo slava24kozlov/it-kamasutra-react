@@ -1,9 +1,8 @@
 import React from 'react';
-import {setMessageAC} from '../../redux/reducer/MessagesReducer';
+import {actionCreators} from '../../redux/reducer/MessagesReducer';
 import {connect} from "react-redux";
 import Messages from "./Messages";
-import {getDialogs, getMessages} from "../../redux/selectors/MessagesSelectors";
-import {getIsAuth} from "../../redux/selectors/AuthSelectors";
+import {getDataMessages} from "../../redux/selectors/MessagesSelectors";
 
 class MessagesContainer extends React.Component {
   state = {
@@ -30,19 +29,18 @@ class MessagesContainer extends React.Component {
       fieldMessage={this.state.message}
       updateField={this.updateState}
       resetFields={this.resetState}
-      {...this.props}
+      dataMessages={this.props.dataMessages}
+      setMessage={this.props.setMessage}
     />
   }
 }
 
 let mapStateToProps = (state) => (
   {
-    dialogData: getDialogs(state),
-    messagesData: getMessages(state),
-    isAuthUser: getIsAuth(state)
+    dataMessages: getDataMessages(state),
   }
 )
 
-export default connect(mapStateToProps, {setMessageAC})(MessagesContainer);
+export default connect(mapStateToProps, {setMessage: actionCreators.setMessage})(MessagesContainer);
 
 

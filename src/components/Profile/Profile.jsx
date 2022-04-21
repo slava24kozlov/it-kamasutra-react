@@ -7,7 +7,7 @@ const Profile = (props) => {
     return (
         <Wrapper title="PROFILE">
             <ProfileInfo {...props}/>
-            <MyPostsContainer isAuthProfile={props.isAuthProfile}/>
+            <MyPostsContainer/>
         </Wrapper>
     )
 }

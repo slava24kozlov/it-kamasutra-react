@@ -10,7 +10,7 @@ type LoginDataType = {
   userId: number
 }
 
-export default {
+export const authAPI = {
   checkAuth() {
     return instanceAxios.get<CommonResponseType<CheckAuthDataType>>('auth/me').then((response) => {
       return response.data

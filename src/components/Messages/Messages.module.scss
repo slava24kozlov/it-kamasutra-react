@@ -17,10 +17,17 @@
   }
 
   form {
-    display: flex;
-    align-items: center;
+    textarea {
+      width: 40%;
+      height: 50px;
+      resize: none;
+      &:first-child {
+        margin-right: 10px;
+      }
+    }
 
     button {
+      display: block;
       padding: 10px 20px;
       font-weight: bold;
       color: white;

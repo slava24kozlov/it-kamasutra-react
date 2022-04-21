@@ -1,26 +1,15 @@
-import {SET_AUTH_LOGIN_DATA, SET_AUTH_RESPONSE_MESSAGE} from "../action-type";
-import {getAuthUserTC, SetAuthUserACType} from "./AuthReducer";
-import {ThunkAction} from "redux-thunk";
-import {AppStateType} from "../store";
-import authAPI from "../../api/authAPI";
+import {getAuthUserTC} from "./AuthReducer";
+import {InferActionsType, ThunkCreator} from "../store";
 import { ResultCode } from "../../api/api";
+import {authAPI} from "../../api/authAPI";
 
 type SetLoginDataType = {
-  type: typeof SET_AUTH_LOGIN_DATA
-  data: {
-    email: string | null
-    password: string | null
-    rememberMe: boolean
-  }
+  email: string | null
+  password: string | null
+  rememberMe: boolean
 }
-
-type SetResponseMessageType = {
-  type: typeof SET_AUTH_RESPONSE_MESSAGE
-  message: string
-}
-
-type ActionCreatorTypes = SetLoginDataType | SetResponseMessageType
-type ThunkCreatorType = ThunkAction<void, AppStateType, unknown, ActionCreatorTypes | SetAuthUserACType>
+export type InitialStateType = typeof initialState
+type ActionsType = InferActionsType<typeof actionCreators>
 
 let initialState = {
   email: '' as string | null,
@@ -29,16 +18,14 @@ let initialState = {
   responseMessage: '' as string,
 }
 
-export type InitialStateType = typeof initialState
-
-export const loginReducer = (state = initialState, action: SetLoginDataType | SetResponseMessageType): InitialStateType => {
+export const loginReducer = (state = initialState, action: ActionsType): InitialStateType => {
   switch (action.type) {
-    case SET_AUTH_LOGIN_DATA:
+    case 'SN/LOGIN/SET_AUTH_LOGIN_DATA':
       return {
         ...state,
         ...action.data
       }
-    case SET_AUTH_RESPONSE_MESSAGE:
+    case 'SN/LOGIN/SET_AUTH_RESPONSE_MESSAGE':
       return {
         ...state,
         responseMessage: action.message
@@ -50,37 +37,38 @@ export const loginReducer = (state = initialState, action: SetLoginDataType | Se
   }
 }
 
-const setLoginData = (email: string | null, password: string | null, rememberMe: boolean): SetLoginDataType => ({
-  type: SET_AUTH_LOGIN_DATA,
-  data: {email, password, rememberMe}
-})
+export const actionCreators = {
+  setLoginData: (email: string | null, password: string | null, rememberMe: boolean) => ({
+    type: 'SN/LOGIN/SET_AUTH_LOGIN_DATA',
+    data: {email, password, rememberMe}
+  } as const),
+  setResponseMessage: (message: string) => ({
+    type: 'SN/LOGIN/SET_AUTH_RESPONSE_MESSAGE',
+    message
+  } as const)
+}
 
-const setResponseMessage = (message: string): SetResponseMessageType => ({
-  type: SET_AUTH_RESPONSE_MESSAGE,
-  message
-})
-
-export const loginUserTC = ({email, password, rememberMe}: SetLoginDataType['data']): ThunkCreatorType => (dispatch) => {
+export const loginUserTC = ({email, password, rememberMe}: SetLoginDataType): ThunkCreator<ActionsType> => (dispatch) => {
   authAPI.login(email, password, rememberMe)
     .then(res => {
         if (res.resultCode === ResultCode.success) {
-          rememberMe && dispatch(setLoginData(email, password, rememberMe))
+          rememberMe && dispatch(actionCreators.setLoginData(email, password, rememberMe))
           dispatch(getAuthUserTC())
         } else {
-          dispatch(setResponseMessage(res.messages[0]))
+          dispatch(actionCreators.setResponseMessage(res.messages[0]))
         }
       }
     ).catch(e => console.error(e))
 }
 
-export const loginOutUserTC = (rememberMe: boolean): ThunkCreatorType => (dispatch): void => {
+export const loginOutUserTC = (rememberMe: boolean): ThunkCreator<ActionsType> => (dispatch): void => {
   authAPI.loginOut()
     .then(res => {
         if (res.resultCode === 0) {
-          !rememberMe && dispatch(setLoginData(null, null, false))
+          !rememberMe && dispatch(actionCreators.setLoginData(null, null, false))
           dispatch(getAuthUserTC())
         } else {
-          dispatch(setResponseMessage(res.messages[0]))
+          dispatch(actionCreators.setResponseMessage(res.messages[0]))
         }
       }
     ).catch(e => console.error(e))

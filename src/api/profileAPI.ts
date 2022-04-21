@@ -22,7 +22,7 @@ export interface ProfileType {
   }
 }
 
-export default {
+export const profileAPI = {
   getProfile(id: number) {
     return instanceAxios.get<ProfileType>(`profile/${id}`).then(response => {
       return response.data

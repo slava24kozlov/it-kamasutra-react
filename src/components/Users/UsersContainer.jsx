@@ -5,7 +5,6 @@ import {
   followingTC,
 } from "../../redux/reducer/UsersReducer";
 import Users from "./Users";
-import {FOLLOW, UNFOLLOW} from "../../redux/action-type";
 import {
   getCurrentPage,
   getIsFetching, getIsFollowing,
@@ -26,11 +25,11 @@ class UsersContainer extends React.Component {
   }
 
   follow = (id) => {
-    this.props.followingTC(FOLLOW, id)
+    this.props.followingTC(id, true)
   }
 
   unfollow = (id) => {
-    this.props.followingTC(UNFOLLOW, id)
+    this.props.followingTC(id, false)
   }
 
   render() {

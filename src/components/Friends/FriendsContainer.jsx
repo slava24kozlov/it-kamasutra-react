@@ -2,7 +2,6 @@ import React from 'react';
 import style from './Friends.module.scss';
 import {connect} from "react-redux";
 import {getFriends} from "../../redux/selectors/SidebarSelectors";
-import {getIsAuth} from "../../redux/selectors/AuthSelectors";
 import Wrapper from "../common/Wrappers/WrapperComponents";
 
 const Friends = ({friendsBar}) => (
@@ -19,7 +18,6 @@ const Friends = ({friendsBar}) => (
 
 const mapStateToProps = (state) => ({
   friendsBar: getFriends(state),
-  isAuthUser: getIsAuth(state),
 })
 
 export default connect(mapStateToProps)(Friends);
