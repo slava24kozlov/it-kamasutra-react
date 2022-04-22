@@ -16,7 +16,7 @@ class ProfileStatus extends React.Component {
     })
   }
 
-  setIsEditMode = () => {
+  handleChangeEditMode = () => {
     this.setState((state) => {
       return {isEditMode: !state.isEditMode}
     })
@@ -33,12 +33,12 @@ class ProfileStatus extends React.Component {
 
   render() {
     return (
-      <div style={{margin: '15px', userSelect: 'none', cursor: 'pointer'}}>
-        <b onDoubleClick={this.props.isAuthProfile ? this.setIsEditMode : null}>
+      <div style={{margin: '15px', userSelect: 'none'}}>
+        <b style={{cursor: 'pointer'}} onDoubleClick={this.props.isAuthProfile ? this.setIsEditMode : null}>
           Status:&nbsp;
         </b>
         {!this.state.isEditMode
-          ? <span onDoubleClick={this.props.isAuthProfile ? this.setIsEditMode : null}>
+          ? <span style={{cursor: 'pointer'}} onDoubleClick={this.props.isAuthProfile ? this.setIsEditMode : null}>
             {this.state.status}
             </span>
           : <input

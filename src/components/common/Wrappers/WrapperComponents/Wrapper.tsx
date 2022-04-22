@@ -3,7 +3,7 @@ import style from "./Wrapper.module.scss";
 
 type PropsType = {
   title: string
-  children: typeof React.Component
+  children: React.ReactNode
 }
 
 const Wrapper: React.FC<PropsType> = ({title, children}): JSX.Element => (
