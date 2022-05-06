@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import {BrowserRouter} from "react-router-dom";
+import {HashRouter} from "react-router-dom";
 import HeaderContainer from "./components/Herder/HeaderContainer";
 import MainContentContainer from './components/MainContentContainer';
 import {connect} from "react-redux";
@@ -29,12 +29,12 @@ class AppContainer extends React.Component<PropsType> {
 
   render() {
     return (
-      <BrowserRouter>
+      <HashRouter basename={process.env.PUBLIC_URL}>
         <HeaderContainer/>
         <main className="app-main">
           {this.props.isFetching ? <Preloader/> : <MainContentContainer/>}
         </main>
-      </BrowserRouter>
+      </HashRouter>
     );
   }
 }
