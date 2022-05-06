@@ -5,39 +5,48 @@ class Main {
   public one: string = 'public'
   protected two: string = 'protected'
   private three: string = 'private'
+  public static value = 'PublicStaticMain'
 
   constructor(one: string, two: string, three: string) {
-    this.one = this.one + one
-    this.two = this.two + two
-    this.three = three
+    this.one = this.one + ' | ' + one
+    this.two = this.two + ' | ' + two
+    this.three = this.three + ' | ' + three
+  }
+
+  setThree(value: string) {
+    this.three = this.three + ' | ' + value
+  }
+
+  getThree() {
+    return this.three
   }
 }
 
-const mainInstance = new Main('Main', 'Main', 'Main')
-
 class PreMain extends Main {
-  constructor(value: string) {
+  constructor(value: string, two: string) {
     super(value, value, value);
+    this.two = this.two + ' | ' + two;
   }
 
-  set(value: string) {
-    this.two = value
-  }
-
-  get() {
+  getTwo() {
     return this.two
   }
 }
 
-const preMainInstance = new PreMain("PreMain");
-preMainInstance.set("Changed value")
+const mainInstance = new Main('Main', 'Main', 'Main');
+mainInstance.setThree("Setter");
+const preMainInstance = new PreMain("PreMain", "PreMainTwo");
+Main.value = Main.value + ' | has changed'
 
 class Communities extends React.Component<JSX.Element> {
   render() {
     return (
       <Wrapper title="COMMUNITIES">
-        <div>{preMainInstance.get()}</div>
+        <div>{Main.value}</div>
         <div>{mainInstance.one}</div>
+        <div>{preMainInstance.one}</div>
+        <div>{preMainInstance.getTwo()}</div>
+        <div>{mainInstance.getThree()}</div>
       </Wrapper>
     )
   }

@@ -26,10 +26,6 @@ const Music = () => {
   const [state, setState] = useState(true)
 
   useEffect(() => {
-    console.log(document.getElementById('#music'))
-  }, [])
-
-  useEffect(() => {
     console.log("useEffect")
   }, [state])
 
