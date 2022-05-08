@@ -1,11 +1,12 @@
 import {ResultCode} from "../../api/api";
 import { authAPI } from "../../api/authAPI";
 import {InferActionsType, ThunkCreator} from "../store";
+import {actionCreatorTest} from "../../types/ReducerTypes";
 
 export type InitialStateType = typeof initialState
-type ActionsType = InferActionsType<typeof actionCreators>
+type ActionsType = InferActionsType<typeof actionCreators | typeof actionCreatorTest>
 
-const initialState = {
+export const initialState = {
   id: null as number | null,
   login: null as string | null,
   email: null as string | null,
@@ -23,16 +24,16 @@ export const authReducer = (state = initialState, action: ActionsType): InitialS
         isFetching: false,
       }
     default:
-      return {...state}
+      return state
   }
 }
 
-const actionCreators = {
+export const actionCreators = {
   setAuthUser: (id: number | null, login: string | null, email: string | null, isAuth: boolean) => ({
     type: 'SN/AUTH/SET-AUTH-USERS',
     data: {id, login, email},
     isAuth
-  })
+  } as const)
 }
 
 export const getAuthUserTC = (): ThunkCreator<ActionsType> => (dispatch) => {
