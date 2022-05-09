@@ -3,8 +3,8 @@ import Preloader from "../common/Preloader/Preloader";
 import photoUser from '../../image/photoUser.png';
 import style from './Users.module.scss';
 import {NavLink} from "react-router-dom";
-import Pagination from "../common/Pagination/Pagination";
 import Wrapper from "../common/Wrappers/WrapperComponents";
+import Pagination from "../common/Pagination/Pagination";
 
 const Users = ({
                  users,
