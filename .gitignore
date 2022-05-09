@@ -20,5 +20,8 @@
 # errors
 *.log
 
+# package
+*.lock.json
+
 # IntelliJ IDEA files
 /.idea
