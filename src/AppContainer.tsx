@@ -31,7 +31,7 @@ class AppContainer extends React.Component<PropsType> {
             <BrowserRouter>
                 <HeaderContainer/>
                 <Suspense fallback={<Preloader/>}>
-                    <main className="app-main">
+                    <main data-testid="testingMain" className="app-main">
                         <MainContentContainer/>
                     </main>
                 </Suspense>

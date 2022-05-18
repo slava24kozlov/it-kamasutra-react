@@ -8,43 +8,53 @@ import {getLogin, getPassword, getRememberMe, getResponseMessage} from "../../re
 import Wrapper from "../common/Wrappers/WrapperComponents";
 
 const Login = ({login, password, rememberMe, responseMessage, loginUserTC}) => {
-  const {register, handleSubmit, reset, formState: {errors, touchedFields}} = useForm()
+    const {register, handleSubmit, reset, formState: {errors, touchedFields}} = useForm()
 
-  const onSubmit = (values) => {
-    reset()
-    loginUserTC(values)
-  }
+    const onSubmit = (values) => {
+        reset()
+        loginUserTC(values)
+    }
 
-  return (
-    <Wrapper title="YOU MUST LOG IN">
-      <div className={style.main}>
-        <form className={style.formLogin} onSubmit={handleSubmit(onSubmit)}>
-          <FieldWrapper label="Login" error={errors.login} touched={touchedFields.login}>
-            <input type='text'
-                   {...register('email', {required: 'field is required'})}
-                   defaultValue={login} placeholder="Enter your login"/>
-          </FieldWrapper>
-          <FieldWrapper label="Password" error={errors.password} touched={touchedFields.password}>
-            <input type='password'
-                   {...register('password', {required: 'field is required'})}
-                   defaultValue={password} placeholder="Enter your password"/>
-          </FieldWrapper>
-          <FieldWrapper label="Remember me" error={errors.rememberMe} touched={touchedFields.rememberMe}>
-            <input type='checkbox' {...register('rememberMe')} defaultChecked={rememberMe}/>
-          </FieldWrapper>
-          <button type='submit'>Submit</button>
-          {responseMessage && <div className={style.responseMessage}>{responseMessage}</div>}
-        </form>
-      </div>
-    </Wrapper>
-  )
+    return (
+        <Wrapper title="YOU MUST LOG IN">
+            <div className={style.main}>
+                <form className={style.formLogin} onSubmit={handleSubmit(onSubmit)}>
+                    <FieldWrapper inputId="loginEmail" label="Login" error={errors.login} touched={touchedFields.login}>
+                        <input aria-placeholder="Enter your login"
+                               id="loginEmail"
+                               {...register('email', {required: 'field is required'})}
+                               defaultValue={login}
+                               placeholder="Enter your login"/>
+                    </FieldWrapper>
+                    <FieldWrapper inputId="loginPassword" label="Password" error={errors.password}
+                                  touched={touchedFields.password}>
+                        <input aria-placeholder="Enter your password"
+                               id="loginPassword"
+                               type='password'
+                               {...register('password', {required: 'field is required'})}
+                               defaultValue={password}
+                               placeholder="Enter your password"/>
+                    </FieldWrapper>
+                    <FieldWrapper inputId="loginRememberMe" label="Remember me" error={errors.rememberMe}
+                                  touched={touchedFields.rememberMe}>
+                        <input aria-placeholder="Check the box"
+                               id="loginRememberMe" type='checkbox'
+                               {...register('rememberMe')}
+                               defaultChecked={rememberMe}/>
+                    </FieldWrapper>
+                    <button type='submit'>Submit</button>
+                    {responseMessage && <div className={style.responseMessage}>{responseMessage}</div>}
+                </form>
+            </div>
+        </Wrapper>
+    )
 }
 
 const mapStateToProps = (state) => ({
-  login: getLogin(state),
-  password: getPassword(state),
-  rememberMe: getRememberMe(state),
-  responseMessage: getResponseMessage(state),
+    login: getLogin(state),
+    password: getPassword(state),
+    rememberMe: getRememberMe(state),
+    responseMessage: getResponseMessage(state),
 })
 
 export default connect(mapStateToProps, {loginUserTC})(Login)
