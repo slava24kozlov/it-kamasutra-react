@@ -5,7 +5,7 @@ import Navbar from "./Navbar/Navbar";
 import {PropsFromRedux} from "./HeaderContainer";
 import Logotype from "../../Logotype";
 
-const Header: React.FC<PropsFromRedux> = ({isAuthUser, idAuthUser, loginAuthUser, rememberMe, loginOutUserTC}) => {
+export const Header: React.FC<PropsFromRedux> = ({isAuthUser, idAuthUser, loginAuthUser, rememberMe, loginOutUserTC}) => {
   return (
     <header>
       <div className={style.main}>
