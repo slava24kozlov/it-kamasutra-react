@@ -22,7 +22,7 @@ const FieldWrapper: React.FC<PropsType> = (
     }): JSX.Element => {
     return (
         <div>
-            {label && <label htmlFor={inputId} aria-label={label} aria-labelledby={inputId}
+            {label && <label htmlFor={inputId} aria-labelledby={inputId}
                              style={{fontWeight: 'bold'}}>{`${label}:`}</label>}
             {children}
             {error && touched &&

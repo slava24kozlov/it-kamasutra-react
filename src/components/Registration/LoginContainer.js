@@ -37,8 +37,7 @@ const Login = ({login, password, rememberMe, responseMessage, loginUserTC}) => {
                     </FieldWrapper>
                     <FieldWrapper inputId="loginRememberMe" label="Remember me" error={errors.rememberMe}
                                   touched={touchedFields.rememberMe}>
-                        <input aria-placeholder="Check the box"
-                               id="loginRememberMe" type='checkbox'
+                        <input id="loginRememberMe" type='checkbox'
                                {...register('rememberMe')}
                                defaultChecked={rememberMe}/>
                     </FieldWrapper>
