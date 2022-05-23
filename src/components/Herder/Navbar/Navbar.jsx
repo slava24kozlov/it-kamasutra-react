@@ -1,14 +1,14 @@
-import React from 'react';
-import style from './Navbar.module.scss';
+import React from "react";
+import style from "./Navbar.module.scss";
 import {NavLink} from "react-router-dom";
 
 const Navbar = ({isAuthUser, idAuthUser}) => {
   if (!isAuthUser) {
-    return <h1 style={{margin: 0}}>You must log in</h1>
+    return <h1 style={{margin: 0}}>You must log in</h1>;
   }
   return (
     <nav className={style.main}>
-      <NavLink to={isAuthUser ? `/profile/${idAuthUser}` : '/profile'}
+      <NavLink to={isAuthUser ? `/profile/${idAuthUser}` : "/profile"}
                activeClassName={style.active}>Profile</NavLink>
       <NavLink to='/messages' activeClassName={style.active}>Messages</NavLink>
       <NavLink to='/communities' activeClassName={style.active}>Communities</NavLink>
@@ -17,6 +17,6 @@ const Navbar = ({isAuthUser, idAuthUser}) => {
       <NavLink to='/users' activeClassName={style.active}>Find Users</NavLink>
     </nav>
   );
-}
+};
 
 export default Navbar;

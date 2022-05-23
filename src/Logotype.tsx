@@ -9,6 +9,6 @@ const Logotype: React.FC = () => (
             <path d="M520.5 78.1z"/>
         </g>
     </svg>
-)
+);
 
 export default Logotype;

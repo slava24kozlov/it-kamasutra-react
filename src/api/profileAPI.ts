@@ -25,15 +25,15 @@ export interface ProfileType {
 export const profileAPI = {
   getProfile(id: number) {
     return instanceAxios.get<ProfileType>(`profile/${id}`).then(response => {
-      return response.data
-    })
+      return response.data;
+    });
   },
   setStatus(status: string) {
-    return instanceAxios.put<CommonResponseType>('profile/status', {status}).then(response => {
-      return response.data
-    })
+    return instanceAxios.put<CommonResponseType>("profile/status", {status}).then(response => {
+      return response.data;
+    });
   },
   getStatus(id: number): Promise<AxiosResponse<string>> {
-    return instanceAxios.get(`profile/status/${id}`)
+    return instanceAxios.get(`profile/status/${id}`);
   }
-}
+};

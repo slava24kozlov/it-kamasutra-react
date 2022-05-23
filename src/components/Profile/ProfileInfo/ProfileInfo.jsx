@@ -1,6 +1,6 @@
-import React from 'react';
-import style from './ProfileInfo.module.scss';
-import imageUser from '../../../image/photoUser.png'
+import React from "react";
+import style from "./ProfileInfo.module.scss";
+import imageUser from "../../../image/photoUser.png";
 import ProfileStatus from "./ProfileStatus";
 
 const ProfileInfo = (props) => {
@@ -10,7 +10,7 @@ const ProfileInfo = (props) => {
       <ul>
         <li><b>Name: </b>{props.profile?.fullName}</li>
         <li><b>About me: </b>{props.profile?.aboutMe}</li>
-        <li><i>Looking for Job: </i>{props.profile?.lookingForAJob ? 'Yes' : 'No'}</li>
+        <li><i>Looking for Job: </i>{props.profile?.lookingForAJob ? "Yes" : "No"}</li>
         <li><i>Description: </i>{props.profile?.lookingForAJobDescription}</li>
       </ul>
       <ProfileStatus
@@ -20,7 +20,7 @@ const ProfileInfo = (props) => {
         isAuthProfile={props.isAuthProfile}
       />
     </div>
-  )
-}
+  );
+};
 
 export default ProfileInfo;

@@ -1,5 +1,5 @@
-import React from 'react';
-import style from './Friends.module.scss';
+import React from "react";
+import style from "./Friends.module.scss";
 import {connect} from "react-redux";
 import {getFriends} from "../../redux/selectors/SidebarSelectors";
 import Wrapper from "../common/Wrappers/WrapperComponents";
@@ -14,10 +14,10 @@ const Friends = ({friendsBar}) => (
         </div>)}
     </div>
   </Wrapper>
-)
+);
 
 const mapStateToProps = (state) => ({
   friendsBar: getFriends(state),
-})
+});
 
 export default connect(mapStateToProps)(Friends);

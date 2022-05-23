@@ -24,67 +24,67 @@ const initialState: InitialStateType = {
     {id: 3, message: "This is a test web page", author: "Daniel Radcliffe", like: 10}
   ],
   profile: null,
-  defaultPostText: 'Enter new post',
+  defaultPostText: "Enter new post",
   defaultCountLike: 0,
-  status: 'enter your status',
-}
+  status: "enter your status",
+};
 
 export const profileReducer = (state = initialState, action: ActionsType) => {
   switch (action.type) {
     case "SN/PROFILE/SET-POST":
-      let post = {
+      const post = {
         id: state.postData[state.postData.length - 1].id + 1,
         message: action.postText,
         author: "Indefinite author",
         like: action.countLike
-      }
+      };
       return {
         ...state,
         postData: [...state.postData, post],
-      }
+      };
     case "SN/PROFILE/SET-PROFILE":
       return {
         ...state,
         profile: {...action.profile}
-      }
+      };
     case "SN/PROFILE/SET-STATUS":
       return {
         ...state,
         status: action.status
-      }
+      };
     default:
-      return {...state}
+      return {...state};
   }
-}
+};
 
 export const getProfileTC = (currentId: number) => (dispatch: Dispatch<ActionsType>) => {
   profileAPI.getProfile(currentId)
     .then(data => {
-      dispatch(actionCreators.setProfile(data))
-    })
-  profileAPI.getStatus(currentId).then(data => data.status === 200 && dispatch(actionCreators.setStatus(data.data)))
+      dispatch(actionCreators.setProfile(data));
+    });
+  profileAPI.getStatus(currentId).then(data => data.status === 200 && dispatch(actionCreators.setStatus(data.data)));
 };
 
 export const updateStatusTC = (status: string) => (dispatch: Dispatch<ActionsType>): void => {
   profileAPI.setStatus(status).then(data => {
-    data.resultCode === 0 ? dispatch(actionCreators.setStatus(status)) : console.error('Error status')
-  })
-}
+    data.resultCode === 0 ? dispatch(actionCreators.setStatus(status)) : console.error("Error status");
+  });
+};
 
 export const actionCreators = {
   setProfile: (profile: ProfileType) => ({
-    type: 'SN/PROFILE/SET-PROFILE',
+    type: "SN/PROFILE/SET-PROFILE",
     profile
   } as const),
   setPost: (postText: string, countLike: number) => ({
-    type: 'SN/PROFILE/SET-POST',
+    type: "SN/PROFILE/SET-POST",
     postText,
     countLike,
   } as const),
   setStatus: (status: string) => ({
-    type: 'SN/PROFILE/SET-STATUS',
+    type: "SN/PROFILE/SET-STATUS",
     status
   } as const)
-}
+};
 
 

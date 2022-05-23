@@ -1,5 +1,5 @@
-import React from 'react';
-import style from './Messages.module.scss';
+import React from "react";
+import style from "./Messages.module.scss";
 import {useForm} from "react-hook-form";
 import Wrapper from "../common/Wrappers/WrapperComponents";
 
@@ -16,13 +16,13 @@ const Messages = (
   const {register, handleSubmit} = useForm();
 
   const handleChange = (event) => {
-    updateField(event.target.name, event.target.value)
-  }
+    updateField(event.target.name, event.target.value);
+  };
 
   const onSubmit = ({dialog, message}) => {
-    setMessage(dialog, message)
-    resetFields()
-  }
+    setMessage(dialog, message);
+    resetFields();
+  };
 
   return (
     <Wrapper title="DIALOGS">
@@ -45,12 +45,12 @@ const Messages = (
 
         <form id="messagesForm" onSubmit={handleSubmit(onSubmit)} onChange={handleChange}>
           <textarea
-            {...register('dialog', {required: 'field is empty'})}
+            {...register("dialog", {required: "field is empty"})}
             value={fieldDialog}
             placeholder="Enter name"
           />
           <textarea
-            {...register('message', {required: 'field is empty'})}
+            {...register("message", {required: "field is empty"})}
             value={fieldMessage}
             placeholder="Enter message"
           />
@@ -59,6 +59,6 @@ const Messages = (
       </div>
     </Wrapper>
   );
-}
+};
 
 export default Messages;

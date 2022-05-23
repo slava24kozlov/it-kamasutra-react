@@ -1,26 +1,26 @@
-import React from 'react';
-import {actionCreators} from '../../redux/reducer/MessagesReducer';
+import React from "react";
+import {actionCreators} from "../../redux/reducer/MessagesReducer";
 import {connect} from "react-redux";
 import Messages from "./Messages";
 import {getDataMessages} from "../../redux/selectors/MessagesSelectors";
 
 class MessagesContainer extends React.Component {
   state = {
-    dialog: '',
-    message: '',
+    dialog: "",
+    message: "",
   }
 
   updateState = (field, value) => {
     this.setState({
       [field]:value
-    })
+    });
   }
 
   resetState = () => {
     this.setState({
-      dialog: '',
-      message: '',
-    })
+      dialog: "",
+      message: "",
+    });
   }
 
   render() {
@@ -31,7 +31,7 @@ class MessagesContainer extends React.Component {
       resetFields={this.resetState}
       dataMessages={this.props.dataMessages}
       setMessage={this.props.setMessage}
-    />
+    />;
   }
 }
 
@@ -39,7 +39,7 @@ let mapStateToProps = (state) => (
   {
     dataMessages: getDataMessages(state),
   }
-)
+);
 
 export default connect(mapStateToProps, {setMessage: actionCreators.setMessage})(MessagesContainer);
 

@@ -1,5 +1,5 @@
-import React from 'react';
-import style from './Headers.module.scss';
+import React from "react";
+import style from "./Headers.module.scss";
 import {NavLink} from "react-router-dom";
 import Navbar from "./Navbar/Navbar";
 import {PropsFromRedux} from "./HeaderContainer";
@@ -9,7 +9,7 @@ export const Header: React.FC<PropsFromRedux> = ({isAuthUser, idAuthUser, loginA
   return (
     <header>
       <div className={style.main}>
-        <NavLink to={isAuthUser ? `/profile/${idAuthUser}` : '/login'} title={isAuthUser ? "Home" : "Log in"}>
+        <NavLink to={isAuthUser ? `/profile/${idAuthUser}` : "/login"} title={isAuthUser ? "Home" : "Log in"}>
           <Logotype/>
         </NavLink>
         <Navbar {...{isAuthUser, idAuthUser}}/>
@@ -28,6 +28,6 @@ export const Header: React.FC<PropsFromRedux> = ({isAuthUser, idAuthUser, loginA
       </div>
     </header>
   );
-}
+};
 
 export default Header;

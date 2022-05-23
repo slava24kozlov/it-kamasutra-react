@@ -1,7 +1,7 @@
-import React, { lazy } from 'react'
+import React, { lazy } from "react";
 import {Redirect} from "react-router-dom";
 import {PropsFromRedux} from "../components/MainContentContainer";
-const LoginContainer = lazy(() => import("../components/Registration/LoginContainer"))
+const LoginContainer = lazy(() => import("../components/Registration/LoginContainer"));
 
 export const withAuthRedirect = (Component: React.ComponentType<PropsFromRedux>) => (props: PropsFromRedux) => {
   if (!props.isAuthUser) {
@@ -10,10 +10,10 @@ export const withAuthRedirect = (Component: React.ComponentType<PropsFromRedux>)
         <LoginContainer/>
         <Redirect to="/login"/>
       </>
-    )
+    );
   }
-  return <Component {...props}/>
-}
+  return <Component {...props}/>;
+};
 
 /*
 export const withAuthRedirect = (Component) => {

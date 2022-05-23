@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import MyPostsContainer from "./Posts/MyPostsContainer";
 import Wrapper from "../common/Wrappers/WrapperComponents";
@@ -9,7 +9,7 @@ const Profile = (props) => {
             <ProfileInfo {...props}/>
             <MyPostsContainer/>
         </Wrapper>
-    )
-}
+    );
+};
 
 export default Profile;

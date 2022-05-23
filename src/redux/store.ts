@@ -1,20 +1,20 @@
-import {Action, AnyAction, applyMiddleware, combineReducers, compose, createStore} from 'redux'
+import {Action, AnyAction, applyMiddleware, combineReducers, compose, createStore} from "redux";
 import thunk, {ThunkAction} from "redux-thunk";
-import {profileReducer} from './reducer/ProfileReducer'
-import {messagesReducer} from './reducer/MessagesReducer'
-import {sidebarReducer} from './reducer/SidebarReducer'
-import {usersReducer} from './reducer/UsersReducer'
+import {profileReducer} from "./reducer/ProfileReducer";
+import {messagesReducer} from "./reducer/MessagesReducer";
+import {sidebarReducer} from "./reducer/SidebarReducer";
+import {usersReducer} from "./reducer/UsersReducer";
 import {authReducer} from "./reducer/AuthReducer";
 import {loginReducer} from "./reducer/LoginReducer";
 
-let rootReducers = combineReducers({
+const rootReducers = combineReducers({
     profilePage : profileReducer,
     messagesPage: messagesReducer,
     usersPage: usersReducer,
     sidebar: sidebarReducer,
     authUser: authReducer,
     loginUser: loginReducer,
-})
+});
 
 // @ts-ignore
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

@@ -1,6 +1,6 @@
-import ProfileReducer from './reducer/ProfileReducer';
-import MessagesReducer from './reducer/MessagesReducer';
-import SidebarReducer from './reducer/SidebarReducer';
+import ProfileReducer from "./reducer/ProfileReducer";
+import MessagesReducer from "./reducer/MessagesReducer";
+import SidebarReducer from "./reducer/SidebarReducer";
 
 let storeManual = {
     _state: {
@@ -10,7 +10,7 @@ let storeManual = {
                 {message: "My favorite actor is Will Smith", author: "Vlad Lenon", like: 5},
                 {message: "It's page of animals", author: "Len Name", like: 10}
             ],
-            newPostText: 'Enter new post',
+            newPostText: "Enter new post",
             newCountLike: 0
         },
         MessagesPage: {
@@ -36,7 +36,7 @@ let storeManual = {
                 {id: 4, message: "What do you do?"},
                 {id: 5, message: "Hello"}
             ],
-            newMessageText: 'Enter message'
+            newMessageText: "Enter message"
         },
         sidebar: {
             FriendsBar: [
@@ -56,7 +56,7 @@ let storeManual = {
         }
     },
     _callSubscriber() {
-        console.log('no subscribers(observers)');
+        console.log("no subscribers(observers)");
     },
 
     getState() {
@@ -73,7 +73,7 @@ let storeManual = {
 
         this._callSubscriber(this._state);
     }
-}
+};
 
 export default storeManual;
 

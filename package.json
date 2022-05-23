@@ -24,7 +24,9 @@
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "editorconfig": "editorconfig-checker"
+    "editorconfig": "editorconfig-checker",
+    "eslint": "eslint src/**/*{.js,.jsx,.ts,.tsx}",
+    "eslint:fix": "eslint --fix src/**/*{.js,.jsx,.ts,.tsx}"
   },
   "browserslist": {
     "production": [

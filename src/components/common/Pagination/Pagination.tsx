@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import style from './Pagination.module.scss';
+import style from "./Pagination.module.scss";
 
 type PropsType = {
     currentPage: number
@@ -13,12 +13,12 @@ const Pagination: React.FC<PropsType> = ({currentPage, onChangeCurrentPage, page
     const [currentLine, setCurrentLine] = useState(1);
 
     const handleChangePaginationLeft = (): void => {
-        setCurrentLine(prev => currentLine - 5 <= 0 ? 1 : prev - 5)
-    }
+        setCurrentLine(prev => currentLine - 5 <= 0 ? 1 : prev - 5);
+    };
 
     const handleChangePaginationRight = (): void => {
-        setCurrentLine(prev => currentLine + 5 > pagesCount ? pagesCount - 4 : prev + 5)
-    }
+        setCurrentLine(prev => currentLine + 5 > pagesCount ? pagesCount - 4 : prev + 5);
+    };
 
     const contentPagination = (): JSX.Element => (
         <div className={style.pagesList}>
@@ -29,7 +29,7 @@ const Pagination: React.FC<PropsType> = ({currentPage, onChangeCurrentPage, page
                 <span
                     key={el + index}
                     aria-selected={currentPage === (el + index)}
-                    datatype={currentPage === (el + index) ? "active" : ''}
+                    datatype={currentPage === (el + index) ? "active" : ""}
                     className={style.selected}
                     onClick={() => onChangeCurrentPage(el + index)}
                 >{el + index}</span>
@@ -38,7 +38,7 @@ const Pagination: React.FC<PropsType> = ({currentPage, onChangeCurrentPage, page
                 &#8594;
             </button>
         </div>
-    )
+    );
 
     return (
         <>
@@ -46,7 +46,7 @@ const Pagination: React.FC<PropsType> = ({currentPage, onChangeCurrentPage, page
             {children}
             {double && contentPagination()}
         </>
-    )
-}
+    );
+};
 
 export default Pagination;

@@ -1,6 +1,6 @@
-import React from 'react';
-import p from './MyPosts.module.scss';
-import Post from './post/Post';
+import React from "react";
+import p from "./MyPosts.module.scss";
+import Post from "./post/Post";
 import {useForm} from "react-hook-form";
 import FieldWrapper from "../../common/Wrappers/FieldWrapper";
 
@@ -11,12 +11,12 @@ const MyPosts = (props) => {
   const {register, handleSubmit, formState: {errors, touchedFields}} = useForm();
 
   const onSubmit = ({post, like}) => {
-    props.setPost(post, like)
-  }
+    props.setPost(post, like);
+  };
 
   const handleFocus = (event) => {
-    event.target.select()
-  }
+    event.target.select();
+  };
 
   return (
     <div className={p.main}>
@@ -25,10 +25,10 @@ const MyPosts = (props) => {
           <FieldWrapper label="Enter new post" error={errors.post} touched={touchedFields.post}>
             <input
               type="text"
-              {...register('post', {
-                required: {value: true, message: 'Text required'},
-                minLength: {value: 3, message: 'Text length < 3'},
-                maxLength: {value: 10, message: 'Text length > 10'},
+              {...register("post", {
+                required: {value: true, message: "Text required"},
+                minLength: {value: 3, message: "Text length < 3"},
+                maxLength: {value: 10, message: "Text length > 10"},
               })}
               onFocus={handleFocus}
               defaultValue={props.postText}
@@ -39,10 +39,10 @@ const MyPosts = (props) => {
               type="number"
               min="1"
               max="10"
-              {...register('like', {
-                required: {value: true, message: 'Value required'},
-                min: {value: 3, message: 'Min value 3'},
-                max: {value: 10, message: 'Max value 10'},
+              {...register("like", {
+                required: {value: true, message: "Value required"},
+                min: {value: 3, message: "Min value 3"},
+                max: {value: 10, message: "Max value 10"},
               })}
               defaultValue={props.countLike}
             />
