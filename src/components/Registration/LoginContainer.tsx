@@ -1,19 +1,22 @@
-import React from 'react'
-import style from './Login.module.scss';
-import {connect} from "react-redux";
-import {loginUserTC} from "../../redux/reducer/LoginReducer";
+import React from "react";
+import style from "./Login.module.scss";
+import {connect, ConnectedProps} from "react-redux";
+import {loginUserTC, SetLoginDataType} from "../../redux/reducer/LoginReducer";
 import {useForm} from "react-hook-form";
 import FieldWrapper from "../common/Wrappers/FieldWrapper";
 import {getLogin, getPassword, getRememberMe, getResponseMessage} from "../../redux/selectors/LoginSelectors";
 import Wrapper from "../common/Wrappers/WrapperComponents";
+import {AppStateType} from "../../redux/store";
 
-const Login = ({login, password, rememberMe, responseMessage, loginUserTC}) => {
-    const {register, handleSubmit, reset, formState: {errors, touchedFields}} = useForm()
+type PropsType = ConnectedProps<typeof connector>
 
-    const onSubmit = (values) => {
-        reset()
-        loginUserTC(values)
-    }
+const Login: React.FC<PropsType> = ({login, password, rememberMe, responseMessage, loginUserTC}) => {
+    const {register, handleSubmit, reset, formState: {errors, touchedFields}} = useForm();
+
+    const onSubmit = (values: SetLoginDataType) => {
+        loginUserTC(values);
+        reset();
+    };
 
     return (
         <Wrapper title="YOU MUST LOG IN">
@@ -22,7 +25,7 @@ const Login = ({login, password, rememberMe, responseMessage, loginUserTC}) => {
                     <FieldWrapper inputId="loginEmail" label="Login" error={errors.login} touched={touchedFields.login}>
                         <input aria-placeholder="Enter your login"
                                id="loginEmail"
-                               {...register('email', {required: 'field is required'})}
+                               {...register("email", {required: "field is required"})}
                                defaultValue={login}
                                placeholder="Enter your login"/>
                     </FieldWrapper>
@@ -30,31 +33,32 @@ const Login = ({login, password, rememberMe, responseMessage, loginUserTC}) => {
                                   touched={touchedFields.password}>
                         <input aria-placeholder="Enter your password"
                                id="loginPassword"
-                               type='password'
-                               {...register('password', {required: 'field is required'})}
+                               type="password"
+                               {...register("password", {required: "field is required"})}
                                defaultValue={password}
                                placeholder="Enter your password"/>
                     </FieldWrapper>
                     <FieldWrapper inputId="loginRememberMe" label="Remember me" error={errors.rememberMe}
                                   touched={touchedFields.rememberMe}>
                         <input aria-placeholder="Check the box"
-                               id="loginRememberMe" type='checkbox'
-                               {...register('rememberMe')}
+                               id="loginRememberMe" type="checkbox"
+                               {...register("rememberMe")}
                                defaultChecked={rememberMe}/>
                     </FieldWrapper>
-                    <button type='submit'>Submit</button>
+                    <button type="submit">Submit</button>
                     {responseMessage && <div className={style.responseMessage}>{responseMessage}</div>}
                 </form>
             </div>
         </Wrapper>
-    )
-}
+    );
+};
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: AppStateType) => ({
     login: getLogin(state),
     password: getPassword(state),
     rememberMe: getRememberMe(state),
     responseMessage: getResponseMessage(state),
-})
+});
 
-export default connect(mapStateToProps, {loginUserTC})(Login)
+const connector = connect(mapStateToProps, {loginUserTC});
+export default connector(Login);

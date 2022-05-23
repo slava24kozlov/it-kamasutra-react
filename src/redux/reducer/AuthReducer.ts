@@ -12,7 +12,7 @@ export const initialState = {
   email: null as string | null,
   isAuth: false as boolean,
   isFetching: true as boolean,
-}
+};
 
 export const authReducer = (state = initialState, action: ActionsType): InitialStateType => {
   switch (action.type) {
@@ -22,29 +22,29 @@ export const authReducer = (state = initialState, action: ActionsType): InitialS
         ...action.data,
         isAuth: action.isAuth,
         isFetching: false,
-      }
+      };
     default:
-      return state
+      return state;
   }
-}
+};
 
 export const actionCreators = {
   setAuthUser: (id: number | null, login: string | null, email: string | null, isAuth: boolean) => ({
-    type: 'SN/AUTH/SET-AUTH-USERS',
+    type: "SN/AUTH/SET-AUTH-USERS",
     data: {id, login, email},
     isAuth
   } as const)
-}
+};
 
 export const getAuthUserTC = (): ThunkCreator<ActionsType> => (dispatch) => {
   authAPI.checkAuth().then(res => {
     if (res.resultCode === ResultCode.success) {
-      let {id, login, email} = res.data
-      dispatch(actionCreators.setAuthUser(id, login, email, true))
+      const {id, login, email} = res.data;
+      dispatch(actionCreators.setAuthUser(id, login, email, true));
     } else {
-      dispatch(actionCreators.setAuthUser(null, null, null, false))
+      dispatch(actionCreators.setAuthUser(null, null, null, false));
     }
-  })
-}
+  });
+};
 
 

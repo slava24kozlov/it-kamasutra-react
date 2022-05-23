@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 type ErrorMessage = {
     message: string
@@ -9,7 +9,7 @@ type PropsType = {
     label: string
     error: ErrorMessage | undefined
     touched: boolean
-    children: typeof React.Component
+    children: React.ReactNode
 }
 
 const FieldWrapper: React.FC<PropsType> = (
@@ -23,15 +23,15 @@ const FieldWrapper: React.FC<PropsType> = (
     return (
         <div>
             {label && <label htmlFor={inputId} aria-label={label} aria-labelledby={inputId}
-                             style={{fontWeight: 'bold'}}>{`${label}:`}</label>}
+                             style={{fontWeight: "bold"}}>{`${label}:`}</label>}
             {children}
             {error && touched &&
-                <p style={{margin: '5px 0', color: 'red'}}>
-                    {error.message ? error.message : 'Error text'}
+                <p style={{margin: "5px 0", color: "red"}}>
+                    {error.message ? error.message : "Error text"}
                 </p>
             }
         </div>
-    )
-}
+    );
+};
 
 export default FieldWrapper;

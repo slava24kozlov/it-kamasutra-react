@@ -21,7 +21,7 @@
 *.log
 
 # package
-*.lock.json
+*lock.json
 
 # IntelliJ IDEA files
 /.idea
