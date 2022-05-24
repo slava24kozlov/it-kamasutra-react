@@ -1,5 +1,5 @@
-import React from 'react';
-import p from './Post.module.scss';
+import React from "react";
+import p from "./Post.module.scss";
 
 const Post = (props) => {
   return (

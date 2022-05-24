@@ -11,7 +11,7 @@ export type InitialStateType = {
 }
 type ActionsType = InferActionsType<typeof actionCreators>
 
-let initialState: InitialStateType = {
+const initialState: InitialStateType = {
   data: [
     {
       key: Math.random(),
@@ -44,7 +44,7 @@ let initialState: InitialStateType = {
       message: "Hello",
     }
   ],
-}
+};
 
 export const messagesReducer = (state = initialState, action: ActionsType): InitialStateType => {
   switch (action.type) {
@@ -57,16 +57,16 @@ export const messagesReducer = (state = initialState, action: ActionsType): Init
           image: "https://html5css.ru/w3images/avatar2.png",
           message: action.message
         }],
-      }
+      };
     default:
-      return state
+      return state;
   }
-}
+};
 
 export const actionCreators = {
   setMessage: (name: string, message: string) => ({
-    type: 'SN/MESSAGES/SET-MESSAGE',
+    type: "SN/MESSAGES/SET-MESSAGE",
     name,
     message,
   } as const)
-}
+};

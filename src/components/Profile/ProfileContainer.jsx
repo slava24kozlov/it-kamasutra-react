@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import Profile from "./Profile";
 import {connect} from "react-redux";
 import {getProfileTC, updateStatusTC} from "../../redux/reducer/ProfileReducer";
@@ -8,19 +8,19 @@ import {getProfile, getStatus} from "../../redux/selectors/ProfileSelectors";
 
 class ProfileContainer extends React.Component {
   componentDidMount() {
-    let currentId = this.props.match.params.userId
-    currentId && this.props.getProfileTC(currentId)
+    let currentId = this.props.match.params.userId;
+    currentId && this.props.getProfileTC(currentId);
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    let currentId = this.props.match.params.userId
+    let currentId = this.props.match.params.userId;
     if (currentId && currentId !== prevProps.match.params.userId) {
-      this.props.getProfileTC(this.props.match.params.userId)
+      this.props.getProfileTC(this.props.match.params.userId);
     }
   }
 
   onChangeStatus = (status) => {
-    this.props.updateStatusTC(status)
+    this.props.updateStatusTC(status);
   }
 
   render() {
@@ -28,17 +28,17 @@ class ProfileContainer extends React.Component {
       profile={this.props.profile}
       status={this.props.status}
       onChangeStatus={this.onChangeStatus}
-    />
+    />;
   }
 }
 
 let mapStateToProps = (state) => ({
   profile: getProfile(state),
   status: getStatus(state),
-})
+});
 
 export default compose(
-  connect(mapStateToProps, {getProfileTC, updateStatusTC}), withRouter)(ProfileContainer)
+  connect(mapStateToProps, {getProfileTC, updateStatusTC}), withRouter)(ProfileContainer);
 
 
 

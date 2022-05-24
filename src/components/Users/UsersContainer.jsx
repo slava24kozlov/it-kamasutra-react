@@ -16,20 +16,20 @@ import {
 class UsersContainer extends React.Component {
   componentDidMount() {
     if (this.props.users.length === 0) {
-      this.props.getUsersTC(this.props.currentPage, this.props.pageSize)
+      this.props.getUsersTC(this.props.currentPage, this.props.pageSize);
     }
   }
 
   onChangeCurrentPage = (currentPage) => {
-    this.props.getUsersTC(currentPage, this.props.pageSize)
+    this.props.getUsersTC(currentPage, this.props.pageSize);
   }
 
   follow = (id) => {
-    this.props.followingTC(id, true)
+    this.props.followingTC(id, true);
   }
 
   unfollow = (id) => {
-    this.props.followingTC(id, false)
+    this.props.followingTC(id, false);
   }
 
   render() {
@@ -39,7 +39,7 @@ class UsersContainer extends React.Component {
              follow={this.follow}
              unfollow={this.unfollow}
       />
-    )
+    );
   }
 }
 
@@ -50,6 +50,6 @@ let mapStateToProps = (state) => ({
   pageSize: getPageSize(state),
   isFetching: getIsFetching(state),
   isFollowing: getIsFollowing(state),
-})
+});
 
 export default connect(mapStateToProps, {getUsersTC, followingTC})(UsersContainer);

@@ -1,8 +1,8 @@
-import React, {Suspense} from 'react';
-import './App.css';
+import React, {Suspense} from "react";
+import "./App.css";
 import {BrowserRouter} from "react-router-dom";
 import HeaderContainer from "./components/Herder/HeaderContainer";
-import MainContentContainer from './components/MainContentContainer';
+import MainContentContainer from "./components/MainContentContainer";
 import {connect} from "react-redux";
 import {getAuthUserTC} from "./redux/reducer/AuthReducer";
 import {getIsAuth} from "./redux/selectors/AuthSelectors";
@@ -15,12 +15,12 @@ type MapStateToPropsType = {
 type MapDispatchToPropsType = {
     getAuthUserTC: () => void
 }
-type OwnPropsTypes = {}
+type OwnPropsTypes = unknown
 type PropsType = MapStateToPropsType & MapDispatchToPropsType & OwnPropsTypes
 
 export class App extends React.Component<PropsType> {
     componentDidMount(): void {
-        !this.props.isAuthUser && this.props.getAuthUserTC()
+        !this.props.isAuthUser && this.props.getAuthUserTC();
     }
 
     render() {
@@ -39,6 +39,6 @@ export class App extends React.Component<PropsType> {
 
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
     isAuthUser: getIsAuth(state),
-})
+});
 
 export default connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsTypes, AppStateType>(mapStateToProps, {getAuthUserTC})(App);

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 class ProfileStatus extends React.Component {
   state = {
@@ -7,38 +7,38 @@ class ProfileStatus extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    this.props.status !== prevProps.status && this.setState({status: this.props.status})
+    this.props.status !== prevProps.status && this.setState({status: this.props.status});
   }
 
   onStatusChange = (event) => {
     this.setState({
       status: event.currentTarget.value
-    })
+    });
   }
 
   handleChangeEditMode = () => {
     this.setState((state) => {
-      return {isEditMode: !state.isEditMode}
-    })
+      return {isEditMode: !state.isEditMode};
+    });
   }
 
   setStatus = () => {
-    this.props.onChangeStatus(this.state.status)
-    this.setIsEditMode()
+    this.props.onChangeStatus(this.state.status);
+    this.setIsEditMode();
   }
 
   handleFocus = (event) => {
-    event.target.select()
+    event.target.select();
   }
 
   render() {
     return (
-      <div style={{margin: '15px', userSelect: 'none'}}>
-        <b style={{cursor: 'pointer'}} onDoubleClick={this.props.isAuthProfile ? this.setIsEditMode : null}>
+      <div style={{margin: "15px", userSelect: "none"}}>
+        <b style={{cursor: "pointer"}} onDoubleClick={this.props.isAuthProfile ? this.setIsEditMode : null}>
           Status:&nbsp;
         </b>
         {!this.state.isEditMode
-          ? <span style={{cursor: 'pointer'}} onDoubleClick={this.props.isAuthProfile ? this.setIsEditMode : null}>
+          ? <span style={{cursor: "pointer"}} onDoubleClick={this.props.isAuthProfile ? this.setIsEditMode : null}>
             {this.state.status}
             </span>
           : <input
@@ -51,8 +51,8 @@ class ProfileStatus extends React.Component {
           />
         }
       </div>
-    )
+    );
   }
 }
 
-export default ProfileStatus
+export default ProfileStatus;

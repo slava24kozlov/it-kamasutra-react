@@ -8,7 +8,7 @@ let mapStateToProps = (state) => (
     postText: state.profilePage.defaultPostText,
     countLike: state.profilePage.defaultCountLike,
   }
-)
+);
 
 export default connect(mapStateToProps, {setPost: actionCreators.setPost})(MyPosts);
 

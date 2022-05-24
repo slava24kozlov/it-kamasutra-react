@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
+import React, {useState} from "react";
 import Preloader from "../common/Preloader/Preloader";
-import photoUser from '../../image/photoUser.png';
-import style from './Users.module.scss';
+import photoUser from "../../image/photoUser.png";
+import style from "./Users.module.scss";
 import {NavLink} from "react-router-dom";
 import Wrapper from "../common/Wrappers/WrapperComponents";
 import Pagination from "../common/Pagination/Pagination";
@@ -17,15 +17,15 @@ const Users = ({
                  follow,
                  unfollow
                }) => {
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState("");
 
   const handleChange = (event) => {
-    setValue(event.target.value)
-  }
+    setValue(event.target.value);
+  };
 
   const handleFollow = (isFollow, id) => {
     isFollow ? unfollow(id) : follow(id);
-  }
+  };
 
   return (
     <Wrapper title="USERS">
@@ -71,6 +71,6 @@ const Users = ({
       )}
     </Wrapper>
   );
-}
+};
 
 export default Users;

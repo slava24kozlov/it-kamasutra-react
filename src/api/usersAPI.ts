@@ -21,19 +21,19 @@ export const usersAPI = {
   getUsers(currentPage: number, pageSize: number) {
     return instanceAxios.get<UsersType>(`users?page=${currentPage}&count=${pageSize}`)
       .then(response => {
-        return response.data
-      })
+        return response.data;
+      });
   },
 
   follow(id: number) {
     return instanceAxios.post<CommonResponseType>(`follow/${id}`).then(response => {
-      return response.data.resultCode
-    })
+      return response.data.resultCode;
+    });
   },
 
   unfollow(id: number) {
     return instanceAxios.delete<CommonResponseType>(`follow/${id}`).then(response => {
-      return response.data.resultCode
-    })
+      return response.data.resultCode;
+    });
   }
-}
+};

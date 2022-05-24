@@ -11,6 +11,6 @@ const Wrapper: React.FC<PropsType> = ({title, children}): JSX.Element => (
     {title && <h1>{title}</h1>}
     {children}
   </section>
-)
+);
 
 export default Wrapper;
