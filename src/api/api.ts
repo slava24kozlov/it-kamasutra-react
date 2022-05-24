@@ -13,7 +13,7 @@ export enum ResultCode {
     error,
 }
 
-export interface CommonResponseType<T, RC = ResultCode> {
+export interface CommonResponseType<T = Record<string, never>, RC = ResultCode> {
     resultCode: RC;
     messages: string[];
     fieldsErrors?: string[];

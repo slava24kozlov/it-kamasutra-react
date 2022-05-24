@@ -25,7 +25,7 @@ export default store;
 export type AppStateType = ReturnType<typeof rootReducers>
 
 type PropertiesTypes<T> = T extends {[key: string]: infer U} ? U : never
-export type InferActionsType<T extends {[key: string]: (...args: any[]) => object}> = ReturnType<PropertiesTypes<T>>
+export type InferActionsType<T extends {[key: string]: (...args: Array<any>) => Record<string, unknown>}> = ReturnType<PropertiesTypes<T>>
 
 export type ThunkCreator<A extends Action = AnyAction, R = void> = ThunkAction<R, AppStateType, unknown, A>
 
