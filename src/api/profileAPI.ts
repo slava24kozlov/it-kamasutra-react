@@ -23,7 +23,7 @@ export interface ProfileType {
 }
 
 export const profileAPI = {
-  getProfile(id: number) {
+  getProfile(id: string) {
     return instanceAxios.get<ProfileType>(`profile/${id}`).then(response => {
       return response.data;
     });
@@ -33,7 +33,7 @@ export const profileAPI = {
       return response.data;
     });
   },
-  getStatus(id: number): Promise<AxiosResponse<string>> {
+  getStatus(id: string): Promise<AxiosResponse<string>> {
     return instanceAxios.get(`profile/status/${id}`);
   }
 };

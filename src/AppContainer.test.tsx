@@ -6,16 +6,17 @@ import store from "./redux/store";
 
 type PropsType = {
     isAuth: boolean
+    isFetching: boolean
 }
 
 describe("tests for AppContainer", () => {
     const dispatchMock = jest.fn() as jest.Mock<() => void>;
-    const AppWithProvider: React.FC<PropsType> = ({isAuth}) => <Provider store={store}><App getAuthUserTC={dispatchMock} isAuthUser={isAuth}/></Provider>;
+    const AppWithProvider: React.FC<PropsType> = ({isAuth, isFetching}) => <Provider store={store}><App getAuthUserTC={dispatchMock} isFetching={isFetching} isAuthUser={isAuth}/></Provider>;
     beforeEach(() => {
         dispatchMock.mockReset();
     });
     test("render App without identification", () => {
-        render(<AppWithProvider isAuth={true}/>);
+        render(<AppWithProvider isFetching={false} isAuth={true}/>);
         expect(dispatchMock).toBeCalledTimes(1);
         const header = screen.getByRole("banner");
         expect(header).toBeInTheDocument();
@@ -28,7 +29,7 @@ describe("tests for AppContainer", () => {
         expect(screen.getByLabelText(/logotype/i)).toBeVisible();
     });
     test("render App with identification", () => {
-        render(<AppWithProvider isAuth={false}/>);
+        render(<AppWithProvider isFetching={false} isAuth={false}/>);
         expect(dispatchMock).toBeCalledTimes(0);
         const header = screen.getByRole("banner");
         expect(header).toBeInTheDocument();

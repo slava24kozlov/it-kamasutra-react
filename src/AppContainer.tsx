@@ -1,16 +1,17 @@
-import React, {Suspense} from "react";
+import React from "react";
 import "./App.css";
 import {BrowserRouter} from "react-router-dom";
 import HeaderContainer from "./components/Herder/HeaderContainer";
 import MainContentContainer from "./components/MainContentContainer";
 import {connect} from "react-redux";
 import {getAuthUserTC} from "./redux/reducer/AuthReducer";
-import {getIsAuth} from "./redux/selectors/AuthSelectors";
+import {getIsAuth, getIsFetchingAuth} from "./redux/selectors/AuthSelectors";
 import Preloader from "./components/common/Preloader/Preloader";
 import {AppStateType} from "./redux/store";
 
 type MapStateToPropsType = {
     isAuthUser: boolean
+    isFetching: boolean
 }
 type MapDispatchToPropsType = {
     getAuthUserTC: () => void
@@ -27,11 +28,9 @@ export class App extends React.Component<PropsType> {
         return (
             <BrowserRouter>
                 <HeaderContainer/>
-                <Suspense fallback={<Preloader/>}>
-                    <main data-testid="testingMain" className="app-main">
-                        <MainContentContainer/>
-                    </main>
-                </Suspense>
+                <main data-testid="testingMain" className="app-main">
+                    {this.props.isFetching ? <Preloader/> : <MainContentContainer isAuth={this.props.isAuthUser}/>}
+                </main>
             </BrowserRouter>
         );
     }
@@ -39,6 +38,7 @@ export class App extends React.Component<PropsType> {
 
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
     isAuthUser: getIsAuth(state),
+    isFetching: getIsFetchingAuth(state),
 });
 
 export default connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsTypes, AppStateType>(mapStateToProps, {getAuthUserTC})(App);

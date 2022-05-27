@@ -1,15 +1,23 @@
 import React from "react";
 import {render, screen} from "@testing-library/react";
 import Header from "./Header";
-import {ComponentsWithRouter} from "../../tests/TestsWrapper";
 import userEvent from "@testing-library/user-event";
+import {BrowserRouter} from "react-router-dom";
+
+type PropsType = {
+    isAuth?: boolean
+    id?: number
+    login?: string
+    isRemember?: boolean
+}
 
 describe("tests for Header component", () => {
     const dispatchMock = jest.fn() as jest.Mock<() => void>;
-    const HeaderTest = ({isAuth = false, id = 12345, login = "LoginTest", isRemember = false}): JSX.Element => (
-        <ComponentsWithRouter>
-            <Header loginOutUserTC={dispatchMock} isAuthUser={isAuth} idAuthUser={id} loginAuthUser={login} rememberMe={isRemember}/>
-        </ComponentsWithRouter>
+    const HeaderTest: React.FC<PropsType> = ({isAuth = false, id = 12345, login = "LoginTest", isRemember = false}) => (
+        <BrowserRouter>
+            <Header loginOutUserTC={dispatchMock} isAuthUser={isAuth} idAuthUser={id} loginAuthUser={login}
+                    rememberMe={isRemember}/>
+        </BrowserRouter>
     );
     afterEach(() => {
         dispatchMock.mockReset();

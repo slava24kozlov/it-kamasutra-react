@@ -58,7 +58,7 @@ export const profileReducer = (state = initialState, action: ActionsType) => {
     }
 };
 
-export const getProfileTC = (currentId: number) => (dispatch: Dispatch<ActionsType>) => {
+export const getProfileTC = (currentId: string) => (dispatch: Dispatch<ActionsType>) => {
     profileAPI.getProfile(currentId)
         .then(data => {
             dispatch(actionCreators.setProfile(data));

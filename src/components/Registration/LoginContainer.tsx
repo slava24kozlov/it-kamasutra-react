@@ -11,9 +11,9 @@ import {AppStateType} from "../../redux/store";
 type PropsType = ConnectedProps<typeof connector>
 
 const Login: React.FC<PropsType> = ({login, password, rememberMe, responseMessage, loginUserTC}) => {
-    const {register, handleSubmit, reset, formState: {errors, touchedFields}} = useForm();
+    const {register, handleSubmit, reset, formState: {errors, touchedFields}} = useForm<SetLoginDataType>();
 
-    const onSubmit = (values: SetLoginDataType) => {
+    const onSubmit = (values: SetLoginDataType): void => {
         loginUserTC(values);
         reset();
     };
@@ -22,7 +22,7 @@ const Login: React.FC<PropsType> = ({login, password, rememberMe, responseMessag
         <Wrapper title="YOU MUST LOG IN">
             <div className={style.main}>
                 <form className={style.formLogin} onSubmit={handleSubmit(onSubmit)}>
-                    <FieldWrapper inputId="loginEmail" label="Login" error={errors.login} touched={touchedFields.login}>
+                    <FieldWrapper inputId="loginEmail" label="Login" error={errors.email} touched={touchedFields.email}>
                         <input aria-placeholder="Enter your login"
                                id="loginEmail"
                                {...register("email", {required: "field is required"})}
