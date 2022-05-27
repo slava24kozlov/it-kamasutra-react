@@ -23,7 +23,7 @@
     "rules": {
         "semi": ["error", "always"],
         "quotes": ["error", "double"],
-        "react/prop-types": ["warn"],
+        "react/prop-types": ["off"],
         "react/display-name": ["off"],
         "@typescript-eslint/ban-ts-comment": ["warn"]
     }

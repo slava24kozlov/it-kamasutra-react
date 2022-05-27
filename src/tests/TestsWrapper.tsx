@@ -1,12 +1,6 @@
-import React from "react";
-import {Provider} from "react-redux";
-import { BrowserRouter } from "react-router-dom";
-import store from "../redux/store";
+import React, {PropsWithChildren} from "react";
+import {BrowserRouter} from "react-router-dom";
 
-export const ComponentsWithStore: React.FC = ({children}) => (
-    <Provider store={store}>{children}</Provider>
-);
-
-export const ComponentsWithRouter: React.FC = ({children}) => (
+export const ComponentsWithRouter: React.FC = <T extends Record<string, unknown> = Record<string, unknown>>({children}: PropsWithChildren<T>) => (
     <BrowserRouter>{children}</BrowserRouter>
 );

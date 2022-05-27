@@ -15,7 +15,7 @@ type MapStateToPropsType = {
 type MapDispatchToPropsType = {
     getAuthUserTC: () => void
 }
-type OwnPropsTypes = unknown
+type OwnPropsTypes = Record<string, unknown>
 type PropsType = MapStateToPropsType & MapDispatchToPropsType & OwnPropsTypes
 
 export class App extends React.Component<PropsType> {

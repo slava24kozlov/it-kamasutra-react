@@ -2,9 +2,9 @@ import React from "react";
 import Profile from "./Profile";
 import {connect} from "react-redux";
 import {getProfileTC, updateStatusTC} from "../../redux/reducer/ProfileReducer";
-import {withRouter} from "react-router-dom";
 import {compose} from "redux";
 import {getProfile, getStatus} from "../../redux/selectors/ProfileSelectors";
+import WithRouter from "../../hoc/WithRouter";
 
 class ProfileContainer extends React.Component {
   componentDidMount() {
@@ -21,7 +21,7 @@ class ProfileContainer extends React.Component {
 
   onChangeStatus = (status) => {
     this.props.updateStatusTC(status);
-  }
+  };
 
   render() {
     return <Profile
@@ -38,7 +38,7 @@ let mapStateToProps = (state) => ({
 });
 
 export default compose(
-  connect(mapStateToProps, {getProfileTC, updateStatusTC}), withRouter)(ProfileContainer);
+  connect(mapStateToProps, {getProfileTC, updateStatusTC}), WithRouter)(ProfileContainer);
 
 
 

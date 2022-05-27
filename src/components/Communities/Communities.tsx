@@ -2,10 +2,10 @@ import React from "react";
 import Wrapper from "../common/Wrappers/WrapperComponents";
 
 class Main {
-  public one = "public"
-  protected two = "protected"
-  private three = "private"
-  public static value = "PublicStaticMain"
+  public one = "public";
+  protected two = "protected";
+  private three = "private";
+  public static value = "PublicStaticMain";
 
   constructor(one: string, two: string, three: string) {
     this.one = this.one + " | " + one;
@@ -38,7 +38,7 @@ mainInstance.setThree("Setter");
 const preMainInstance = new PreMain("PreMain", "PreMainTwo");
 Main.value = Main.value + " | has changed";
 
-class Communities extends React.Component<JSX.Element> {
+class Communities extends React.Component {
   render() {
     return (
       <Wrapper title="COMMUNITIES">

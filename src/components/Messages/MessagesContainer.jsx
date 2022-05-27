@@ -8,20 +8,20 @@ class MessagesContainer extends React.Component {
   state = {
     dialog: "",
     message: "",
-  }
+  };
 
   updateState = (field, value) => {
     this.setState({
       [field]:value
     });
-  }
+  };
 
   resetState = () => {
     this.setState({
       dialog: "",
       message: "",
     });
-  }
+  };
 
   render() {
     return <Messages

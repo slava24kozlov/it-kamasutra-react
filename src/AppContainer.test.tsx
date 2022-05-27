@@ -1,7 +1,8 @@
 import React from "react";
 import {render, screen} from "@testing-library/react";
 import AppContainer, {App} from "./AppContainer";
-import {ComponentsWithStore} from "./tests/TestsWrapper";
+import {Provider} from "react-redux";
+import store from "./redux/store";
 
 type PropsType = {
     isAuth: boolean
@@ -9,12 +10,12 @@ type PropsType = {
 
 describe("tests for AppContainer", () => {
     const dispatchMock = jest.fn() as jest.Mock<() => void>;
-    const AppWithStore: React.FC<PropsType> = ({isAuth}) => <ComponentsWithStore><App getAuthUserTC={dispatchMock} isAuthUser={isAuth}/></ComponentsWithStore>;
+    const AppWithProvider: React.FC<PropsType> = ({isAuth}) => <Provider store={store}><App getAuthUserTC={dispatchMock} isAuthUser={isAuth}/></Provider>;
     beforeEach(() => {
         dispatchMock.mockReset();
     });
     test("render App without identification", () => {
-        render(<AppWithStore isAuth={false}/>);
+        render(<AppWithProvider isAuth={true}/>);
         expect(dispatchMock).toBeCalledTimes(1);
         const header = screen.getByRole("banner");
         expect(header).toBeInTheDocument();
@@ -27,7 +28,7 @@ describe("tests for AppContainer", () => {
         expect(screen.getByLabelText(/logotype/i)).toBeVisible();
     });
     test("render App with identification", () => {
-        render(<AppWithStore isAuth={true}/>);
+        render(<AppWithProvider isAuth={false}/>);
         expect(dispatchMock).toBeCalledTimes(0);
         const header = screen.getByRole("banner");
         expect(header).toBeInTheDocument();
@@ -37,7 +38,7 @@ describe("tests for AppContainer", () => {
         expect(main).toBeVisible();
     });
     test("render AppContainer", () => {
-        render(<ComponentsWithStore><AppContainer/></ComponentsWithStore>);
+        render(<Provider store={store}><AppContainer/></Provider>);
         expect(screen.getByRole("banner")).toBeInTheDocument();
         expect(screen.getByTestId("testingMain")).toBeInTheDocument();
     });

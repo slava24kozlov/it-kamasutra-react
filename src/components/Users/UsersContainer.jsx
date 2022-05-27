@@ -22,15 +22,15 @@ class UsersContainer extends React.Component {
 
   onChangeCurrentPage = (currentPage) => {
     this.props.getUsersTC(currentPage, this.props.pageSize);
-  }
+  };
 
   follow = (id) => {
     this.props.followingTC(id, true);
-  }
+  };
 
   unfollow = (id) => {
     this.props.followingTC(id, false);
-  }
+  };
 
   render() {
     return (

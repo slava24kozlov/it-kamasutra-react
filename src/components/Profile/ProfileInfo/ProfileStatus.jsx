@@ -4,7 +4,7 @@ class ProfileStatus extends React.Component {
   state = {
     status: this.props.status,
     isEditMode: false,
-  }
+  };
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     this.props.status !== prevProps.status && this.setState({status: this.props.status});
@@ -14,22 +14,22 @@ class ProfileStatus extends React.Component {
     this.setState({
       status: event.currentTarget.value
     });
-  }
+  };
 
   handleChangeEditMode = () => {
     this.setState((state) => {
       return {isEditMode: !state.isEditMode};
     });
-  }
+  };
 
   setStatus = () => {
     this.props.onChangeStatus(this.state.status);
     this.setIsEditMode();
-  }
+  };
 
   handleFocus = (event) => {
     event.target.select();
-  }
+  };
 
   render() {
     return (
