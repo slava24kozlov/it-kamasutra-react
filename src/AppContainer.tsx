@@ -5,12 +5,14 @@ import HeaderContainer from "./components/Herder/HeaderContainer";
 import MainContentContainer from "./components/MainContentContainer";
 import {connect} from "react-redux";
 import {getAuthUserTC} from "./redux/reducer/AuthReducer";
-import {getIsAuth, getIsFetchingAuth} from "./redux/selectors/AuthSelectors";
+import {getAuthErrorMessage, getIsAuth, getIsFetchingAuth} from "./redux/selectors/AuthSelectors";
 import Preloader from "./components/common/Preloader/Preloader";
 import {AppStateType} from "./redux/store";
+import Error from "./components/Error/Error";
 
-type MapStateToPropsType = {
+export type MapStateToPropsType = {
     isAuthUser: boolean
+    errorAuthMessage: string | null
     isFetching: boolean
 }
 type MapDispatchToPropsType = {
@@ -29,7 +31,9 @@ export class App extends React.Component<PropsType> {
             <BrowserRouter>
                 <HeaderContainer/>
                 <main data-testid="testingMain" className="app-main">
-                    {this.props.isFetching ? <Preloader/> : <MainContentContainer isAuth={this.props.isAuthUser}/>}
+                    {this.props.isFetching ? <Preloader/> : this.props.errorAuthMessage ?
+                        <Error error={this.props.errorAuthMessage}/> :
+                        <MainContentContainer isAuth={this.props.isAuthUser}/>}
                 </main>
             </BrowserRouter>
         );
@@ -38,6 +42,7 @@ export class App extends React.Component<PropsType> {
 
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
     isAuthUser: getIsAuth(state),
+    errorAuthMessage: getAuthErrorMessage(state),
     isFetching: getIsFetchingAuth(state),
 });
 
