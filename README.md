@@ -6,7 +6,7 @@ HTML, CSS, SCSS, JavaScript, TypeScript, React, Redux, Jest, React Testing Libra
 
 ### Deployed application
 
-Deployed application with Vercel [![Deploy with Vercel](https://vercel.com/button)](https://it-kamasutra-react.vercel.app)
+Deployed application with Vercel [![Deploy with Vercel](https://vercel.com/button)](https://slava-kozlov-react.vercel.app)
 
 Deployed application with GitHubPage: https://slava24kozlov.github.io/it-kamasutra-react
 
