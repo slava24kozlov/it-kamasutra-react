@@ -12,7 +12,12 @@ import Error from "./components/Error/Error";
 
 export type MapStateToPropsType = {
     isAuthUser: boolean
-    errorAuthMessage: string | null
+    errorAuthMessage: {
+        code: string | null
+        name: string | null
+        message: string | null
+        isError: boolean
+    }
     isFetching: boolean
 }
 type MapDispatchToPropsType = {
@@ -31,8 +36,10 @@ export class App extends React.Component<PropsType> {
             <BrowserRouter>
                 <HeaderContainer/>
                 <main data-testid="testingMain" className="app-main">
-                    {this.props.isFetching ? <Preloader/> : this.props.errorAuthMessage ?
-                        <Error error={this.props.errorAuthMessage}/> :
+                    {this.props.isFetching ? <Preloader/> : this.props.errorAuthMessage.isError ?
+                        <Error code={this.props.errorAuthMessage.code}
+                               name={this.props.errorAuthMessage.name}
+                               message={this.props.errorAuthMessage.message}/> :
                         <MainContentContainer isAuth={this.props.isAuthUser}/>}
                 </main>
             </BrowserRouter>

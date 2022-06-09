@@ -6,12 +6,18 @@ import store from "./redux/store";
 
 describe("tests for AppContainer", () => {
     const dispatchMock = jest.fn() as jest.Mock<() => void>;
+    const errorProps = {
+        code: null,
+        name: null,
+        message: null,
+        isError: false
+    };
     const AppWithProvider: React.FC<MapStateToPropsType> = ({isAuthUser, isFetching, errorAuthMessage}) => <Provider store={store}><App getAuthUserTC={dispatchMock} isFetching={isFetching} isAuthUser={isAuthUser} errorAuthMessage={errorAuthMessage}/></Provider>;
     beforeEach(() => {
         dispatchMock.mockReset();
     });
     test("render App without identification", () => {
-        render(<AppWithProvider isFetching={false} isAuthUser={true} errorAuthMessage={null}/>);
+        render(<AppWithProvider isFetching={false} isAuthUser={true} errorAuthMessage={errorProps}/>);
         expect(dispatchMock).toBeCalledTimes(1);
         const header = screen.getByRole("banner");
         expect(header).toBeInTheDocument();
@@ -24,7 +30,7 @@ describe("tests for AppContainer", () => {
         expect(screen.getByLabelText(/logotype/i)).toBeVisible();
     });
     test("render App with identification", () => {
-        render(<AppWithProvider isFetching={false} isAuthUser={false} errorAuthMessage={null}/>);
+        render(<AppWithProvider isFetching={false} isAuthUser={false} errorAuthMessage={errorProps}/>);
         expect(dispatchMock).toBeCalledTimes(0);
         const header = screen.getByRole("banner");
         expect(header).toBeInTheDocument();

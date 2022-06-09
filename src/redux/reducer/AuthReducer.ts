@@ -10,7 +10,12 @@ export const initialState = {
     id: null as number | null,
     login: null as string | null,
     email: null as string | null,
-    error: null as string | null,
+    error: {
+        code: null as string | null,
+        name: null as string | null,
+        message: null as string | null,
+        isError: false as boolean,
+    },
     isAuth: false as boolean,
     isFetching: true as boolean,
 };
@@ -27,7 +32,7 @@ export const authReducer = (state = initialState, action: ActionsType): InitialS
         case "SN/AUTH/SET-AUTH-ERROR-MESSAGE":
             return {
                 ...state,
-                error: action.error,
+                error: {...action.error, isError: true},
                 isFetching: false,
             };
         default:
@@ -41,9 +46,11 @@ export const actionCreators = {
         data: {id, login, email},
         isAuth
     } as const),
-    setAuthErrorMessage: (error: string) => ({
+    setAuthErrorMessage: (code: string, name: string, message: string) => ({
         type: "SN/AUTH/SET-AUTH-ERROR-MESSAGE",
-        error
+        error: {
+            code, name, message
+        }
     } as const)
 };
 
@@ -56,8 +63,7 @@ export const getAuthUserTC = (): ThunkCreator<ActionsType> => (dispatch) => {
             dispatch(actionCreators.setAuthUser(null, null, null, false));
         }
     }).catch(error => {
-        console.error(error);
-        dispatch(actionCreators.setAuthErrorMessage(error));
+        dispatch(actionCreators.setAuthErrorMessage(error.code, error.name, error.message));
     });
 };
 
