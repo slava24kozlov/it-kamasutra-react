@@ -56,6 +56,7 @@ export const getAuthUserTC = (): ThunkCreator<ActionsType> => (dispatch) => {
             dispatch(actionCreators.setAuthUser(null, null, null, false));
         }
     }).catch(error => {
+        console.error(error);
         dispatch(actionCreators.setAuthErrorMessage(error));
     });
 };
