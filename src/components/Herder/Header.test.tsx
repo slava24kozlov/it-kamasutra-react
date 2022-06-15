@@ -66,14 +66,14 @@ describe("tests for Header component", () => {
         expect(screen.getByText("LoginTest")).toBeVisible();
         expect(dispatchMock).not.toBeCalled();
     });
-    test("checking the behavior of the exit button", () => {
+    test("checking the behavior of the exit button", async () => {
         render(<HeaderTest isAuth={true} id={12345} login="LoginTest" isRemember={true}/>);
         const buttonExit = screen.getByRole("button") as HTMLAnchorElement;
         expect(buttonExit).toContainHTML("EXIT");
         expect(buttonExit).toBeVisible();
         expect(buttonExit.title).toBe("Exit");
         expect(buttonExit.style.fontWeight).toBe("bold");
-        userEvent.click(buttonExit);
+        await userEvent.click(buttonExit);
         expect(dispatchMock).toBeCalledTimes(1);
         expect(dispatchMock).toBeCalledWith(true);
     });

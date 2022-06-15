@@ -7,7 +7,7 @@ type PropsType = {
 }
 
 const Wrapper: React.FC<PropsType> = ({title, children}): JSX.Element => (
-  <section className={style.main}>
+  <section className={style.sectionMain}>
     {title && <h1>{title}</h1>}
     {children}
   </section>

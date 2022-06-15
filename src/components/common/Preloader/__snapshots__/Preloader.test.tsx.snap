@@ -3,6 +3,7 @@
 exports[`tests for the Preloader component snapshot testing 1`] = `
 <div>
   <div
+    aria-label="page preloader"
     class="main"
   >
     <div />
