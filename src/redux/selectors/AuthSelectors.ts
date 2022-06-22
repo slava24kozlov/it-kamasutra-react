@@ -13,10 +13,6 @@ export const getLoginAuthUser = (state: AppStateType): InitialStateType["login"]
     state.authUser.login
 );
 
-export const getAuthErrorMessage = (state: AppStateType): InitialStateType["error"] => (
-    state.authUser.error
-);
-
 export const getIsFetchingAuth = (state: AppStateType): InitialStateType["isFetching"] => (
     state.authUser.isFetching
 );

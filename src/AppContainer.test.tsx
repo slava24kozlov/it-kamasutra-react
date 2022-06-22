@@ -6,25 +6,18 @@ import store from "./redux/store";
 
 describe("tests for AppContainer",() => {
     const dispatchMock = jest.fn() as jest.Mock<() => void>;
-    const errorProps = {
-        code: null,
-        name: null,
-        message: null,
-        isError: false
-    };
-    const AppWithProvider: React.FC<MapStateToPropsType> = ({isAuthUser, isFetching, errorAuthMessage}) =>
+    const AppWithProvider: React.FC<MapStateToPropsType> = ({isAuthUser, isFetching}) =>
         <Provider store={store}>
             <App getAuthUserTC={dispatchMock}
                  isFetching={isFetching}
                  isAuthUser={isAuthUser}
-                 errorAuthMessage={errorAuthMessage}
             />
         </Provider>;
     beforeEach(() => {
         dispatchMock.mockReset();
     });
     test("render App with identification",() => {
-        render(<AppWithProvider isFetching={true} isAuthUser={false} errorAuthMessage={errorProps}/>);
+        render(<AppWithProvider isFetching={true} isAuthUser={false}/>);
         expect(dispatchMock).toBeCalledTimes(1);
         const main = screen.getByTestId("testingMain");
         expect(main).toBeInTheDocument();
@@ -33,7 +26,7 @@ describe("tests for AppContainer",() => {
         expect(main).toContainElement(preloader);
     });
     test("render App without identification",() => {
-        render(<AppWithProvider isFetching={true} isAuthUser={true} errorAuthMessage={errorProps}/>);
+        render(<AppWithProvider isFetching={true} isAuthUser={true}/>);
         expect(dispatchMock).toBeCalledTimes(0);
         const header = screen.getByRole("banner");
         expect(header).toBeInTheDocument();
@@ -41,24 +34,11 @@ describe("tests for AppContainer",() => {
         expect(main).toBeVisible();
     });
     test("displaying the preloader when loading the App", () => {
-        render(<AppWithProvider isFetching={true} isAuthUser={true} errorAuthMessage={errorProps}/>);
+        render(<AppWithProvider isFetching={true} isAuthUser={true}/>);
         expect(screen.getByTestId("testingMain")).toBeVisible();
         const preloader = screen.getByLabelText("page preloader");
         expect(preloader).toBeInTheDocument();
         expect(preloader).toBeVisible();
-    });
-    test("render App with server error", () => {
-        render(<AppWithProvider isFetching={false} isAuthUser={true} errorAuthMessage={{
-            code: "test code",
-            name: "test name",
-            message: "test message",
-            isError: true,
-        }}/>);
-        const main = screen.getByTestId("testingMain");
-        expect(main).toBeVisible();
-        const headingError = screen.getByText(/error/i);
-        expect(headingError).toBeInTheDocument();
-        expect(main).toContainElement(headingError);
     });
     test("render AppContainer", () => {
         render(<Provider store={store}><AppContainer/></Provider>);

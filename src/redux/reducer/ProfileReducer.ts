@@ -1,6 +1,7 @@
 import {Dispatch} from "redux";
 import {profileAPI, ProfileType} from "../../api/profileAPI";
 import {InferActionsType} from "../store";
+import {actionCreatorsCommon} from "./CommonReducer";
 
 interface PostDataType {
     id: number;
@@ -17,7 +18,7 @@ export interface InitialStateType {
     status: string | number;
 }
 
-type ActionsType = InferActionsType<typeof actionCreators>
+type ActionsType = InferActionsType<typeof actionCreators | typeof actionCreatorsCommon>
 
 const initialState: InitialStateType = {
     postData: [
@@ -46,7 +47,8 @@ export const profileReducer = (state = initialState, action: ActionsType) => {
         case "SN/PROFILE/SET-PROFILE":
             return {
                 ...state,
-                profile: {...action.profile}
+                profile: {...action.profile},
+                isFetching: false
             };
         case "SN/PROFILE/SET-STATUS":
             return {
@@ -54,7 +56,7 @@ export const profileReducer = (state = initialState, action: ActionsType) => {
                 status: action.status
             };
         default:
-            return {...state};
+            return state;
     }
 };
 
@@ -62,7 +64,12 @@ export const getProfileTC = (currentId: string) => (dispatch: Dispatch<ActionsTy
     profileAPI.getProfile(currentId)
         .then(data => {
             dispatch(actionCreators.setProfile(data));
-        });
+        }).catch((error) => {
+        dispatch(actionCreatorsCommon.setResponseErrorMessage(error.code, error.name, error.message));
+        if (location.pathname !== "/error") {
+            location.replace("/error");
+        }
+    });
     profileAPI.getStatus(currentId).then(data => data.status === 200 && dispatch(actionCreators.setStatus(data.data)));
 };
 

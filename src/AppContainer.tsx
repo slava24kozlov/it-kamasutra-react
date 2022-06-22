@@ -5,19 +5,12 @@ import HeaderContainer from "./components/Herder/HeaderContainer";
 import MainContentContainer from "./components/MainContentContainer";
 import {connect} from "react-redux";
 import {getAuthUserTC} from "./redux/reducer/AuthReducer";
-import {getAuthErrorMessage, getIsAuth, getIsFetchingAuth} from "./redux/selectors/AuthSelectors";
+import {getIsAuth, getIsFetchingAuth} from "./redux/selectors/AuthSelectors";
 import Preloader from "./components/common/Preloader/Preloader";
 import {AppStateType} from "./redux/store";
-import Error from "./components/Error/Error";
 
 export type MapStateToPropsType = {
     isAuthUser: boolean
-    errorAuthMessage: {
-        code: string | null
-        name: string | null
-        message: string | null
-        isError: boolean
-    }
     isFetching: boolean
 }
 type MapDispatchToPropsType = {
@@ -28,7 +21,9 @@ type PropsType = MapStateToPropsType & MapDispatchToPropsType & OwnPropsTypes
 
 export class App extends React.Component<PropsType> {
     componentDidMount(): void {
-        !this.props.isAuthUser && this.props.getAuthUserTC();
+        if (!this.props.isAuthUser) {
+            this.props.getAuthUserTC();
+        }
     }
 
     render() {
@@ -36,11 +31,7 @@ export class App extends React.Component<PropsType> {
             <BrowserRouter>
                 <HeaderContainer/>
                 <main data-testid="testingMain" className="app-main">
-                    {this.props.isFetching ? <Preloader/> : this.props.errorAuthMessage.isError ?
-                        <Error code={this.props.errorAuthMessage.code}
-                               name={this.props.errorAuthMessage.name}
-                               message={this.props.errorAuthMessage.message}/> :
-                        <MainContentContainer isAuth={this.props.isAuthUser}/>}
+                    {this.props.isFetching ? <Preloader/> : <MainContentContainer/>}
                 </main>
             </BrowserRouter>
         );
@@ -49,7 +40,6 @@ export class App extends React.Component<PropsType> {
 
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
     isAuthUser: getIsAuth(state),
-    errorAuthMessage: getAuthErrorMessage(state),
     isFetching: getIsFetchingAuth(state),
 });
 

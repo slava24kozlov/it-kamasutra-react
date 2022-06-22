@@ -1,10 +1,9 @@
 import React, {lazy} from "react";
-import {Navigate, Route} from "react-router-dom";
-import {PropsFromRedux} from "../components/MainContentContainer";
+import {Route, Navigate} from "react-router-dom";
 
 const LoginContainer = lazy(() => import("../components/Registration/LoginContainer"));
 
-export const withAuthRedirect = (Component: React.ComponentType<PropsFromRedux>) => (props: PropsFromRedux): React.ReactElement => {
+export const withAuthRedirect = (Component) => (props) => {
     if (!props.isAuthUser) {
         return (
             <>

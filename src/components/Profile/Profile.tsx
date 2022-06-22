@@ -13,7 +13,7 @@ type PropsType = {
 const Profile: React.FC<PropsType> = (props) => {
     return (
         <Wrapper title="PROFILE">
-            <ProfileInfo {...props}/>
+            <ProfileInfo {...props} />
             <MyPostsContainer/>
         </Wrapper>
     );

@@ -2,20 +2,15 @@ import {ResultCode} from "../../api/api";
 import {authAPI} from "../../api/authAPI";
 import {InferActionsType, ThunkCreator} from "../store";
 import {actionCreatorTest} from "../../types/ReducerTypes";
+import {actionCreatorsCommon} from "./CommonReducer";
 
 export type InitialStateType = typeof initialState
-type ActionsType = InferActionsType<typeof actionCreators | typeof actionCreatorTest>
+type ActionsType = InferActionsType<typeof actionCreators | typeof actionCreatorsCommon | typeof actionCreatorTest>
 
 export const initialState = {
     id: null as number | null,
     login: null as string | null,
     email: null as string | null,
-    error: {
-        code: null as string | null,
-        name: null as string | null,
-        message: null as string | null,
-        isError: false as boolean,
-    },
     isAuth: false as boolean,
     isFetching: true as boolean,
 };
@@ -29,12 +24,6 @@ export const authReducer = (state = initialState, action: ActionsType): InitialS
                 isAuth: action.isAuth,
                 isFetching: false,
             };
-        case "SN/AUTH/SET-AUTH-ERROR-MESSAGE":
-            return {
-                ...state,
-                error: {...action.error, isError: true},
-                isFetching: false,
-            };
         default:
             return state;
     }
@@ -46,12 +35,6 @@ export const actionCreators = {
         data: {id, login, email},
         isAuth
     } as const),
-    setAuthErrorMessage: (code: string, name: string, message: string) => ({
-        type: "SN/AUTH/SET-AUTH-ERROR-MESSAGE",
-        error: {
-            code, name, message
-        }
-    } as const)
 };
 
 export const getAuthUserTC = (): ThunkCreator<ActionsType> => (dispatch) => {
@@ -59,11 +42,21 @@ export const getAuthUserTC = (): ThunkCreator<ActionsType> => (dispatch) => {
         if (res.resultCode === ResultCode.success) {
             const {id, login, email} = res.data;
             dispatch(actionCreators.setAuthUser(id, login, email, true));
+            if (location.pathname === "/login" || location.pathname === "/") {
+                location.replace(`/profile/${id}`);
+            }
         } else {
             dispatch(actionCreators.setAuthUser(null, null, null, false));
+            if (location.pathname !== "/login") {
+                location.replace("/login");
+            }
         }
     }).catch(error => {
-        dispatch(actionCreators.setAuthErrorMessage(error.code, error.name, error.message));
+        dispatch(actionCreatorsCommon.setResponseErrorMessage(error.code, error.name, error.message));
+        dispatch(actionCreators.setAuthUser(null, null, null, false));
+        if (location.pathname !== "/error") {
+            location.replace("/error");
+        }
     });
 };
 
