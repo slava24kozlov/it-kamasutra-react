@@ -4,6 +4,9 @@
     & > h2 {
         font-size: math.div(50px, 2);
     }
+    & > h3 {
+        color: red;
+    }
     & > div {
         margin: 10px 0;
         display: flex;

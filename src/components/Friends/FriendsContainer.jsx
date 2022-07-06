@@ -21,6 +21,7 @@ const Friends = ({friendsBar}) => {
         <Wrapper title="FRIENDS" className={style.main}>
             <div className={style.main}>
                 <h2>sass:Math.div</h2>
+                <h3>My changes in browser</h3>
                 {state && friendsBar.map(({name, image}) =>
                     <div key={name}>
                         <img src={image} alt={name} width="50" height="50"/>
