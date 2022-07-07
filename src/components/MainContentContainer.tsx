@@ -1,5 +1,5 @@
 import React, {lazy, Suspense} from "react";
-import {Route, Routes} from "react-router-dom";
+import {Route, Routes, useNavigate} from "react-router-dom";
 import Preloader from "./common/Preloader/Preloader";
 import PageNotFound from "./Error/PageNotFound";
 
@@ -13,17 +13,30 @@ const Communities = lazy(() => import("./Communities/Communities"));
 const Music = lazy(() => import("./Music/Music"));
 const ErrorContainer = lazy(() => import("./Error/ErrorContainer"));
 
-const MainContent = () => {
+type PropsMainContentType = {
+    isAuthUser: boolean
+    idAuthUser: number | null
+}
+
+const MainContent: React.FC<PropsMainContentType> = ({isAuthUser, idAuthUser}) => {
+    const navigation = useNavigate();
+
+   /* if (isAuthUser) {
+       navigation(`/profile/${idAuthUser}`, {replace: true});
+    } else {
+        navigation("/login");
+    }*/
+
     return (
-        <Suspense fallback={<Preloader/>}>
+        <Suspense fallback={<Preloader entire/>}>
             <Routes>
-                <Route path="/login" element={<LoginContainer/>}/>
                 <Route path="/profile/:userId" element={<ProfileContainer/>}/>
                 <Route path="/friends" element={<FriendsContainer/>}/>
                 <Route path="/messages" element={<MessagesContainer/>}/>
                 <Route path="/users" element={<UsersContainer/>}/>
                 <Route path="/communities" element={<Communities/>}/>
                 <Route path="/music" element={<Music/>}/>
+                <Route path="/login" element={<LoginContainer/>}/>
                 <Route path="/error" element={<ErrorContainer/>}/>
                 <Route path="*" element={<PageNotFound/>}/>
             </Routes>

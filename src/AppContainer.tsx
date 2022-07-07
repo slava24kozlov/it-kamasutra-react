@@ -5,13 +5,14 @@ import HeaderContainer from "./components/Herder/HeaderContainer";
 import MainContentContainer from "./components/MainContentContainer";
 import {connect} from "react-redux";
 import {getAuthUserTC} from "./redux/reducer/AuthReducer";
-import {getIsAuth, getIsFetchingAuth} from "./redux/selectors/AuthSelectors";
+import {getAuthId, getIsAuth, getIsFetchingAuth} from "./redux/selectors/AuthSelectors";
 import Preloader from "./components/common/Preloader/Preloader";
 import {AppStateType} from "./redux/store";
 
 export type MapStateToPropsType = {
     isAuthUser: boolean
     isFetching: boolean
+    idAuthUser: number | null
 }
 type MapDispatchToPropsType = {
     getAuthUserTC: () => void
@@ -31,7 +32,8 @@ export class App extends React.Component<PropsType> {
             <BrowserRouter>
                 <HeaderContainer/>
                 <main data-testid="testingMain" className="app-main">
-                    {this.props.isFetching ? <Preloader/> : <MainContentContainer/>}
+                    {this.props.isFetching ? <Preloader entire/> :
+                        <MainContentContainer isAuthUser={this.props.isAuthUser} idAuthUser={this.props.idAuthUser}/>}
                 </main>
             </BrowserRouter>
         );
@@ -41,6 +43,7 @@ export class App extends React.Component<PropsType> {
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
     isAuthUser: getIsAuth(state),
     isFetching: getIsFetchingAuth(state),
+    idAuthUser: getAuthId(state),
 });
 
 export default connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsTypes, AppStateType>(mapStateToProps, {getAuthUserTC})(App);

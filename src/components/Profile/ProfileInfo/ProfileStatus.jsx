@@ -23,8 +23,8 @@ class ProfileStatus extends React.Component {
   };
 
   setStatus = () => {
-    this.props.onChangeStatus(this.state.status);
-    this.setIsEditMode();
+    this.props.status !== this.state.status && this.props.onChangeStatus(this.state.status);
+    this.handleChangeEditMode();
   };
 
   handleFocus = (event) => {
@@ -34,11 +34,11 @@ class ProfileStatus extends React.Component {
   render() {
     return (
       <div style={{margin: "15px", userSelect: "none"}}>
-        <b style={{cursor: "pointer"}} onDoubleClick={this.props.isAuthProfile ? this.setIsEditMode : null}>
+        <b style={{cursor: "pointer"}} onDoubleClick={this.props.isAuthProfile ? this.handleChangeEditMode : null}>
           Status:&nbsp;
         </b>
         {!this.state.isEditMode
-          ? <span style={{cursor: "pointer"}} onDoubleClick={this.props.isAuthProfile ? this.setIsEditMode : null}>
+          ? <span style={{cursor: "pointer"}} onDoubleClick={this.props.isAuthProfile ? this.handleChangeEditMode : null}>
             {this.state.status}
             </span>
           : <input

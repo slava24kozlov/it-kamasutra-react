@@ -12,7 +12,10 @@ interface PostDataType {
 
 export interface InitialStateType {
     postData: Array<PostDataType>;
-    profile: ProfileType | null;
+    profile: {
+        data: ProfileType | null
+        isFetching: boolean
+    };
     defaultPostText: string;
     defaultCountLike: number;
     status: string | number;
@@ -26,7 +29,10 @@ const initialState: InitialStateType = {
         {id: 2, message: "My favorite actor is Will Smith", author: "James McAvoy", like: 5},
         {id: 3, message: "This is a test web page", author: "Daniel Radcliffe", like: 10}
     ],
-    profile: null,
+    profile: {
+        data: null,
+        isFetching: true
+    },
     defaultPostText: "Enter new post",
     defaultCountLike: 0,
     status: "enter your status",
@@ -34,6 +40,15 @@ const initialState: InitialStateType = {
 
 export const profileReducer = (state = initialState, action: ActionsType) => {
     switch (action.type) {
+        case "SN/PROFILE/SET-PROFILE":
+            return {
+                ...state,
+                profile: {
+                    data: {...action.profile},
+                    isFetching: false,
+                },
+                isFetching: false
+            };
         case "SN/PROFILE/SET-POST":
             return {
                 ...state,
@@ -43,12 +58,6 @@ export const profileReducer = (state = initialState, action: ActionsType) => {
                     author: "Indefinite author",
                     like: action.countLike
                 }],
-            };
-        case "SN/PROFILE/SET-PROFILE":
-            return {
-                ...state,
-                profile: {...action.profile},
-                isFetching: false
             };
         case "SN/PROFILE/SET-STATUS":
             return {
@@ -64,13 +73,13 @@ export const getProfileTC = (currentId: string) => (dispatch: Dispatch<ActionsTy
     profileAPI.getProfile(currentId)
         .then(data => {
             dispatch(actionCreators.setProfile(data));
+            profileAPI.getStatus(currentId).then(data => data.status === 200 && dispatch(actionCreators.setStatus(data.data)));
         }).catch((error) => {
         dispatch(actionCreatorsCommon.setResponseErrorMessage(error.code, error.name, error.message));
         if (location.pathname !== "/error") {
             location.replace("/error");
         }
     });
-    profileAPI.getStatus(currentId).then(data => data.status === 200 && dispatch(actionCreators.setStatus(data.data)));
 };
 
 export const updateStatusTC = (status: string) => (dispatch: Dispatch<ActionsType>): void => {

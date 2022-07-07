@@ -42,14 +42,14 @@ export const getAuthUserTC = (): ThunkCreator<ActionsType> => (dispatch) => {
         if (res.resultCode === ResultCode.success) {
             const {id, login, email} = res.data;
             dispatch(actionCreators.setAuthUser(id, login, email, true));
-            if (location.pathname === "/login" || location.pathname === "/") {
+           /* if (location.pathname === "/login" || location.pathname === "/") {
                 location.replace(`/profile/${id}`);
-            }
+            }*/
         } else {
             dispatch(actionCreators.setAuthUser(null, null, null, false));
-            if (location.pathname !== "/login") {
+            /*if (location.pathname !== "/login") {
                 location.replace("/login");
-            }
+            }*/
         }
     }).catch(error => {
         dispatch(actionCreatorsCommon.setResponseErrorMessage(error.code, error.name, error.message));

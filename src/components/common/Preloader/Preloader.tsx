@@ -1,8 +1,14 @@
 import React from "react";
 import style from "./Preloader.module.scss";
 
-const Preloader: React.FC = () => <div aria-label="page preloader" className={style.main}>
-    <div/>
-</div>;
+type PropsPreloaderType = {
+    entire?: boolean
+}
+
+const Preloader: React.FC<PropsPreloaderType> = ({entire}) => (
+    <div aria-label="page preloader" className={`${style.main} ${entire && style.entire}`}>
+        <div className={style.content}/>
+    </div>
+);
 
 export default Preloader;
