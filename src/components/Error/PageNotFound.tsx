@@ -1,5 +1,6 @@
 import React from "react";
 import Wrapper from "../common/Wrappers/WrapperComponents";
+import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
 
 const PageNotFound = () => (
     <Wrapper title="OOPS! PAGE NOT FOUND">
@@ -7,4 +8,4 @@ const PageNotFound = () => (
     </Wrapper>
 );
 
-export default PageNotFound;
+export default WithAuthRedirect(PageNotFound);

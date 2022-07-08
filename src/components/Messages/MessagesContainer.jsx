@@ -3,6 +3,8 @@ import {actionCreators} from "../../redux/reducer/MessagesReducer";
 import {connect} from "react-redux";
 import Messages from "./Messages";
 import {getDataMessages} from "../../redux/selectors/MessagesSelectors";
+import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
+import {compose} from "redux";
 
 class MessagesContainer extends React.Component {
   state = {
@@ -41,6 +43,6 @@ let mapStateToProps = (state) => (
   }
 );
 
-export default connect(mapStateToProps, {setMessage: actionCreators.setMessage})(MessagesContainer);
+export default compose(connect(mapStateToProps, {setMessage: actionCreators.setMessage}), WithAuthRedirect)(MessagesContainer);
 
 

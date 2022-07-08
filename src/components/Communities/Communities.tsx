@@ -1,6 +1,7 @@
 import React from "react";
 import Wrapper from "../common/Wrappers/WrapperComponents";
 import style from "./Communities.module.scss";
+import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
 
 class Main {
     public one = "public";
@@ -55,4 +56,4 @@ class Communities extends React.Component {
     }
 }
 
-export default Communities;
+export default WithAuthRedirect(Communities);

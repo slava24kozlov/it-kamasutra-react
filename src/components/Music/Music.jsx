@@ -2,6 +2,7 @@ import React, {useEffect, useLayoutEffect, useState} from "react";
 import style from "./Music.module.css";
 import Wrapper from "../common/Wrappers/WrapperComponents";
 import ChartComponent from "./ChartJS/ChartComponent";
+import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
 
 const eventLoop = () => {
     setTimeout(() => {
@@ -48,4 +49,4 @@ const Music = () => {
     );
 };
 
-export default Music;
+export default WithAuthRedirect(Music);

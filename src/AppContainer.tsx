@@ -33,7 +33,7 @@ export class App extends React.Component<PropsType> {
                 <HeaderContainer/>
                 <main data-testid="testingMain" className="app-main">
                     {this.props.isFetching ? <Preloader entire/> :
-                        <MainContentContainer isAuthUser={this.props.isAuthUser} idAuthUser={this.props.idAuthUser}/>}
+                        <MainContentContainer idAuthUser={this.props.idAuthUser}/>}
                 </main>
             </BrowserRouter>
         );

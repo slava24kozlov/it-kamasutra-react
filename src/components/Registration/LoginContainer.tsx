@@ -20,9 +20,9 @@ const Login: React.FC<PropsType> = ({login, password, rememberMe, responseMessag
         reset();
     };
 
-    /*if (isAuth) {
+    if (isAuth) {
         return <Navigate to={`/profile/${idAuthUser}`} replace/>;
-    }*/
+    }
 
     return (
         <Wrapper title="YOU MUST LOG IN">

@@ -27,13 +27,11 @@ export const Header: React.FC<PropsFromRedux> = ({
                     {isAuthUser
                         ? <>
                             <p>{loginAuthUser}</p>
-                            <NavLink to="/login" title="Log out">
-                                <button style={{fontWeight: "bold"}}
-                                        onClick={handleExit}
-                                        title="Exit">
-                                    EXIT
-                                </button>
-                            </NavLink>
+                            <button style={{fontWeight: "bold"}}
+                                    onClick={handleExit}
+                                    title="Log out">
+                                EXIT
+                            </button>
                         </>
                         : <NavLink to="/login" title="Log in">
                             <button>Log in</button>

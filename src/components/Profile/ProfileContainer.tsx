@@ -8,6 +8,7 @@ import WithRouter from "../../hoc/WithRouter";
 import {Params} from "react-router-dom";
 import {AppStateType} from "../../redux/store";
 import {getAuthId} from "../../redux/selectors/AuthSelectors";
+import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
 
 type PropsTypeContainer = ConnectedProps<typeof connector> & {
     params: Readonly<Params>
@@ -49,7 +50,7 @@ const mapStateToProps = (state: AppStateType) => ({
 });
 
 const connector = connect(mapStateToProps, {getProfileTC, updateStatusTC});
-export default compose(connector, WithRouter<ConnectedProps<typeof connector>>)(ProfileComponent);
+export default compose(connector, WithAuthRedirect, WithRouter<ConnectedProps<typeof connector>>)(ProfileComponent);
 
 
 
