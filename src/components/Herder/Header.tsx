@@ -28,7 +28,7 @@ export const Header: React.FC<PropsFromRedux> = ({
                     {isAuthUser
                         ? <>
                             <p>{loginAuthUser}</p>
-                            <button style={{fontWeight: "bold"}}
+                            <button style={{fontWeight: "bold", cursor: "pointer"}}
                                     onClick={handleExit}
                                     title="Log out">
                                 EXIT

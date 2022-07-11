@@ -3,7 +3,8 @@ import Wrapper from "../common/Wrappers/WrapperComponents";
 import {getResponseError} from "../../redux/selectors/CommonSelector";
 import {connect, ConnectedProps} from "react-redux";
 import {AppStateType} from "../../redux/store";
-import { Navigate } from "react-router-dom";
+import {Navigate} from "react-router-dom";
+import HomeButton from "../common/RedirectButtons/HomeButton";
 
 type PropsType = ConnectedProps<typeof connector>
 
@@ -27,6 +28,7 @@ const ErrorContainer: React.FC<PropsType> = ({errorResponseMessage: {isError, co
                 <label htmlFor="messageError" aria-labelledby="messageError">Message: </label>
                 <span style={{fontStyle: "italic"}} id="messageError">{message}</span>
             </div>
+            <HomeButton/>
         </Wrapper>
     );
 

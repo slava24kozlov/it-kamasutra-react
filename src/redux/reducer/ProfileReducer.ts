@@ -76,9 +76,6 @@ export const getProfileTC = (currentId: string) => (dispatch: Dispatch<ActionsTy
             profileAPI.getStatus(currentId).then(data => data.status === 200 && dispatch(actionCreators.setStatus(data.data)));
         }).catch((error) => {
         dispatch(actionCreatorsCommon.setResponseErrorMessage(error.code, error.name, error.message));
-        if (location.pathname !== "/error") {
-            location.replace("/error");
-        }
     });
 };
 

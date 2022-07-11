@@ -5,7 +5,7 @@ import {AppStateType} from "../redux/store";
 
 export function withAuthRedirect<T>(Component: React.ComponentType<T>) {
     return (props: T) => {
-        const isAuth = useSelector<AppStateType>(state => state.authUser.isAuth);
+        const isAuth = useSelector<AppStateType, boolean>(state => state.authUser.isAuth);
         if (isAuth) {
             return <Navigate to="/login" replace/>;
         }
