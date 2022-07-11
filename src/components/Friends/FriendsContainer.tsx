@@ -1,18 +1,19 @@
 import React, {useEffect, useState} from "react";
 import style from "./Friends.module.scss";
-import {connect} from "react-redux";
+import {useSelector} from "react-redux";
 import {getFriends} from "../../redux/selectors/SidebarSelectors";
 import Wrapper from "../common/Wrappers/WrapperComponents";
-import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
-import {compose} from "redux";
+import {AppStateType} from "../../redux/store";
+import {SidebarStateType} from "../../redux/reducer/SidebarReducer";
+import { WithAuthRedirect } from "../../hoc/WithAuthRedirect";
 
 const media = matchMedia("screen and (min-width: 768px)");
 
-const Friends = ({friendsBar}) => {
-    const [state, setState] = useState(() => media.matches);
+const Friends: React.FC = () => {
+    const friendsList = useSelector<AppStateType, SidebarStateType["FriendsBar"]>(state => getFriends(state));
+    const [state, setState] = useState<boolean>(() => media.matches);
     useEffect(() => {
         media.addEventListener("change", ({matches}) => {
-            console.log("start media");
             setState(matches);
         });
         return () => media.removeEventListener("change", ({matches}) => {
@@ -20,11 +21,11 @@ const Friends = ({friendsBar}) => {
         });
         }, []);
     return (
-        <Wrapper title="FRIENDS" className={style.main}>
+        <Wrapper title="FRIENDS">
             <div className={style.main}>
                 <h2>sass:Math.div</h2>
                 <h3>My changes in browser</h3>
-                {state && friendsBar.map(({name, image}) =>
+                {state && friendsList.map(({name, image}) =>
                     <div key={name}>
                         <img src={image} alt={name} width="50" height="50"/>
                         <b>{name}</b>
@@ -34,8 +35,4 @@ const Friends = ({friendsBar}) => {
     );
 };
 
-const mapStateToProps = (state) => ({
-    friendsBar: getFriends(state),
-});
-
-export default compose(connect(mapStateToProps, {}), WithAuthRedirect)(Friends);
+export default WithAuthRedirect(Friends) as React.ComponentType;

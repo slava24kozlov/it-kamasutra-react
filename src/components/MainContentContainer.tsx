@@ -4,7 +4,6 @@ import Preloader from "./common/Preloader/Preloader";
 import PageNotFound from "./Error/PageNotFound";
 
 const LoginContainer = lazy(() => import("./Registration/LoginContainer"));
-// @ts-ignore
 const ProfileContainer = lazy(() => import("./Profile/ProfileContainer"));
 const FriendsContainer = lazy(() => import("./Friends/FriendsContainer"));
 const MessagesContainer = lazy(() => import("./Messages/MessagesContainer"));

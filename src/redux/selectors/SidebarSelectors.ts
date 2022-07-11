@@ -1,6 +1,6 @@
 import {AppStateType} from "../store";
-import {InitialStateType} from "../reducer/SidebarReducer";
+import {SidebarStateType} from "../reducer/SidebarReducer";
 
-export const getFriends = (state: AppStateType): InitialStateType["FriendsBar"] => (
+export const getFriends = (state: AppStateType): SidebarStateType["FriendsBar"] => (
   state.sidebar.FriendsBar
 );

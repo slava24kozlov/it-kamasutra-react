@@ -56,4 +56,4 @@ class Communities extends React.Component {
     }
 }
 
-export default WithAuthRedirect(Communities);
+export default WithAuthRedirect(Communities) as React.ComponentType;
