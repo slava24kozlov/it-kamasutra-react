@@ -2,9 +2,17 @@ import React from "react";
 import style from "./Navbar.module.scss";
 import {NavLink} from "react-router-dom";
 
-const Navbar = ({isAuthUser, idAuthUser}) => {
+type PropsNavbarType = {
+    isAuthUser: boolean
+    idAuthUser: number | null
+    isError: boolean
+}
+
+const Navbar: React.FC<PropsNavbarType> = ({isAuthUser, idAuthUser, isError}) => {
     if (!isAuthUser) {
         return <h1 style={{margin: 0}}>You must log in</h1>;
+    } else if (isError) {
+        return <h1 style={{margin: 0}}>You have some kind of error</h1>;
     }
     return (
         <nav className={style.main}>

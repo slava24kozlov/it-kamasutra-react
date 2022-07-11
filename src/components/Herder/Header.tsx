@@ -10,7 +10,8 @@ export const Header: React.FC<PropsFromRedux> = ({
                                                      idAuthUser,
                                                      loginAuthUser,
                                                      rememberMe,
-                                                     loginOutUserTC
+                                                     loginOutUserTC,
+                                                     isError,
                                                  }) => {
     const handleExit = () => {
         loginOutUserTC(rememberMe);
@@ -22,7 +23,7 @@ export const Header: React.FC<PropsFromRedux> = ({
                 <NavLink to={isAuthUser ? `/profile/${idAuthUser}` : "/login"} title={isAuthUser ? "Home" : "Log in"}>
                     <Logotype/>
                 </NavLink>
-                <Navbar {...{isAuthUser, idAuthUser}}/>
+                <Navbar {...{isAuthUser, idAuthUser, isError}}/>
                 <div className={style.login}>
                     {isAuthUser
                         ? <>

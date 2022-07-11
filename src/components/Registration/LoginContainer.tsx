@@ -7,12 +7,12 @@ import FieldWrapper from "../common/Wrappers/FieldWrapper";
 import {getLogin, getPassword, getRememberMe, getResponseMessage} from "../../redux/selectors/LoginSelectors";
 import Wrapper from "../common/Wrappers/WrapperComponents";
 import {AppStateType} from "../../redux/store";
-import {getAuthId, getIsAuth} from "../../redux/selectors/AuthSelectors";
+import {getIsAuth} from "../../redux/selectors/AuthSelectors";
 import {Navigate} from "react-router-dom";
 
 type PropsType = ConnectedProps<typeof connector>
 
-const Login: React.FC<PropsType> = ({login, password, rememberMe, responseMessage, loginUserTC, isAuth, idAuthUser}) => {
+const Login: React.FC<PropsType> = ({login, password, rememberMe, responseMessage, loginUserTC, isAuth}) => {
     const {register, handleSubmit, reset, formState: {errors, touchedFields}} = useForm<SetLoginDataType>();
 
     const onSubmit = (values: SetLoginDataType): void => {
@@ -21,7 +21,7 @@ const Login: React.FC<PropsType> = ({login, password, rememberMe, responseMessag
     };
 
     if (isAuth) {
-        return <Navigate to={`/profile/${idAuthUser}`} replace/>;
+        return <Navigate to="/" replace/>;
     }
 
     return (
@@ -64,7 +64,6 @@ const mapStateToProps = (state: AppStateType) => ({
     rememberMe: getRememberMe(state),
     responseMessage: getResponseMessage(state),
     isAuth: getIsAuth(state),
-    idAuthUser: getAuthId(state),
 });
 
 const connector = connect(mapStateToProps, {loginUserTC});

@@ -9,14 +9,15 @@ type PropsType = {
     id?: number
     login?: string
     isRemember?: boolean
+    isError?: boolean
 }
 
 describe("tests for Header component", () => {
     const dispatchMock = jest.fn() as jest.Mock<() => void>;
-    const HeaderTest: React.FC<PropsType> = ({isAuth = false, id = 12345, login = "LoginTest", isRemember = false}) => (
+    const HeaderTest: React.FC<PropsType> = ({isAuth = false, id = 12345, login = "LoginTest", isRemember = false, isError= false}) => (
         <BrowserRouter>
             <Header loginOutUserTC={dispatchMock} isAuthUser={isAuth} idAuthUser={id} loginAuthUser={login}
-                    rememberMe={isRemember}/>
+                    rememberMe={isRemember} isError={isError}/>
         </BrowserRouter>
     );
     afterEach(() => {
