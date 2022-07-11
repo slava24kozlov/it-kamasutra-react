@@ -4,7 +4,7 @@ import AppContainer, {App, MapStateToPropsType} from "./AppContainer";
 import {Provider} from "react-redux";
 import store from "./redux/store";
 
-describe("tests for AppContainer",() => {
+describe("tests for AppContainer", () => {
     const dispatchMock = jest.fn() as jest.Mock<() => void>;
     const AppWithProvider: React.FC<MapStateToPropsType> = ({isAuthUser, isFetching, idAuthUser}) =>
         <Provider store={store}>
@@ -17,7 +17,7 @@ describe("tests for AppContainer",() => {
     beforeEach(() => {
         dispatchMock.mockReset();
     });
-    test("render App with identification",() => {
+    test("render App with identification", () => {
         render(<AppWithProvider isFetching={true} isAuthUser={false} idAuthUser={111}/>);
         expect(dispatchMock).toBeCalledTimes(1);
         const main = screen.getByTestId("testingMain");
@@ -26,7 +26,7 @@ describe("tests for AppContainer",() => {
         expect(preloader).toBeVisible();
         expect(main).toContainElement(preloader);
     });
-    test("render App without identification",() => {
+    test("render App without identification", () => {
         render(<AppWithProvider isFetching={true} isAuthUser={true} idAuthUser={111}/>);
         expect(dispatchMock).toBeCalledTimes(0);
         const header = screen.getByRole("banner");

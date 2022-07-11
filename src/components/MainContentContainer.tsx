@@ -13,7 +13,11 @@ const Communities = lazy(() => import("./Communities/Communities"));
 const Music = lazy(() => import("./Music/Music"));
 const ErrorContainer = lazy(() => import("./Error/ErrorContainer"));
 
-const MainContent: React.FC<{idAuthUser: number | null}> = ({idAuthUser}) => {
+type PropsMainContentType = {
+    idAuthUser: number | null
+}
+
+const MainContent: React.FC<PropsMainContentType> = ({idAuthUser}) => {
     return (
         <Suspense fallback={<Preloader entire/>}>
             <Routes>

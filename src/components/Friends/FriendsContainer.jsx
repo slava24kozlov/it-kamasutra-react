@@ -4,15 +4,11 @@ import {connect} from "react-redux";
 import {getFriends} from "../../redux/selectors/SidebarSelectors";
 import Wrapper from "../common/Wrappers/WrapperComponents";
 import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
-import {getIsAuth} from "../../redux/selectors/AuthSelectors";
-import {Navigate} from "react-router-dom";
+import {compose} from "redux";
 
 const media = matchMedia("screen and (min-width: 768px)");
 
-const Friends = ({friendsBar, isAuth}) => {
-    if (!isAuth) {
-        return <Navigate to="/login" replace/>;
-    }
+const Friends = ({friendsBar}) => {
     const [state, setState] = useState(() => media.matches);
     useEffect(() => {
         media.addEventListener("change", ({matches}) => {
@@ -40,7 +36,6 @@ const Friends = ({friendsBar, isAuth}) => {
 
 const mapStateToProps = (state) => ({
     friendsBar: getFriends(state),
-    isAuth: getIsAuth(state),
 });
 
-export default connect(mapStateToProps, WithAuthRedirect)(Friends);
+export default compose(connect(mapStateToProps, {}), WithAuthRedirect)(Friends);
