@@ -48,9 +48,6 @@ export const getAuthUserTC = (): ThunkCreator<ActionsType> => (dispatch) => {
     }).catch(error => {
         dispatch(actionCreatorsCommon.setResponseErrorMessage(error.code, error.name, error.message));
         dispatch(actionCreators.setAuthUser(null, null, null, false));
-        if (location.pathname !== "/error") {
-            location.replace("/error");
-        }
     });
 };
 

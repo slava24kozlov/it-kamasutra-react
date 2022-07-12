@@ -9,10 +9,10 @@ export function WithAuthRedirect<T>(Component: React.ComponentType<T>) {
     return (props: T): React.ComponentType<T> | FunctionComponentElement<NavigateProps> => {
         const isAuth = useSelector<AppStateType, boolean>(state => getIsAuth(state));
         const isError = useSelector<AppStateType, boolean>(state => getResponseIsError(state));
-        if (!isAuth) {
-            return <Navigate to="/login" replace/>;
-        } else if (isError) {
+        if (isError) {
             return <Navigate to="/error" replace/>;
+        } else if (!isAuth) {
+            return <Navigate to="/login" replace/>;
         }
         return <Component {...props}/>;
     };

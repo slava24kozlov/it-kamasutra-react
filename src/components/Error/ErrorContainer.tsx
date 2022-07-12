@@ -3,15 +3,19 @@ import Wrapper from "../common/Wrappers/WrapperComponents";
 import {getResponseError} from "../../redux/selectors/CommonSelector";
 import {connect, ConnectedProps} from "react-redux";
 import {AppStateType} from "../../redux/store";
-import {Navigate} from "react-router-dom";
-import HomeButton from "../common/RedirectButtons/HomeButton";
+import {Navigate, useNavigate} from "react-router-dom";
 
 type PropsType = ConnectedProps<typeof connector>
 
 const ErrorContainer: React.FC<PropsType> = ({errorResponseMessage: {isError, code, name, message}}) => {
+    const navigate = useNavigate();
     if (!isError) {
-       return <Navigate to="/" replace/>;
+        return <Navigate to="/" replace/>;
     }
+
+    const handleReload = () => {
+        navigate(0);
+    };
 
     return (
         <Wrapper title="Error">
@@ -28,10 +32,11 @@ const ErrorContainer: React.FC<PropsType> = ({errorResponseMessage: {isError, co
                 <label htmlFor="messageError" aria-labelledby="messageError">Message: </label>
                 <span style={{fontStyle: "italic"}} id="messageError">{message}</span>
             </div>
-            <HomeButton/>
+            <button style={{padding: "10px", margin: "10px 0", fontWeight: "bold", cursor: "pointer"}}
+                    onClick={handleReload}>Reload Page
+            </button>
         </Wrapper>
     );
-
 };
 
 const MapStateToProps = (state: AppStateType) => ({
