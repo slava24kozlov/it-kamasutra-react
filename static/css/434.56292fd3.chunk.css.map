@@ -1,0 +1,1 @@
+{"version":3,"file":"static/css/434.56292fd3.chunk.css","mappings":"AAAA,wCACI","sources":["components/Communities/Communities.module.scss"],"sourcesContent":[".main > :last-of-type {\r\n    border: 1px solid red;\r\n}\r\n"],"names":[],"sourceRoot":""}
