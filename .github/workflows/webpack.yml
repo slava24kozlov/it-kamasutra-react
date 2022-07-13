@@ -1,4 +1,4 @@
-name: Webpack build
+name: Webpack
 
 on:
   push:
