@@ -6,12 +6,12 @@ type DataMessagesType = {
   image: string
   message: string
 }
-export type InitialStateType = {
+export type MessagesStateType = {
   data: Array<DataMessagesType>
 }
 type ActionsType = InferActionsType<typeof actionCreators>
 
-const initialState: InitialStateType = {
+const initialState: MessagesStateType = {
   data: [
     {
       key: Math.random(),
@@ -46,7 +46,7 @@ const initialState: InitialStateType = {
   ],
 };
 
-export const messagesReducer = (state = initialState, action: ActionsType): InitialStateType => {
+export const messagesReducer = (state = initialState, action: ActionsType): MessagesStateType => {
   switch (action.type) {
     case "SN/MESSAGES/SET-MESSAGE":
       return {

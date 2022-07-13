@@ -1,43 +1,48 @@
 import React from "react";
 import {render, screen} from "@testing-library/react";
-import AppContainer, {App} from "./AppContainer";
-import {ComponentsWithStore} from "./tests/TestsWrapper";
-
-type PropsType = {
-    isAuth: boolean
-}
+import AppContainer, {App, MapStateToPropsType} from "./AppContainer";
+import {Provider} from "react-redux";
+import store from "./redux/store";
 
 describe("tests for AppContainer", () => {
     const dispatchMock = jest.fn() as jest.Mock<() => void>;
-    const AppWithStore: React.FC<PropsType> = ({isAuth}) => <ComponentsWithStore><App getAuthUserTC={dispatchMock} isAuthUser={isAuth}/></ComponentsWithStore>;
+    const AppWithProvider: React.FC<MapStateToPropsType> = ({isAuthUser, isFetching, idAuthUser}) =>
+        <Provider store={store}>
+            <App getAuthUserTC={dispatchMock}
+                 isFetching={isFetching}
+                 isAuthUser={isAuthUser}
+                 idAuthUser={idAuthUser}
+            />
+        </Provider>;
     beforeEach(() => {
         dispatchMock.mockReset();
     });
-    test("render App without identification", () => {
-        render(<AppWithStore isAuth={false}/>);
+    test("render App with identification", () => {
+        render(<AppWithProvider isFetching={true} isAuthUser={false} idAuthUser={111}/>);
         expect(dispatchMock).toBeCalledTimes(1);
-        const header = screen.getByRole("banner");
-        expect(header).toBeInTheDocument();
-        expect(header).toBeVisible();
         const main = screen.getByTestId("testingMain");
         expect(main).toBeInTheDocument();
-        expect(main).not.toBeVisible();
-        expect(screen.getByText(/you must log in/i)).toBeVisible();
-        expect(screen.getByText("Log in")).toBeVisible();
-        expect(screen.getByLabelText(/logotype/i)).toBeVisible();
+        const preloader = screen.getByLabelText("page preloader");
+        expect(preloader).toBeVisible();
+        expect(main).toContainElement(preloader);
     });
-    test("render App with identification", () => {
-        render(<AppWithStore isAuth={true}/>);
+    test("render App without identification", () => {
+        render(<AppWithProvider isFetching={true} isAuthUser={true} idAuthUser={111}/>);
         expect(dispatchMock).toBeCalledTimes(0);
         const header = screen.getByRole("banner");
         expect(header).toBeInTheDocument();
-        expect(header).toBeVisible();
         const main = screen.getByTestId("testingMain");
-        expect(main).toBeInTheDocument();
         expect(main).toBeVisible();
     });
+    test("displaying the preloader when loading the App", () => {
+        render(<AppWithProvider isFetching={true} isAuthUser={true} idAuthUser={111}/>);
+        expect(screen.getByTestId("testingMain")).toBeVisible();
+        const preloader = screen.getByLabelText("page preloader");
+        expect(preloader).toBeInTheDocument();
+        expect(preloader).toBeVisible();
+    });
     test("render AppContainer", () => {
-        render(<ComponentsWithStore><AppContainer/></ComponentsWithStore>);
+        render(<Provider store={store}><AppContainer/></Provider>);
         expect(screen.getByRole("banner")).toBeInTheDocument();
         expect(screen.getByTestId("testingMain")).toBeInTheDocument();
     });

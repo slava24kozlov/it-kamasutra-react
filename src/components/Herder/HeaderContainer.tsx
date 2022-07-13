@@ -5,18 +5,20 @@ import {loginOutUserTC} from "../../redux/reducer/LoginReducer";
 import {getAuthId, getIsAuth, getLoginAuthUser} from "../../redux/selectors/AuthSelectors";
 import {getRememberMe} from "../../redux/selectors/LoginSelectors";
 import {AppStateType} from "../../redux/store";
+import {getResponseIsError} from "../../redux/selectors/CommonSelector";
 
 function HeaderContainer(props: PropsFromRedux) {
-  return (
-    <Header {...props}/>
-  );
+    return (
+        <Header {...props}/>
+    );
 }
 
 const mapStateToProps = (state: AppStateType) => ({
-  isAuthUser: getIsAuth(state),
-  idAuthUser: getAuthId(state),
-  loginAuthUser: getLoginAuthUser(state),
-  rememberMe: getRememberMe(state),
+    isAuthUser: getIsAuth(state),
+    idAuthUser: getAuthId(state),
+    loginAuthUser: getLoginAuthUser(state),
+    rememberMe: getRememberMe(state),
+    isError: getResponseIsError(state),
 });
 
 const connector = connect(mapStateToProps, {loginOutUserTC});

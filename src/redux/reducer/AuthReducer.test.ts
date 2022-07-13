@@ -26,8 +26,7 @@ describe("tests for AuthReducer", () => {
       expect(newState.isFetching).toBe(false);
     });
     test("checking the reset state", () => {
-      const action = actionCreators.setAuthUser(null, null, null, false);
-      const newState = authReducer(state, action);
+      const newState = authReducer(state, actionCreators.setAuthUser(null, null, null, false));
       expect(state).not.toBe(newState);
       expect(newState.id).toBeNull();
       expect(newState.login).toBeNull();

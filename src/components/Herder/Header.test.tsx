@@ -1,15 +1,24 @@
 import React from "react";
 import {render, screen} from "@testing-library/react";
 import Header from "./Header";
-import {ComponentsWithRouter} from "../../tests/TestsWrapper";
 import userEvent from "@testing-library/user-event";
+import {BrowserRouter} from "react-router-dom";
+
+type PropsType = {
+    isAuth?: boolean
+    id?: number
+    login?: string
+    isRemember?: boolean
+    isError?: boolean
+}
 
 describe("tests for Header component", () => {
     const dispatchMock = jest.fn() as jest.Mock<() => void>;
-    const HeaderTest = ({isAuth = false, id = 12345, login = "LoginTest", isRemember = false}): JSX.Element => (
-        <ComponentsWithRouter>
-            <Header loginOutUserTC={dispatchMock} isAuthUser={isAuth} idAuthUser={id} loginAuthUser={login} rememberMe={isRemember}/>
-        </ComponentsWithRouter>
+    const HeaderTest: React.FC<PropsType> = ({isAuth = false, id = 12345, login = "LoginTest", isRemember = false, isError= false}) => (
+        <BrowserRouter>
+            <Header loginOutUserTC={dispatchMock} isAuthUser={isAuth} idAuthUser={id} loginAuthUser={login}
+                    rememberMe={isRemember} isError={isError}/>
+        </BrowserRouter>
     );
     afterEach(() => {
         dispatchMock.mockReset();
@@ -58,14 +67,14 @@ describe("tests for Header component", () => {
         expect(screen.getByText("LoginTest")).toBeVisible();
         expect(dispatchMock).not.toBeCalled();
     });
-    test("checking the behavior of the exit button", () => {
+    test("checking the behavior of the exit button", async () => {
         render(<HeaderTest isAuth={true} id={12345} login="LoginTest" isRemember={true}/>);
         const buttonExit = screen.getByRole("button") as HTMLAnchorElement;
         expect(buttonExit).toContainHTML("EXIT");
         expect(buttonExit).toBeVisible();
         expect(buttonExit.title).toBe("Exit");
         expect(buttonExit.style.fontWeight).toBe("bold");
-        userEvent.click(buttonExit);
+        await userEvent.click(buttonExit);
         expect(dispatchMock).toBeCalledTimes(1);
         expect(dispatchMock).toBeCalledWith(true);
     });

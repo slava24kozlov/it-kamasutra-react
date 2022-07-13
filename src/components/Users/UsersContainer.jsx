@@ -12,6 +12,8 @@ import {
   getTotalUsersCount,
   getUsers
 } from "../../redux/selectors/UsersSelectors";
+import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
+import {compose} from "redux";
 
 class UsersContainer extends React.Component {
   componentDidMount() {
@@ -22,15 +24,15 @@ class UsersContainer extends React.Component {
 
   onChangeCurrentPage = (currentPage) => {
     this.props.getUsersTC(currentPage, this.props.pageSize);
-  }
+  };
 
   follow = (id) => {
     this.props.followingTC(id, true);
-  }
+  };
 
   unfollow = (id) => {
     this.props.followingTC(id, false);
-  }
+  };
 
   render() {
     return (
@@ -52,4 +54,4 @@ let mapStateToProps = (state) => ({
   isFollowing: getIsFollowing(state),
 });
 
-export default connect(mapStateToProps, {getUsersTC, followingTC})(UsersContainer);
+export default compose(connect(mapStateToProps, {getUsersTC, followingTC}), WithAuthRedirect)(UsersContainer);

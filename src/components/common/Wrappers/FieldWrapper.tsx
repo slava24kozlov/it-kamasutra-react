@@ -1,14 +1,11 @@
 import React from "react";
-
-type ErrorMessage = {
-    message: string
-}
+import {FieldError} from "react-hook-form";
 
 type PropsType = {
     inputId: string
     label: string
-    error: ErrorMessage | undefined
-    touched: boolean
+    error: FieldError | undefined
+    touched: boolean | undefined
     children: React.ReactNode
 }
 

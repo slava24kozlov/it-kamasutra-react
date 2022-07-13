@@ -1,6 +1,7 @@
 import {Dispatch} from "redux";
 import {profileAPI, ProfileType} from "../../api/profileAPI";
 import {InferActionsType} from "../store";
+import {actionCreatorsCommon} from "./CommonReducer";
 
 interface PostDataType {
     id: number;
@@ -11,13 +12,16 @@ interface PostDataType {
 
 export interface InitialStateType {
     postData: Array<PostDataType>;
-    profile: ProfileType | null;
+    profile: {
+        data: ProfileType | null
+        isFetching: boolean
+    };
     defaultPostText: string;
     defaultCountLike: number;
     status: string | number;
 }
 
-type ActionsType = InferActionsType<typeof actionCreators>
+type ActionsType = InferActionsType<typeof actionCreators | typeof actionCreatorsCommon>
 
 const initialState: InitialStateType = {
     postData: [
@@ -25,7 +29,10 @@ const initialState: InitialStateType = {
         {id: 2, message: "My favorite actor is Will Smith", author: "James McAvoy", like: 5},
         {id: 3, message: "This is a test web page", author: "Daniel Radcliffe", like: 10}
     ],
-    profile: null,
+    profile: {
+        data: null,
+        isFetching: true
+    },
     defaultPostText: "Enter new post",
     defaultCountLike: 0,
     status: "enter your status",
@@ -33,6 +40,15 @@ const initialState: InitialStateType = {
 
 export const profileReducer = (state = initialState, action: ActionsType) => {
     switch (action.type) {
+        case "SN/PROFILE/SET-PROFILE":
+            return {
+                ...state,
+                profile: {
+                    data: {...action.profile},
+                    isFetching: false,
+                },
+                isFetching: false
+            };
         case "SN/PROFILE/SET-POST":
             return {
                 ...state,
@@ -43,27 +59,24 @@ export const profileReducer = (state = initialState, action: ActionsType) => {
                     like: action.countLike
                 }],
             };
-        case "SN/PROFILE/SET-PROFILE":
-            return {
-                ...state,
-                profile: {...action.profile}
-            };
         case "SN/PROFILE/SET-STATUS":
             return {
                 ...state,
                 status: action.status
             };
         default:
-            return {...state};
+            return state;
     }
 };
 
-export const getProfileTC = (currentId: number) => (dispatch: Dispatch<ActionsType>) => {
+export const getProfileTC = (currentId: string) => (dispatch: Dispatch<ActionsType>) => {
     profileAPI.getProfile(currentId)
         .then(data => {
             dispatch(actionCreators.setProfile(data));
-        });
-    profileAPI.getStatus(currentId).then(data => data.status === 200 && dispatch(actionCreators.setStatus(data.data)));
+            profileAPI.getStatus(currentId).then(data => data.status === 200 && dispatch(actionCreators.setStatus(data.data)));
+        }).catch((error) => {
+        dispatch(actionCreatorsCommon.setResponseErrorMessage(error.code, error.name, error.message));
+    });
 };
 
 export const updateStatusTC = (status: string) => (dispatch: Dispatch<ActionsType>): void => {

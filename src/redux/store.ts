@@ -6,8 +6,10 @@ import {sidebarReducer} from "./reducer/SidebarReducer";
 import {usersReducer} from "./reducer/UsersReducer";
 import {authReducer} from "./reducer/AuthReducer";
 import {loginReducer} from "./reducer/LoginReducer";
+import {commonReducer} from "./reducer/CommonReducer";
 
 const rootReducers = combineReducers({
+    common: commonReducer,
     profilePage : profileReducer,
     messagesPage: messagesReducer,
     usersPage: usersReducer,

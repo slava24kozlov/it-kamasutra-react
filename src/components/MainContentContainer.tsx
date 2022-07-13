@@ -1,40 +1,38 @@
-import React, {lazy, Suspense } from "react";
-import {Redirect, Route} from "react-router-dom";
-import {compose} from "redux";
-import {getAuthId, getIsAuth} from "../redux/selectors/AuthSelectors";
-import {connect, ConnectedProps} from "react-redux";
-import {withAuthRedirect} from "../hoc/AuthRedirect";
-import {AppStateType} from "../redux/store";
+import React, {lazy, Suspense} from "react";
+import {Navigate, Route, Routes} from "react-router-dom";
 import Preloader from "./common/Preloader/Preloader";
-const ProfileContainer = lazy(() => import("./Profile/ProfileContainer"));
+import ProfileContainer from "./Profile/ProfileContainer";
+import LoginContainer from "./Registration/LoginContainer";
+import ErrorContainer from "./Error/ErrorContainer";
+import PageNotFound from "./Error/PageNotFound";
+
 const FriendsContainer = lazy(() => import("./Friends/FriendsContainer"));
 const MessagesContainer = lazy(() => import("./Messages/MessagesContainer"));
 const UsersContainer = lazy(() => import("./Users/UsersContainer"));
 const Communities = lazy(() => import("./Communities/Communities"));
 const Music = lazy(() => import("./Music/Music"));
 
-const MainContent = (props: PropsFromRedux) => (
-  <Suspense fallback={<Preloader/>}>
-    <Route path='/profile/:userId?' render={() =>
-      <ProfileContainer/>}/>
-    <Route path='/friends' render={() =>
-      <FriendsContainer/>}/>
-    <Route path='/messages' render={() =>
-      <MessagesContainer/>}/>
-    <Route path='/users' render={() =>
-      <UsersContainer/>}/>
-    <Route path='/communities' component={Communities}/>
-    <Route path='/music' component={Music}/>
-    <Redirect from='/' to={`/profile/${props.idAuthUser}`}/>
-  </Suspense>
-);
+type PropsMainContentType = {
+    idAuthUser: number | null
+}
 
-const mapStateToProps = (state: AppStateType) => ({
-  isAuthUser: getIsAuth(state),
-  idAuthUser: getAuthId(state),
-});
+const MainContent: React.FC<PropsMainContentType> = ({idAuthUser}) => {
+    return (
+        <Suspense fallback={<Preloader entire/>}>
+            <Routes>
+                <Route path="/profile/:userId" element={<ProfileContainer/>}/>
+                <Route path="/friends" element={<FriendsContainer/>}/>
+                <Route path="/messages" element={<MessagesContainer/>}/>
+                <Route path="/users" element={<UsersContainer/>}/>
+                <Route path="/communities" element={<Communities/>}/>
+                <Route path="/music" element={<Music/>}/>
+                <Route path="/login" element={<LoginContainer/>}/>
+                <Route path="/error" element={<ErrorContainer/>}/>
+                <Route path="*" element={<PageNotFound/>}/>
+                <Route path="/" element={<Navigate to={`/profile/${idAuthUser}`}/>}/>
+            </Routes>
+        </Suspense>
+    );
+};
 
-const connector = connect(mapStateToProps);
-export type PropsFromRedux = ConnectedProps<typeof connector>
-
-export default compose(connector, withAuthRedirect)(MainContent);
+export default MainContent;
