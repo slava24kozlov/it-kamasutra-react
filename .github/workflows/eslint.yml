@@ -14,5 +14,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - run: npm ci
+      - name: Install dependencies
+      - run: npm install
+      - name: Eslint run
       - run: npm run eslint
