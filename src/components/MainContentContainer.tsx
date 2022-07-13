@@ -1,16 +1,16 @@
 import React, {lazy, Suspense} from "react";
 import {Navigate, Route, Routes} from "react-router-dom";
 import Preloader from "./common/Preloader/Preloader";
+import ProfileContainer from "./Profile/ProfileContainer";
+import LoginContainer from "./Registration/LoginContainer";
+import ErrorContainer from "./Error/ErrorContainer";
 import PageNotFound from "./Error/PageNotFound";
 
-const LoginContainer = lazy(() => import("./Registration/LoginContainer"));
-const ProfileContainer = lazy(() => import("./Profile/ProfileContainer"));
 const FriendsContainer = lazy(() => import("./Friends/FriendsContainer"));
 const MessagesContainer = lazy(() => import("./Messages/MessagesContainer"));
 const UsersContainer = lazy(() => import("./Users/UsersContainer"));
 const Communities = lazy(() => import("./Communities/Communities"));
 const Music = lazy(() => import("./Music/Music"));
-const ErrorContainer = lazy(() => import("./Error/ErrorContainer"));
 
 type PropsMainContentType = {
     idAuthUser: number | null
